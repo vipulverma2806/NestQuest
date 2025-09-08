@@ -16,7 +16,6 @@ const NavBar = () => {
   const IconStyle = "w-[35px]  h-[35px] text-black";
   const IconDiv = "flex  hover:border-b-2 justify-center items-center flex-col";
 
-  
   return (
     <div className="">
       <div className="fixed py-4 px-4 bg-white pb-4 w-full">
@@ -27,13 +26,13 @@ const NavBar = () => {
           <div className="border-2 border-gray-400 h-[55px] flex w-[530px]  rounded-s-full relative right-10 rounded-e-full ">
             <input type="text" className="w-full outline-0 pl-4 text-md" />
             <div className="flex  items-center ">
-              <CiSearch className="p-1 mr-3 bg-red-700 h-[35px] w-[35px] text-white rounded-full" />
+              <CiSearch className="p-1 mr-3 bg-red-500 h-[35px] w-[35px] text-white rounded-full" />
             </div>
           </div>
           <div className="border-2 border-gray-400 h-[55px]  w-[100px] flex justify-between p-4 items-center  rounded-s-full rounded-e-full ">
             <GiHamburgerMenu />
             {"user" ? (
-              <div className="text-center flex justify-center ml-2 items-center bg-red-700 h-[35px] w-[35px] text-white rounded-full">
+              <div className="text-center flex justify-center ml-2 items-center bg-red-500 h-[35px] w-[35px] text-white rounded-full">
                 N
               </div>
             ) : (
@@ -80,12 +79,10 @@ const NavBar = () => {
           <div className={IconDiv}>
             <GiFamilyHouse className={IconStyle} /> <h2>Villa</h2>
           </div>
-        
         </div>
       </div>
 
       {/* select cat end------------------------------------- */}
-      
     </div>
   );
 };
