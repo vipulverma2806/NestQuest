@@ -33,7 +33,7 @@ const NavBar = () => {
             <GiHamburgerMenu />
             {"user" ? (
               <div className="text-center flex justify-center ml-2 items-center bg-red-500 h-[35px] w-[35px] text-white rounded-full">
-                N
+                NVde
               </div>
             ) : (
               <CgProfile className={IconStyle} />
