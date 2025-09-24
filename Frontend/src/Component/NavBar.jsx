@@ -23,17 +23,17 @@ const NavBar = () => {
           <h1 className=" text-red-500 h-[55px] font-extrabold text-4xl">
             NestQuest
           </h1>
-          <div className="border-2 border-gray-400 h-[55px] flex w-[530px]  rounded-s-full relative right-10 rounded-e-full ">
+          <div className="border-2 border-gray-400 h-[55px] md:flex lg:w-[530px] absolute left-1/2 -translate-x-1/2 md:w-[300px]  rounded-s-full  right-10  hidden rounded-e-full ">
             <input type="text" className="w-full outline-0 pl-4 text-md" />
             <div className="flex  items-center ">
-              <CiSearch className="p-1 mr-3 bg-red-500 h-[35px] w-[35px] text-white rounded-full" />
+              <CiSearch className="p-1  mr-3 bg-red-500 h-[35px] w-[35px] text-white rounded-full" />
             </div>
           </div>
           <div className="border-2 border-gray-400 h-[55px]  w-[100px] flex justify-between p-4 items-center  rounded-s-full rounded-e-full ">
             <GiHamburgerMenu />
             {"user" ? (
               <div className="text-center flex justify-center ml-2 items-center bg-red-500 h-[35px] w-[35px] text-white rounded-full">
-                NVde
+                N
               </div>
             ) : (
               <CgProfile className={IconStyle} />
@@ -42,7 +42,7 @@ const NavBar = () => {
         </div>
 
         {/* select category ------------------------------------ */}
-        <div className="flex justify-center h-[70px] bg-white pt-3 items-center mx-3 gap-x-10">
+        <div className="flex flex-wrap justify-center h-18 bg-white pt-3 items-center mx-3 gap-x-10">
           <div className={IconDiv}>
             <MdWhatshot className={IconStyle} />
             <h2>Trending</h2>

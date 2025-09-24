@@ -14,12 +14,14 @@ const AddListing2 = () => {
     "flex border-1  gap-y-5  border-gray-500 p-10 h-48 w-48 rounded-xl hover:border-b-8 hover:cursor-pointer  justify-center items-center flex-col";
   return (
     <div>
-      <nav className="flex fixed  bg-white w-full justify-between px-10 py-5">
-        <button className="rounded-full bg-red-500 p-4">
-          {" "}
+      <nav className="flex fixed bg-white w-full justify-between px-10 h-24 py-5">
+        <button className="rounded-full hidden sm:block bg-red-500 p-4">
           <FaArrowLeft className="text-2xl text-white" />
         </button>
-        <div className="rounded-full text-md font-semibold text-white bg-red-500 p-4">
+        <h1 className=" text-red-500 h-[55px] absolute left-1/2 -translate-x-1/2 bg-white font-extrabold text-4xl">
+          NestQuest
+        </h1>
+        <div className="rounded-full hidden sm:block text-md font-semibold text-white bg-red-500 p-4">
           Set your category
         </div>
       </nav>
@@ -65,3 +67,11 @@ const AddListing2 = () => {
 };
 
 export default AddListing2;
+
+{
+  /* <div className="flex justify-center">
+  <div className="w-3xs">X</div>
+  <div>Y</div>
+  <div className="w-3xl">Z</div>
+</div>; */
+}
