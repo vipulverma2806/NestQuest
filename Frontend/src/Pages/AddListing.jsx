@@ -1,36 +1,60 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
+import { listingDataContext } from "../Context/ListingContext";
 const fileCSS =
   "file:bg-gray-300 border-gray-400 border-2 rounded-xl p-1 hover:file:bg-gray-400 file:rounded-md file:px-2 px-1 w-[250px] py-1 file:py-1 file:mr-3";
 const AddListing = () => {
-  // ----------------------testing multer + cloudinary--------
-  const [image, setImage] = useState([]);
-  const handleTest = async (e) => {
-    e.preventDefault();
-    const formdata = new FormData();
-    formdata.append("img1", image[0]);
-    formdata.append("img2", image[1]);
-    formdata.append("img3", image[2]);
-    const result = await axios.post(
-      "http://localhost:5000/postimage",
-      formdata
-    );
-    console.log(result.data);
-    console.log(formdata.get("img1"));
-  };
-  const [form, setForm] = useState({
-    title: "",
-    description: "",
-    img1: "",
-    img2: "",
-    img3: "",
-    rent: "",
-    city: "",
-    landmark: "",
-    latitude: "",
-    longitude: "",
-  });
+  const navigate = useNavigate();
+  let {
+    title,
+    setTitle,
+    description,
+    setDescription,
+    img1,
+    setImg1,
+    img2,
+    setImg2,
+    img3,
+    setImg3,
+    rent,
+    setRent,
+    city,
+    setCity,
+    landmark,
+    setLandmark,
+    latitude,
+    setLatitude,
+    longitude,
+    setLongitude,
+  } = useContext(listingDataContext);
+
+  const handleTest = async (e) => {};
+  //   e.preventDefault();
+  //   const formdata = new FormData();
+  //   formdata.append("img1", image[0]);
+  //   formdata.append("img2", image[1]);
+  //   formdata.append("img3", image[2]);
+  //   const result = await axios.post(
+  //     "http://localhost:5000/postimage",
+  //     formdata
+  //   );
+  //   console.log(result.data);
+  //   console.log(formdata.get("img1"));
+  // };
+  // const [form, setForm] = useState({
+  //   title: "",
+  //   description: "",
+  //   img1: "",
+  //   img2: "",
+  //   img3: "",
+  //   rent: "",
+  //   city: "",
+  //   landmark: "",
+  //   latitude: "",
+  //   longitude: "",
+  // });
   return (
     <div>
       <nav className="flex fixed bg-white w-full justify-between px-10 h-24 py-5">
@@ -48,6 +72,7 @@ const AddListing = () => {
       {/* -------------------------Form------------------------- */}
       <div className="pt-30  pb-10 flex justify-center   w-full items-center">
         <form
+          onSubmit={() => navigate("/addlisting2")}
           className=" rounded-2xl bg-blue-100 flex flex-col w-[900px] gap-y-5  p-10 mx-10 shadow-gray-600 shadow-xl "
           action=""
         >
@@ -56,9 +81,12 @@ const AddListing = () => {
               Title:
             </label>
             <input
+              required
               className="border-2 border-gray-400 rounded-xl px-3 py-1"
               placeholder="eg. 2 bhk House"
               type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-y-2 ">
@@ -66,9 +94,12 @@ const AddListing = () => {
               Description:
             </label>
             <textarea
+              required
               className="border-2 border-gray-400 rounded-xl px-3 py-1"
               placeholder="eg. Fully furnished home"
               type="textbox"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-y-2 ">
@@ -77,20 +108,23 @@ const AddListing = () => {
             </label>
             {/* --------------------------test-------------------- */}
             <input
+              required
               className={fileCSS}
-              onChange={(e) => setImage((prev) => [...prev, e.target.files[0]])}
+              onChange={(e) => setImg1(e.target.files[0])}
+              value={img1}
               type="file"
             />
-            <button onClick={handleTest}>send test file</button>
           </div>
           <div className="flex flex-col gap-y-2 ">
             <label className="text-xl font-semibold" htmlFor="">
               Image 2:
             </label>
             <input
+              required
               className={fileCSS}
               type="file"
-              onChange={(e) => setImage((prev) => [...prev, e.target.files[0]])}
+              onChange={(e) => setImg2(e.target.files[0])}
+              value={img2}
             />
           </div>
           <div className="flex flex-col gap-y-2 ">
@@ -98,9 +132,11 @@ const AddListing = () => {
               Image 3:
             </label>
             <input
+              required
               className={fileCSS}
               type="file"
-              onChange={(e) => setImage((prev) => [...prev, e.target.files[0]])}
+              onChange={(e) => setImg3(e.target.files[0])}
+              value={img3}
             />
           </div>
 
@@ -109,9 +145,12 @@ const AddListing = () => {
               Rent:
             </label>
             <input
+              required
               className="border-2 rounded-xl border-gray-400 px-3 py-1"
               placeholder="eg. Rupees/day"
               type="number"
+              value={rent}
+              onChange={(e) => setRent(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-y-2 ">
@@ -119,9 +158,12 @@ const AddListing = () => {
               City:
             </label>
             <input
+              required
               className="border-2 rounded-xl border-gray-400 px-3 py-1"
               placeholder="eg. Durg (CG)"
               type="text"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-y-2 ">
@@ -129,9 +171,12 @@ const AddListing = () => {
               Landmark:
             </label>
             <input
+              required
               className="border-2 rounded-xl border-gray-400 px-3 py-1"
               placeholder="eg. Near BIT College"
               type="text"
+              value={landmark}
+              onChange={(e) => setLandmark(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-y-2 ">
@@ -139,17 +184,27 @@ const AddListing = () => {
               Coordinates:
             </label>
             <input
+              required
               className="border-2 rounded-xl mb-2 border-gray-400 px-3 py-1"
               placeholder="Latitude"
               type="number"
+              value={latitude}
+              onChange={(e) => setLatitude(e.target.value)}
             />
             <input
+              required
               className="border-2 rounded-xl border-gray-400 px-3 py-1"
               placeholder="Longitude"
               type="number"
+              value={longitude}
+              onChange={(e) => setLongitude(e.target.value)}
             />
           </div>
-          <button className="rounded-full text-md font-semibold text-white bg-red-500 p-4">
+          <button
+            type="submit"
+            // onClick={() => navigate("/addlisting2")}
+            className="rounded-full text-md font-semibold text-white bg-red-500 p-4"
+          >
             Next Page
           </button>
         </form>

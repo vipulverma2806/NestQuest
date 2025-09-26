@@ -8,14 +8,19 @@ import { SiHomeassistantcommunitystore } from "react-icons/si";
 import { IoBedOutline } from "react-icons/io5";
 import { FaTreeCity } from "react-icons/fa6";
 import { BiBuildingHouse } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 const AddListing2 = () => {
+  const navigate = useNavigate();
   const IconStyle = "w-[45px]  h-[45px] text-black";
   const IconDiv =
     "flex border-1  gap-y-5  border-gray-500 p-10 h-48 w-48 rounded-xl hover:border-b-8 hover:cursor-pointer  justify-center items-center flex-col";
   return (
     <div>
       <nav className="flex fixed bg-white w-full justify-between px-10 h-24 py-5">
-        <button className="rounded-full hidden sm:block bg-red-500 p-4">
+        <button
+          onClick={() => navigate("/addlisting")}
+          className="rounded-full hidden sm:block bg-red-500 p-4"
+        >
           <FaArrowLeft className="text-2xl text-white" />
         </button>
         <h1 className=" text-red-500 h-[55px] absolute left-1/2 -translate-x-1/2 bg-white font-extrabold text-4xl">
