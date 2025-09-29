@@ -26,13 +26,13 @@ const NavBar = () => {
           <div className="border-2 border-gray-400 h-[55px] md:flex lg:w-[530px] absolute left-1/2 -translate-x-1/2 md:w-[300px]  rounded-s-full  right-10  hidden rounded-e-full ">
             <input type="text" className="w-full outline-0 pl-4 text-md" />
             <div className="flex  items-center ">
-              <CiSearch className="p-1  mr-3 bg-red-500 h-[35px] w-[35px] text-white rounded-full" />
+              <CiSearch className="p-1  mr-3 bg-red-500 active:bg-red-700 h-[35px] w-[35px] text-white rounded-full" />
             </div>
           </div>
           <div className="border-2 border-gray-400 h-[55px]  w-[100px] flex justify-between p-4 items-center  rounded-s-full rounded-e-full ">
             <GiHamburgerMenu />
             {"user" ? (
-              <div className="text-center flex justify-center ml-2 items-center bg-red-500 h-[35px] w-[35px] text-white rounded-full">
+              <div className="text-center flex justify-center ml-2 items-center bg-red-500 active:bg-red-700 h-[35px] w-[35px] text-white rounded-full">
                 N
               </div>
             ) : (

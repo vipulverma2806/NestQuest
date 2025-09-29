@@ -7,10 +7,10 @@ import "leaflet/dist/leaflet.css";
 import ListingContext from "./Context/ListingContext.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <ListingContext>
+    <ListingContext>
+      <BrowserRouter>
         <App />
-      </ListingContext>
-    </BrowserRouter>
+      </BrowserRouter>
+    </ListingContext>
   </StrictMode>
 );

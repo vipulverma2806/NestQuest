@@ -3,10 +3,13 @@ export const listingDataContext = createContext();
 const ListingContext = ({ children }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [img1, setImg1] = useState("");
-  const [img2, setImg2] = useState("");
-  const [img3, setImg3] = useState("");
-  const [rent, setRent] = useState("");
+  const [fimg1, setFImg1] = useState(null);
+  const [fimg2, setFImg2] = useState(null);
+  const [fimg3, setFImg3] = useState(null);
+  const [bimg1, setBImg1] = useState(null);
+  const [bimg2, setBImg2] = useState(null);
+  const [bimg3, setBImg3] = useState(null);
+  const [rent, setRent] = useState("4546");
   const [city, setCity] = useState("");
   const [landmark, setLandmark] = useState("");
   const [latitude, setLatitude] = useState("");
@@ -18,12 +21,19 @@ const ListingContext = ({ children }) => {
     setTitle,
     description,
     setDescription,
-    img1,
-    setImg1,
-    img2,
-    setImg2,
-    img3,
-    setImg3,
+    bimg1,
+    setBImg1,
+    bimg2,
+    setBImg2,
+    bimg3,
+    setBImg3,
+    fimg1,
+    setFImg1,
+    fimg2,
+    setFImg2,
+    fimg3,
+    setFImg3,
+
     rent,
     setRent,
     city,
@@ -38,7 +48,10 @@ const ListingContext = ({ children }) => {
     setCategory,
   };
 
-  console.log(latitude);
+  console.log(fimg1);
+  console.log(rent);
+  // console.log(fimg3);
+
   return (
     <listingDataContext.Provider value={value}>
       {children}

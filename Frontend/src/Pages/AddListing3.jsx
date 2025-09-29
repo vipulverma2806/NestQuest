@@ -4,49 +4,100 @@ import v2 from "../assets/v2.jpg";
 import v3 from "../assets/v3.jpg";
 import Map from "../Component/Map";
 import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { listingDataContext } from "../Context/ListingContext";
 const AddListing3 = () => {
+  const handleImg = (e, setBack, setFront) => {
+    const file = e.target.files[0];
+    setFront(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const navigate = useNavigate();
+  let {
+    title,
+    description,
+    fimg1,
+    setFImg1,
+    setBImg1,
+    fimg2,
+    fimg3,
+    rent,
+    city,
+    landmark,
+    latitude,
+    longitude,
+    category,
+  } = useContext(listingDataContext);
+
   return (
     <div className="flex justify-center">
-      <nav className="flex fixed bg-white w-full justify-between px-10 h-24 py-5">
-        <button className="rounded-full hover:cursor-pointer hidden sm:block bg-red-500 p-4">
+      <nav className="flex fixed bg-white w-full z-20 justify-between px-10 h-24 py-5">
+        <button
+          onClick={() => navigate("/addlisting2")}
+          className="rounded-full hover:cursor-pointer hidden sm:block bg-red-500 active:bg-red-700 p-4"
+        >
           <FaArrowLeft className="text-2xl text-white" />
         </button>
-        <h1 className=" text-red-500 absolute left-1/2 -translate-x-1/2 h-[55px] font-extrabold text-4xl">
+        <h1
+          onClick={() => navigate("/")}
+          className=" text-red-500 hover:cursor-pointer absolute left-1/2 -translate-x-1/2 h-[55px] font-extrabold text-4xl"
+        >
           NestQuest
         </h1>
-        <div className="rounded-full text-md font-semibold text-white hidden sm:block bg-red-500 p-4">
+        <div className="rounded-full text-md font-semibold text-white hidden sm:block bg-red-500 active:bg-red-700 p-4">
           Review your listing
         </div>
       </nav>
-      <div className="pt-30 flex flex-col py-5 gap-y-4 w-[1008px] bg-white">
-        <h1>Address</h1>
-        <div className="h-[408px] border-red-500 border-4 flex w-[1008px]  bg-amber-400 justify-center  ">
+      <div className="mt-30 flex flex-col justify-center m-10 shadow-gray-600 shadow-md  p-5 gap-x-10 gap-y-5 border-gray-400 rounded-2xl border-1 flex-wrap bg-blue-100 w-[85%]">
+        <h1 className="text-4xl pl-3">Address</h1>
+        <div className="h-[408px] border-red-500 border-4 flex w-[1008px]   justify-center  ">
           <div>
             <img
-              src={v1}
+              src={fimg1}
               alt=""
               className="h-[400px] w-[500px] object-cover  "
             />
+            {/* test-------------------------------------- */}
+            {console.log(fimg1)}
           </div>
           <div className="flex flex-col border-l-4 border-red-500 h-[400px]">
             <img
-              src={v2}
+              src={fimg2}
               alt=""
               className="object-cover border-b-4 border-red-500 w-[500px] h-1/2"
             />
-            <img src={v3} alt="" className="object-cover w-[500px] h-1/2" />
+            <img src={fimg3} alt="" className="object-cover w-[500px] h-1/2" />
           </div>
         </div>
-        <p>title</p>
-        <p>description</p>
-        <p>Price</p>
-        <p>
-          Map View (Check Accuracy)
-          <Map></Map>
-        </p>
-        <button className="rounded-full hover:cursor-pointer text-xl font-semibold text-white bg-red-500 w-1/4 p-4">
+        <p className="text-3xl pl-3">title</p>
+        <p className="text-2xl pl-3">description</p>
+        <p className="text-xl pl-3">Rent : {rent}</p>
+        <p className="text-md pl-3"> Map View (Check Accuracy) </p>
+
+        <Map></Map>
+
+        <button className="rounded-full hover:cursor-pointer text-xl font-semibold text-white bg-red-500 active:bg-red-700 w-1/4 p-4">
           Add Listing
         </button>
+        {/* -------------------------test------------------------- */}
+
+        <div className="flex flex-col gap-y-2 ">
+          <label className="text-xl font-semibold" htmlFor="">
+            Image 1:
+          </label>
+
+          <img src={fimg1} alt="fhreyer" />
+
+          {/* --------------------------test-------------------- */}
+          <input
+            required
+            // className={fileCSS}
+            onChange={(e) => handleImg(e, setBImg1, setFImg1)}
+            // value={img1}
+            type="file"
+          />
+        </div>
       </div>
     </div>
   );

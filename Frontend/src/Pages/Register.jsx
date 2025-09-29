@@ -108,7 +108,7 @@ const Register = () => {
           />
           <button
             type="submit"
-            className="bg-red-500 rounded-2xl p-3 hover:bg-red-600 hover:cursor-pointer text-white w-full"
+            className="bg-red-500 active:bg-red-700 rounded-2xl p-3 hover:bg-red-600 hover:cursor-pointer text-white w-full"
           >
             Submit
           </button>

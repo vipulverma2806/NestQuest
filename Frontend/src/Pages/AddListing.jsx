@@ -12,12 +12,18 @@ const AddListing = () => {
     setTitle,
     description,
     setDescription,
-    img1,
-    setImg1,
-    img2,
-    setImg2,
-    img3,
-    setImg3,
+    bimg1,
+    setBImg1,
+    bimg2,
+    setBImg2,
+    bimg3,
+    setBImg3,
+    fimg1,
+    setFImg1,
+    fimg2,
+    setFImg2,
+    fimg3,
+    setFImg3,
     rent,
     setRent,
     city,
@@ -55,16 +61,29 @@ const AddListing = () => {
   //   latitude: "",
   //   longitude: "",
   // });
+  const handleImg = (e, setBack, setFront) => {
+    const file = e.target.files[0];
+    setFront(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/addlisting2");
+  };
+
   return (
     <div>
       <nav className="flex fixed bg-white w-full justify-between px-10 h-24 py-5">
-        <button className="rounded-full hidden sm:block bg-red-500 p-4">
+        <button className="rounded-full hidden sm:block bg-red-500 active:bg-red-700 p-4">
           <FaArrowLeft className="text-2xl text-white" />
         </button>
-        <h1 className=" text-red-500 absolute left-1/2 -translate-x-1/2 h-[55px] font-extrabold text-4xl">
+        <h1
+          onClick={() => navigate("/")}
+          className=" text-red-500 hover:cursor-pointer absolute left-1/2 -translate-x-1/2 h-[55px] font-extrabold text-4xl"
+        >
           NestQuest
         </h1>
-        <div className="rounded-full hidden sm:block text-md font-semibold text-white bg-red-500 p-4">
+        <div className="rounded-full hidden sm:block text-md font-semibold text-white bg-red-500 active:bg-red-700 p-4">
           Set up your Home
         </div>
       </nav>
@@ -72,7 +91,7 @@ const AddListing = () => {
       {/* -------------------------Form------------------------- */}
       <div className="pt-30  pb-10 flex justify-center   w-full items-center">
         <form
-          onSubmit={() => navigate("/addlisting2")}
+          onSubmit={handleSubmit}
           className=" rounded-2xl bg-blue-100 flex flex-col w-[900px] gap-y-5  p-10 mx-10 shadow-gray-600 shadow-xl "
           action=""
         >
@@ -106,12 +125,16 @@ const AddListing = () => {
             <label className="text-xl font-semibold" htmlFor="">
               Image 1:
             </label>
+            {/* -------------------------test------------------------- */}
+
+            <img src={fimg1} className={fimg1 && "h-50 w-min"} alt="" />
+
             {/* --------------------------test-------------------- */}
             <input
               required
               className={fileCSS}
-              onChange={(e) => setImg1(e.target.files[0])}
-              value={img1}
+              onChange={(e) => handleImg(e, setBImg1, setFImg1)}
+              // value={img1}
               type="file"
             />
           </div>
@@ -119,24 +142,26 @@ const AddListing = () => {
             <label className="text-xl font-semibold" htmlFor="">
               Image 2:
             </label>
+            <img src={fimg2} className={fimg2 && "h-50 w-min"} alt="" />
             <input
               required
               className={fileCSS}
               type="file"
-              onChange={(e) => setImg2(e.target.files[0])}
-              value={img2}
+              onChange={(e) => handleImg(e, setBImg2, setFImg2)}
+              // value={img2}
             />
           </div>
           <div className="flex flex-col gap-y-2 ">
             <label className="text-xl font-semibold" htmlFor="">
               Image 3:
             </label>
+            <img src={fimg3} className={fimg3 && "h-50 w-min"} alt="" />
             <input
               required
               className={fileCSS}
               type="file"
-              onChange={(e) => setImg3(e.target.files[0])}
-              value={img3}
+              onChange={(e) => handleImg(e, setBImg3, setFImg3)}
+              // value={img3}
             />
           </div>
 
@@ -203,7 +228,7 @@ const AddListing = () => {
           <button
             type="submit"
             // onClick={() => navigate("/addlisting2")}
-            className="rounded-full text-md font-semibold text-white bg-red-500 p-4"
+            className="rounded-full text-md font-semibold text-white bg-red-500 active:bg-red-700 p-4"
           >
             Next Page
           </button>
