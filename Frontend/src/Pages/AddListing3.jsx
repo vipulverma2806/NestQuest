@@ -8,18 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { listingDataContext } from "../Context/ListingContext";
 const AddListing3 = () => {
-  const handleImg = (e, setBack, setFront) => {
-    const file = e.target.files[0];
-    setFront(URL.createObjectURL(e.target.files[0]));
-  };
-
   const navigate = useNavigate();
   let {
     title,
     description,
     fimg1,
-    setFImg1,
-    setBImg1,
     fimg2,
     fimg3,
     rent,
@@ -28,6 +21,7 @@ const AddListing3 = () => {
     latitude,
     longitude,
     category,
+    handleSubmit,
   } = useContext(listingDataContext);
 
   return (
@@ -50,7 +44,7 @@ const AddListing3 = () => {
         </div>
       </nav>
       <div className="mt-30 flex flex-col justify-center m-10 shadow-gray-600 shadow-md  p-5 gap-x-10 gap-y-5 border-gray-400 rounded-2xl border-1 flex-wrap bg-blue-100 w-[85%]">
-        <h1 className="text-4xl pl-3">Address</h1>
+        <h1 className="text-4xl pl-3">{`${landmark} , ${city}`}</h1>
         <div className="h-[408px] border-red-500 border-4 flex w-[1008px]   justify-center  ">
           <div>
             <img
@@ -58,8 +52,6 @@ const AddListing3 = () => {
               alt=""
               className="h-[400px] w-[500px] object-cover  "
             />
-            {/* test-------------------------------------- */}
-            {console.log(fimg1)}
           </div>
           <div className="flex flex-col border-l-4 border-red-500 h-[400px]">
             <img
@@ -70,34 +62,20 @@ const AddListing3 = () => {
             <img src={fimg3} alt="" className="object-cover w-[500px] h-1/2" />
           </div>
         </div>
-        <p className="text-3xl pl-3">title</p>
-        <p className="text-2xl pl-3">description</p>
+        <p className="text-3xl pl-3">{title} </p>
+        <p className="text-2xl pl-3">{description}</p>
+        <p className="text-2xl pl-3">{category}</p>
         <p className="text-xl pl-3">Rent : {rent}</p>
         <p className="text-md pl-3"> Map View (Check Accuracy) </p>
 
-        <Map></Map>
+        <Map latitude={latitude} longitude={longitude} title={title}></Map>
 
-        <button className="rounded-full hover:cursor-pointer text-xl font-semibold text-white bg-red-500 active:bg-red-700 w-1/4 p-4">
+        <button
+          onClick={handleSubmit}
+          className="rounded-full hover:cursor-pointer text-xl font-semibold text-white bg-red-500 active:bg-red-700 w-1/4 p-4"
+        >
           Add Listing
         </button>
-        {/* -------------------------test------------------------- */}
-
-        <div className="flex flex-col gap-y-2 ">
-          <label className="text-xl font-semibold" htmlFor="">
-            Image 1:
-          </label>
-
-          <img src={fimg1} alt="fhreyer" />
-
-          {/* --------------------------test-------------------- */}
-          <input
-            required
-            // className={fileCSS}
-            onChange={(e) => handleImg(e, setBImg1, setFImg1)}
-            // value={img1}
-            type="file"
-          />
-        </div>
       </div>
     </div>
   );

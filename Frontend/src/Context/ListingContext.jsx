@@ -1,4 +1,6 @@
 import React, { createContext, useState } from "react";
+import axios from "axios";
+const URL = import.meta.env.VITE_URL;
 export const listingDataContext = createContext();
 const ListingContext = ({ children }) => {
   const [title, setTitle] = useState("");
@@ -9,12 +11,35 @@ const ListingContext = ({ children }) => {
   const [bimg1, setBImg1] = useState(null);
   const [bimg2, setBImg2] = useState(null);
   const [bimg3, setBImg3] = useState(null);
-  const [rent, setRent] = useState("4546");
+  const [rent, setRent] = useState("");
   const [city, setCity] = useState("");
   const [landmark, setLandmark] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [category, setCategory] = useState("");
+
+  let formdata = new FormData();
+  formdata.append("title", title);
+  formdata.append("description", description);
+  formdata.append("bimg1", bimg1);
+  formdata.append("bimg2", bimg2);
+  formdata.append("bimg3", bimg3);
+  formdata.append("rent", rent);
+  formdata.append("city", city);
+  formdata.append("landmark", landmark);
+  formdata.append("latitude", latitude);
+  formdata.append("longitude", longitude);
+  formdata.append("category", category);
+
+  const handleSubmit = async () => {
+    try {
+      console.log("working");
+      const result = await axios.post(`${URL}/listingMain/post`, formdata);
+      console.log(result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   let value = {
     title,
@@ -46,11 +71,8 @@ const ListingContext = ({ children }) => {
     setLongitude,
     category,
     setCategory,
+    handleSubmit,
   };
-
-  console.log(fimg1);
-  console.log(rent);
-  // console.log(fimg3);
 
   return (
     <listingDataContext.Provider value={value}>

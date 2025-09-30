@@ -1,7 +1,9 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-
+// import { listingDataContext } from "../Context/ListingContext";
+// import { useContext } from "react";
 export default function Map({ latitude, longitude, title }) {
-  const center = [51.505, -0.09]; // London
+  // let { latitude, longitude } = useContext(listingDataContext);
+  const center = [latitude, longitude];
   return (
     <MapContainer
       center={center}
@@ -15,7 +17,7 @@ export default function Map({ latitude, longitude, title }) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors'
       />
       <Marker position={center}>
-        <Popup>Hello from react-leaflet 👋</Popup>
+        <Popup>{title}</Popup>
       </Marker>
     </MapContainer>
   );

@@ -111,11 +111,3 @@ const AddListing2 = () => {
 };
 
 export default AddListing2;
-
-{
-  /* <div className="flex justify-center">
-  <div className="w-3xs">X</div>
-  <div>Y</div>
-  <div className="w-3xl">Z</div>
-</div>; */
-}

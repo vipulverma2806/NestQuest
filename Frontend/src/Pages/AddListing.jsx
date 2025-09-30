@@ -63,6 +63,7 @@ const AddListing = () => {
   // });
   const handleImg = (e, setBack, setFront) => {
     const file = e.target.files[0];
+    setBack(file);
     setFront(URL.createObjectURL(e.target.files[0]));
   };
 
