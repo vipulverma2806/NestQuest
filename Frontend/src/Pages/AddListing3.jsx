@@ -22,6 +22,8 @@ const AddListing3 = () => {
     longitude,
     category,
     handleSubmit,
+    setLoading,
+    loading,
   } = useContext(listingDataContext);
 
   return (
@@ -72,9 +74,11 @@ const AddListing3 = () => {
 
         <button
           onClick={handleSubmit}
-          className="rounded-full hover:cursor-pointer text-xl font-semibold text-white bg-red-500 active:bg-red-700 w-1/4 p-4"
+          className={`rounded-full hover:cursor-pointer text-xl font-semibold text-white  active:bg-red-700 w-1/4 p-4 ${
+            loading ? "bg-green-500" : "bg-red-600"
+          }`}
         >
-          Add Listing
+          {loading ? "Adding please wait..." : "Add Listing"}
         </button>
       </div>
     </div>

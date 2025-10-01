@@ -17,6 +17,7 @@ const ListingContext = ({ children }) => {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [category, setCategory] = useState("");
+  const [loading, setLoading] = useState(false);
 
   let formdata = new FormData();
   formdata.append("title", title);
@@ -34,7 +35,9 @@ const ListingContext = ({ children }) => {
   const handleSubmit = async () => {
     try {
       console.log("working");
+      setLoading(true);
       const result = await axios.post(`${URL}/listingMain/post`, formdata);
+      setLoading(false);
       console.log(result);
     } catch (err) {
       console.log(err);
@@ -72,6 +75,8 @@ const ListingContext = ({ children }) => {
     category,
     setCategory,
     handleSubmit,
+    loading,
+    setLoading,
   };
 
   return (
