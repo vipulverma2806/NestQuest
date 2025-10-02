@@ -18,7 +18,7 @@ const ListingContext = ({ children }) => {
   const [longitude, setLongitude] = useState("");
   const [category, setCategory] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const [allProperties, setAllProperties] = useState([]);
   let formdata = new FormData();
   formdata.append("title", title);
   formdata.append("description", description);
@@ -39,6 +39,17 @@ const ListingContext = ({ children }) => {
       const result = await axios.post(`${URL}/listingMain/post`, formdata);
       setLoading(false);
       console.log(result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getAll = async () => {
+    try {
+      console.log("fgfgfg");
+      const totalList = await axios.get(`${URL}/listingMain/getAll`);
+      console.log(totalList.data);
+      setAllProperties(totalList.data);
     } catch (err) {
       console.log(err);
     }
@@ -77,6 +88,9 @@ const ListingContext = ({ children }) => {
     handleSubmit,
     loading,
     setLoading,
+
+    getAll,
+    allProperties,
   };
 
   return (

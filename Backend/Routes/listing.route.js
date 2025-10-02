@@ -1,6 +1,7 @@
 import express from "express";
 import upload from "../Middleware/multer.js";
 import listingController from "../Controllers/listing.controller.js";
+import getAll from "../Controllers/getAll.controller.js";
 const listingRouter = express.Router();
 
 listingRouter.post(
@@ -12,4 +13,6 @@ listingRouter.post(
   ]),
   listingController
 );
+
+listingRouter.get("/getAll", getAll);
 export default listingRouter;
