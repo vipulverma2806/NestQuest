@@ -4,9 +4,10 @@ import ProductTile from "../Component/ProductTile";
 import { useEffect } from "react";
 import { listingDataContext } from "../Context/ListingContext";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
   let { getAll, allProperties } = useContext(listingDataContext);
-  const user = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 11];
+  const navigate = useNavigate();
   useEffect(() => {
     getAll();
   }, []);

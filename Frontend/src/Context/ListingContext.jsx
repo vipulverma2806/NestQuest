@@ -55,6 +55,11 @@ const ListingContext = ({ children }) => {
     }
   };
 
+  const bookPage = (property) => {
+    setFImg1(property.img1);
+    setTitle(property.title);
+  };
+
   let value = {
     title,
     setTitle,
@@ -91,6 +96,7 @@ const ListingContext = ({ children }) => {
 
     getAll,
     allProperties,
+    bookPage,
   };
 
   return (
