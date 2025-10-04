@@ -17,6 +17,7 @@ const ListingContext = ({ children }) => {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [category, setCategory] = useState("");
+  const [propertyID, setPropertyID] = useState(0);
   const [loading, setLoading] = useState(false);
   const [allProperties, setAllProperties] = useState([]);
   let formdata = new FormData();
@@ -57,7 +58,17 @@ const ListingContext = ({ children }) => {
 
   const bookPage = (property) => {
     setFImg1(property.img1);
+    setFImg2(property.img2);
+    setFImg3(property.img3);
     setTitle(property.title);
+    setRent(property.rent);
+    setCategory(property.category);
+    setDescription(property.description);
+    setLandmark(property.landmark);
+    setLatitude(property.latitude);
+    setLongitude(property.longitude);
+    setCity(property.city);
+    setPropertyID(property._id);
   };
 
   let value = {
@@ -97,6 +108,8 @@ const ListingContext = ({ children }) => {
     getAll,
     allProperties,
     bookPage,
+    propertyID,
+    setPropertyID,
   };
 
   return (

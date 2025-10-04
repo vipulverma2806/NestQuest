@@ -5,6 +5,7 @@ import multer from "multer";
 import cors from "cors";
 import uploadOnCloudinary from "./Config/cloudinary.js";
 import listingRouter from "./Routes/listing.route.js";
+import bookingRouter from "./Routes/booking.route.js";
 import connectDB from "./Config/db.js";
 dotenv.config();
 const app = express();
@@ -39,5 +40,6 @@ app.use(express.json());
 // );
 
 app.use("/listingMain", listingRouter);
+app.use("/booking", bookingRouter);
 connectDB();
 app.listen("5000", () => console.log("server started"));

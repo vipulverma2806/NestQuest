@@ -7,8 +7,12 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { listingDataContext } from "../Context/ListingContext";
+import {
+  bookingDataContext,
+  BookingDataContext,
+} from "../Context/BookingContext";
 import { useParams } from "react-router-dom";
-const AddListing3 = () => {
+const Booking = () => {
   const property = useParams();
   const navigate = useNavigate();
   let {
@@ -23,17 +27,21 @@ const AddListing3 = () => {
     latitude,
     longitude,
     category,
-    handleSubmit,
+
     setLoading,
     loading,
     allProperties,
+    propertyID,
+    setPropertyID,
   } = useContext(listingDataContext);
+
+  let { handleBooking } = useContext(bookingDataContext);
 
   return (
     <div className="flex justify-center">
       <nav className="flex fixed bg-white w-full z-20 justify-between px-10 h-24 py-5">
         <button
-          onClick={() => navigate("/addlisting2")}
+          onClick={() => navigate("/")}
           className="rounded-full hover:cursor-pointer hidden sm:block bg-red-500 active:bg-red-700 p-4"
         >
           <FaArrowLeft className="text-2xl text-white" />
@@ -76,16 +84,16 @@ const AddListing3 = () => {
         <Map latitude={latitude} longitude={longitude} title={title}></Map>
 
         <button
-          onClick={handleSubmit}
+          onClick={handleBooking(propertyID)}
           className={`rounded-full hover:cursor-pointer text-xl font-semibold text-white  active:bg-red-700 w-1/4 p-4 ${
             loading ? "bg-green-500" : "bg-red-600"
           }`}
         >
-          {loading ? "Adding please wait..." : "Add Listing"}
+          {loading ? "Booking please wait..." : "Book"}
         </button>
       </div>
     </div>
   );
 };
 
-export default AddListing3;
+export default Booking;

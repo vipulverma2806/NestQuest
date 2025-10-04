@@ -45,6 +45,11 @@ const listingSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  booked: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 const Listing = mongoose.model("Listing", listingSchema);
