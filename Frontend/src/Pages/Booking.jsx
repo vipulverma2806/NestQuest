@@ -7,10 +7,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { listingDataContext } from "../Context/ListingContext";
-import {
-  bookingDataContext,
-  BookingDataContext,
-} from "../Context/BookingContext";
+import { bookingDataContext } from "../Context/BookingContext";
 import { useParams } from "react-router-dom";
 const Booking = () => {
   const property = useParams();
@@ -84,7 +81,7 @@ const Booking = () => {
         <Map latitude={latitude} longitude={longitude} title={title}></Map>
 
         <button
-          onClick={handleBooking(propertyID)}
+          onClick={() => handleBooking(propertyID)}
           className={`rounded-full hover:cursor-pointer text-xl font-semibold text-white  active:bg-red-700 w-1/4 p-4 ${
             loading ? "bg-green-500" : "bg-red-600"
           }`}
