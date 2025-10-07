@@ -1,76 +1,36 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-
+import { toast } from "react-toastify";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [wait, setWait] = useState(false);
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/auth/register", {
+      setWait(true);
+      const result = await axios.post("http://localhost:5000/auth/register", {
         name,
         email,
         password,
       });
-      alert("Register Successfully");
+      setWait(false);
+      if (result.data.errorResponse?.code === 11000)
+        return toast.error("Email already exists");
+      console.log(result.data);
+      toast.success("Registered Successfully");
       setName("");
       setPassword("");
-      navigate("/");
+      setEmail("");
+      navigate("/login");
     } catch (error) {
       console.error("Registration failed:", error);
     }
   };
-
-  // return (
-  //   <div className="w-full justify-center items-center min-h-screen flex">
-
-  //       <form onSubmit={handleSubmit} className="lg:w-1/3 w-full flex justify-center items-center flex-col">
-  //         <h1>Register</h1>
-  //         <input
-  //           type="text"
-  //           placeholder="name"
-  //           value={name}
-  //           onChange={(e) => setname(e.target.value)}
-  //           className=""
-  //         />
-  //         <input
-  //           type="email"
-  //           placeholder="Email"
-  //           value={email}
-  //           onChange={(e) => setEmail(e.target.value)}
-  //           className=""
-  //         />
-  //         <input
-  //           type="password"
-  //           placeholder="Password"
-  //           value={password}
-  //           onChange={(e) => setPassword(e.target.value)}
-  //           className=""
-  //         />
-  //         <button type="submit" className="">
-  //           Register
-  //         </button>
-  //          <p className="text-left w-full">
-  //         Already have an account?{" "}
-  //         <Link to path="/login" className="text-blue-600 hover:cursor-pointer">
-  //           Login here
-  //         </Link>
-  //       </p>
-  //       </form>
-
-  //     <div className="hidden lg:block lg:w-2/3">
-  //       <img
-  //         src="../../public/exam.jpg"
-  //         className="min-h-screen object-cover"
-  //         alt="Description"
-  //       />
-  //     </div>
-  //   </div>
-  // );
 
   return (
     <div className="min-h-screen bg-gray-900 flex items-center">
@@ -80,7 +40,13 @@ const Register = () => {
           className="bg-gray-800 flex shadow-white shadow-sm flex-col  p-6  rounded-2xl space-y-5 max-w-sm w-full "
         >
           <h1 className="text-gray-100 text-center text-2xl font-bold">
-            Register to <span className="text-red-500 ">NestQuest</span>
+            Register to{" "}
+            <span
+              className="text-red-500 hover:cursor-pointer hover:text-blue-600"
+              onClick={() => navigate("/")}
+            >
+              NestQuest
+            </span>
           </h1>
           <input
             type="text"
@@ -108,9 +74,11 @@ const Register = () => {
           />
           <button
             type="submit"
-            className="bg-red-500 active:bg-red-700 rounded-2xl p-3 hover:bg-red-600 hover:cursor-pointer text-white w-full"
+            className={` active:bg-red-700 rounded-2xl p-3 hover:cursor-pointer  text-white w-full ${
+              wait ? "bg-green-500 " : "bg-red-500 hover:bg-red-600 "
+            }`}
           >
-            Submit
+            {wait ? "Please wait.." : "Submit"}
           </button>
           <p className="text-gray-200 ">
             Already have an account :{" "}
@@ -133,3 +101,50 @@ const Register = () => {
 };
 
 export default Register;
+
+// return (
+//   <div className="w-full justify-center items-center min-h-screen flex">
+
+//       <form onSubmit={handleSubmit} className="lg:w-1/3 w-full flex justify-center items-center flex-col">
+//         <h1>Register</h1>
+//         <input
+//           type="text"
+//           placeholder="name"
+//           value={name}
+//           onChange={(e) => setname(e.target.value)}
+//           className=""
+//         />
+//         <input
+//           type="email"
+//           placeholder="Email"
+//           value={email}
+//           onChange={(e) => setEmail(e.target.value)}
+//           className=""
+//         />
+//         <input
+//           type="password"
+//           placeholder="Password"
+//           value={password}
+//           onChange={(e) => setPassword(e.target.value)}
+//           className=""
+//         />
+//         <button type="submit" className="">
+//           Register
+//         </button>
+//          <p className="text-left w-full">
+//         Already have an account?{" "}
+//         <Link to path="/login" className="text-blue-600 hover:cursor-pointer">
+//           Login here
+//         </Link>
+//       </p>
+//       </form>
+
+//     <div className="hidden lg:block lg:w-2/3">
+//       <img
+//         src="../../public/exam.jpg"
+//         className="min-h-screen object-cover"
+//         alt="Description"
+//       />
+//     </div>
+//   </div>
+// );

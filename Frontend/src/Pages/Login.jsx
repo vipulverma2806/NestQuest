@@ -1,31 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
+import { authDataContext } from "../Context/authContext";
 const Login = () => {
   axios.defaults.withCredentials = true;
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [wait, setWait] = useState(false);
   const navigate = useNavigate();
+  let { setName, email, setEmail } = useContext(authDataContext);
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      setWait(true);
       const res = await axios.post("http://localhost:5000/auth/login", {
         email,
         password,
       });
+      setWait(false);
       console.log("Login response:", res.data);
 
-      navigate("/dashboard");
+      toast.success("Login Successful");
+      navigate("/");
     } catch (error) {
       console.error(error);
-      console.error(
-        "Login failed:",
-        error.response ? error.response.data : error.message
-      );
-      setError("Invalid credentials");
+      if (error.response.data === "NA")
+        return toast.error("Invalid Crediantials");
     }
   };
 
@@ -33,7 +36,7 @@ const Login = () => {
     <div className="min-h-screen bg-gray-900 flex items-center">
       <div className="flex justify-center lg:justify-end items-center w-full lg:w-1/3">
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleLogin}
           className="bg-gray-800 shadow-white shadow-sm flex flex-col p-6  rounded-2xl space-y-5 max-w-sm w-full "
         >
           <h1 className="text-gray-100 text-center text-2xl font-bold">
@@ -58,9 +61,11 @@ const Login = () => {
           />
           <button
             type="submit"
-            className="bg-red-500 active:bg-red-700 rounded-2xl p-3 hover:bg-red-600 hover:cursor-pointer text-white w-full"
+            className={` active:bg-red-700 rounded-2xl p-3 hover:cursor-pointer  text-white w-full ${
+              wait ? "bg-green-500 " : "bg-red-500 hover:bg-red-600 "
+            }`}
           >
-            Submit
+            {wait ? "Please wait.." : "Login"}
           </button>
           <p className="text-gray-200 ">
             Don't have an account :{" "}

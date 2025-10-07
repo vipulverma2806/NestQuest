@@ -75,7 +75,10 @@ const AddListing = () => {
   return (
     <div>
       <nav className="flex fixed bg-white w-full justify-between px-10 h-24 py-5">
-        <button className="rounded-full hidden sm:block bg-red-500 active:bg-red-700 p-4">
+        <button
+          className="rounded-full hidden sm:block bg-red-500 active:bg-red-700 p-4"
+          onClick={() => navigate("/")}
+        >
           <FaArrowLeft className="text-2xl text-white" />
         </button>
         <h1

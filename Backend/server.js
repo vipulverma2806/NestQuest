@@ -6,15 +6,22 @@ import cors from "cors";
 import uploadOnCloudinary from "./Config/cloudinary.js";
 import listingRouter from "./Routes/listing.route.js";
 import bookingRouter from "./Routes/booking.route.js";
+import authRouter from "./Routes/auth.route.js";
 import connectDB from "./Config/db.js";
 dotenv.config();
 const app = express();
 app.use(
   cors({
     origin: "http://localhost:5173",
+    credentials: true,
   })
 );
 app.use(express.json());
+app.use("/listingMain", listingRouter);
+app.use("/booking", bookingRouter);
+app.use("/auth", authRouter);
+connectDB();
+app.listen("5000", () => console.log("server started"));
 
 // app.post(
 //   "/postimage",
@@ -38,8 +45,3 @@ app.use(express.json());
 //     res.json(URL);
 //   }
 // );
-
-app.use("/listingMain", listingRouter);
-app.use("/booking", bookingRouter);
-connectDB();
-app.listen("5000", () => console.log("server started"));

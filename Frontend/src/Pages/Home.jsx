@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <div>
       <NavBar></NavBar>
-      <div className="md:pt-44 sm:pt-60 pt-80 flex gap-8  w-screen flex-wrap items-center justify-center p-10">
+      <div className="md:pt-48 sm:pt-60 pt-80 flex gap-8  w-screen flex-wrap items-center justify-center p-10">
         {allProperties.map((property, i) => {
           return <ProductTile property={property} key={i} />;
         })}
