@@ -8,6 +8,7 @@ import listingRouter from "./Routes/listing.route.js";
 import bookingRouter from "./Routes/booking.route.js";
 import authRouter from "./Routes/auth.route.js";
 import connectDB from "./Config/db.js";
+import cookieParser from "cookie-parser";
 dotenv.config();
 const app = express();
 app.use(
@@ -17,6 +18,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(cookieParser());
 app.use("/listingMain", listingRouter);
 app.use("/booking", bookingRouter);
 app.use("/auth", authRouter);

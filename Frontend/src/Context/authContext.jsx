@@ -1,27 +1,32 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createContext } from "react";
 import axios from "axios";
-const URL = import.meta.env.VITE_URL
+const URL = import.meta.env.VITE_URL;
 export const authDataContext = createContext();
 
-const authContext = ({ children }) => {
+const AuthContext = ({ children }) => {
+  axios.defaults.withCredentials = true;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const getName = async() =>{
-    try{
-      const result = await axios.get(`${URL}/auth/name`)
-    }
-  catch(err){
+  const getUserData = async () => {
+    try {
+      const userData = await axios.get(`${URL}/auth/getuserdata`);
+      setName(result.data);
+    } catch (err) {}
+  };
 
-  }
+  useEffect(() => {
+    getUserData();
+  }, []);
+
   let value = {
     name,
     setName,
     email,
     setEmail,
-    getName
+    getUserData,
   };
   return (
     <authDataContext.Provider value={value}>
@@ -30,4 +35,4 @@ const authContext = ({ children }) => {
   );
 };
 
-export default authContext;
+export default AuthContext;

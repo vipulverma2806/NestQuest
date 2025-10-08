@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
@@ -12,11 +12,13 @@ import { IoBedOutline } from "react-icons/io5";
 import { FaTreeCity } from "react-icons/fa6";
 import { BiBuildingHouse } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import { authDataContext } from "../Context/authContext";
 const IconStyle = "w-[35px]  h-[35px] text-black";
 const IconDiv = "flex  hover:border-b-2 justify-center items-center flex-col";
 const NavBar = () => {
   const navigate = useNavigate();
   const [menu, setMenu] = useState(false);
+  let { name } = useContext(authDataContext);
 
   return (
     <div className="relative z-10">
@@ -34,14 +36,14 @@ const NavBar = () => {
           </div>
 
           <div className="">
-            {false ? (
+            {name ? (
               <button
                 className="border-2 border-gray-400 h-[55px]  w-[100px] flex justify-between p-4 items-center  rounded-s-full rounded-e-full cursor-pointer"
                 onClick={() => setMenu(!menu)}
               >
                 <GiHamburgerMenu />
                 <div className="text-center flex justify-center ml-2 items-center bg-red-500 active:bg-red-700 h-[35px] w-[35px] text-white rounded-full">
-                  N
+                  {name.trim()[0]}
                 </div>
 
                 <div className="relative">
@@ -50,12 +52,25 @@ const NavBar = () => {
                       menu ? "block" : "hidden"
                     } absolute border-gray-800 border rounded-2xl bg-gray-200 right-1/2 top-7 z-30 w-[180px]`}
                   >
-                    <ul className="p-5 flex flex-col text-left gap-y-4 font">
-                      <li onClick={() => navigate("/addlisting")}>
+                    <ul className=" flex flex-col text-left  font">
+                      <li
+                        className="p-2 pt-4 hover:bg-gray-300 rounded-2xl "
+                        onClick={() => navigate("/addlisting")}
+                      >
                         List your Property
                       </li>
-                      <li>My Listing</li>
-                      <li>My Booking</li>
+                      <li
+                        className="hover:bg-gray-300 p-2"
+                        onClick={() => navigate("/mylistings")}
+                      >
+                        My Listing
+                      </li>
+                      <li
+                        className="hover:bg-gray-300 rounded-2xl p-2 pb-4"
+                        onClick={() => navigate("/mybookings")}
+                      >
+                        My Booking
+                      </li>
                     </ul>
                   </div>
                 </div>

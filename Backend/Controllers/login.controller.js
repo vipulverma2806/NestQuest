@@ -12,7 +12,7 @@ const login = async (req, res) => {
     if (!found) return res.status(401).json("NA");
     const compare = await bcrypt.compare(password, found.password);
     if (!compare) return res.status(401).json("NA");
-    const token = jwt.sign({ email: found.email, id: found._id }, JWT_SECRET, {
+    const token = jwt.sign({ id: found._id }, JWT_SECRET, {
       expiresIn: "1d",
     });
     res.cookie("token", token);
