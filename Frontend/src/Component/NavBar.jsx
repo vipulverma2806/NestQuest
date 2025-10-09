@@ -18,7 +18,7 @@ const IconDiv = "flex  hover:border-b-2 justify-center items-center flex-col";
 const NavBar = () => {
   const navigate = useNavigate();
   const [menu, setMenu] = useState(false);
-  let { name } = useContext(authDataContext);
+  let { name, logout } = useContext(authDataContext);
 
   return (
     <div className="relative z-10">
@@ -42,8 +42,11 @@ const NavBar = () => {
                 onClick={() => setMenu(!menu)}
               >
                 <GiHamburgerMenu />
-                <div className="text-center flex justify-center ml-2 items-center bg-red-500 active:bg-red-700 h-[35px] w-[35px] text-white rounded-full">
-                  {name.trim()[0]}
+                <div className=" flex justify-center  ml-2 items-center bg-red-500 active:bg-red-700 h-[35px] w-[35px] text-white rounded-full">
+                  <h1 className="font-semibold text-2xl text-center relative bottom-1 ">
+                    {" "}
+                    {name.trim()[0]}
+                  </h1>
                 </div>
 
                 <div className="relative">
@@ -66,10 +69,16 @@ const NavBar = () => {
                         My Listing
                       </li>
                       <li
-                        className="hover:bg-gray-300 rounded-2xl p-2 pb-4"
+                        className="hover:bg-gray-300  p-2 "
                         onClick={() => navigate("/mybookings")}
                       >
                         My Booking
+                      </li>
+                      <li
+                        className="hover:bg-red-300 rounded-2xl p-2 pb-4"
+                        onClick={logout}
+                      >
+                        Logout
                       </li>
                     </ul>
                   </div>

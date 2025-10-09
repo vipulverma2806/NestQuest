@@ -5,8 +5,10 @@ import { useEffect } from "react";
 import { listingDataContext } from "../Context/ListingContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { authDataContext } from "../Context/authContext";
 const Home = () => {
   let { getAll, allProperties } = useContext(listingDataContext);
+
   const navigate = useNavigate();
   useEffect(() => {
     getAll();

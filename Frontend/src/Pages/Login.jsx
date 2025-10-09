@@ -3,24 +3,26 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { authDataContext } from "../Context/authContext";
+import { listingDataContext } from "../Context/ListingContext";
 const Login = () => {
   axios.defaults.withCredentials = true;
   // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [wait, setWait] = useState(false);
+  // const [wait, setWait] = useState(false);
   const navigate = useNavigate();
   let { setName, email, setEmail } = useContext(authDataContext);
+  let { loading, setLoading } = useContext(listingDataContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      setWait(true);
+      setLoading(true);
       const res = await axios.post("http://localhost:5000/auth/login", {
         email,
         password,
       });
-      setWait(false);
+      setLoading(false);
       console.log("Login response:", res.data);
 
       toast.success("Login Successful");
@@ -40,7 +42,10 @@ const Login = () => {
           className="bg-gray-800 shadow-white shadow-sm flex flex-col p-6  rounded-2xl space-y-5 max-w-sm w-full "
         >
           <h1 className="text-gray-100 text-center text-2xl font-bold">
-            Login to <span className="text-red-500">NestQuest</span>
+            Login to{" "}
+            <span onClick={() => navigate("/")} className="text-red-500">
+              NestQuest
+            </span>
           </h1>
 
           <input
@@ -62,10 +67,10 @@ const Login = () => {
           <button
             type="submit"
             className={` active:bg-red-700 rounded-2xl p-3 hover:cursor-pointer  text-white w-full ${
-              wait ? "bg-green-500 " : "bg-red-500 hover:bg-red-600 "
+              loading ? "bg-green-500 " : "bg-red-500 hover:bg-red-600 "
             }`}
           >
-            {wait ? "Please wait.." : "Login"}
+            {loading ? "Please wait.." : "Login"}
           </button>
           <p className="text-gray-200 ">
             Don't have an account :{" "}

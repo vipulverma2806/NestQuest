@@ -20,21 +20,23 @@ const ListingContext = ({ children }) => {
   const [propertyID, setPropertyID] = useState(0);
   const [loading, setLoading] = useState(false);
   const [allProperties, setAllProperties] = useState([]);
-  let formdata = new FormData();
-  formdata.append("title", title);
-  formdata.append("description", description);
-  formdata.append("bimg1", bimg1);
-  formdata.append("bimg2", bimg2);
-  formdata.append("bimg3", bimg3);
-  formdata.append("rent", rent);
-  formdata.append("city", city);
-  formdata.append("landmark", landmark);
-  formdata.append("latitude", latitude);
-  formdata.append("longitude", longitude);
-  formdata.append("category", category);
+  // const [adding, setAdding] = useState(false);
 
   const handleSubmit = async () => {
     try {
+      let formdata = new FormData();
+      formdata.append("title", title);
+      formdata.append("description", description);
+      formdata.append("bimg1", bimg1);
+      formdata.append("bimg2", bimg2);
+      formdata.append("bimg3", bimg3);
+      formdata.append("rent", rent);
+      formdata.append("city", city);
+      formdata.append("landmark", landmark);
+      formdata.append("latitude", latitude);
+      formdata.append("longitude", longitude);
+      formdata.append("category", category);
+
       console.log("working");
       setLoading(true);
       const result = await axios.post(`${URL}/listingMain/post`, formdata);
