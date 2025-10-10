@@ -13,6 +13,7 @@ const AuthContext = ({ children }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [listing, setListing] = useState([]);
+  const [userId, setUserId] = useState(0);
 
   const getUserData = async () => {
     try {
@@ -20,6 +21,7 @@ const AuthContext = ({ children }) => {
       console.log(userData.data);
       setName(userData.data.name);
       setListing(userData.data.listing);
+      setUserId(userData.data._id);
     } catch (err) {
       setName("");
       setListing([]);
@@ -52,6 +54,7 @@ const AuthContext = ({ children }) => {
     getUserData,
     listing,
     logout,
+    userId,
   };
   return (
     <authDataContext.Provider value={value}>

@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import axios from "axios";
+import UpdateForm from "../Component/UpdateForm";
 const URL = import.meta.env.VITE_URL;
 export const listingDataContext = createContext();
 const ListingContext = ({ children }) => {
@@ -20,6 +21,7 @@ const ListingContext = ({ children }) => {
   const [propertyID, setPropertyID] = useState(0);
   const [loading, setLoading] = useState(false);
   const [allProperties, setAllProperties] = useState([]);
+  const [hostId, setHostId] = useState(0);
   // const [adding, setAdding] = useState(false);
 
   const handleSubmit = async () => {
@@ -58,7 +60,7 @@ const ListingContext = ({ children }) => {
     }
   };
 
-  const bookPage = (property) => {
+  const productViewPage = (property) => {
     setFImg1(property.img1);
     setFImg2(property.img2);
     setFImg3(property.img3);
@@ -71,7 +73,10 @@ const ListingContext = ({ children }) => {
     setLongitude(property.longitude);
     setCity(property.city);
     setPropertyID(property._id);
+    setHostId(property.host);
   };
+
+  const handleUpdate = async (propertyID) => {};
 
   let value = {
     title,
@@ -109,9 +114,10 @@ const ListingContext = ({ children }) => {
 
     getAll,
     allProperties,
-    bookPage,
+    productViewPage,
     propertyID,
     setPropertyID,
+    hostId,
   };
 
   return (

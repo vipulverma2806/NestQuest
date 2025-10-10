@@ -5,13 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { listingDataContext } from "../Context/ListingContext";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { useContext } from "react";
+import { authDataContext } from "../Context/authContext";
 const ProductTile = ({ property }) => {
-  let { bookPage } = useContext(listingDataContext);
+  let { productViewPage } = useContext(listingDataContext);
+  let { userId } = useContext(authDataContext);
 
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/booking/${property._id}`);
-    bookPage(property);
+    navigate(`/propertyview/${property._id}`);
+    productViewPage(property);
   };
   return (
     <div className="hover:cursor-pointer relative z-0" onClick={handleClick}>

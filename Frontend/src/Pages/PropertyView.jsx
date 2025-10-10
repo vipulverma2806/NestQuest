@@ -3,13 +3,20 @@ import v1 from "../assets/v1.jpg";
 import v2 from "../assets/v2.jpg";
 import v3 from "../assets/v3.jpg";
 import Map from "../Component/Map";
+import UpdateForm from "../Component/UpdateForm";
+import BookingForm from "../Component/BookingForm";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { listingDataContext } from "../Context/ListingContext";
 import { bookingDataContext } from "../Context/BookingContext";
+import { authDataContext } from "../Context/authContext";
 import { useParams } from "react-router-dom";
-const Booking = () => {
+const PropertyView = () => {
+  const [updatePopup, setUpdatePopup] = useState(false);
+  const [bookingPopup, setBookingPopup] = useState(false);
+  let { productViewPage, handleUpdate } = useContext(listingDataContext);
+  let { userId } = useContext(authDataContext);
   const property = useParams();
   const navigate = useNavigate();
   let {
@@ -30,6 +37,7 @@ const Booking = () => {
     allProperties,
     propertyID,
     setPropertyID,
+    hostId,
   } = useContext(listingDataContext);
 
   let { handleBooking } = useContext(bookingDataContext);
@@ -55,7 +63,7 @@ const Booking = () => {
       </nav>
       <div className="mt-30 flex flex-col justify-center m-10 shadow-gray-600 shadow-md  p-5 gap-x-10 gap-y-5 border-gray-400 rounded-2xl border-1 flex-wrap bg-blue-100 w-[85%]">
         <h1 className="text-4xl pl-3">{`${landmark} , ${city}`}</h1>
-        <div className="h-[408px] border-red-500 border-4 flex w-[1008px]   justify-center  ">
+        <div className="h-[408px] border-red-500 border-4 w-[1008px] flex  justify-center  ">
           <div>
             <img
               src={fimg1}
@@ -81,16 +89,27 @@ const Booking = () => {
         <Map latitude={latitude} longitude={longitude} title={title}></Map>
 
         <button
-          onClick={() => handleBooking(propertyID)}
+          onClick={
+            hostId == userId
+              ? () => setUpdatePopup(true)
+              : () => setBookingPopup(true)
+          }
           className={`rounded-full hover:cursor-pointer text-xl font-semibold text-white  active:bg-red-700 w-1/4 p-4 ${
             loading ? "bg-green-500" : "bg-red-600"
           }`}
         >
-          {loading ? "Booking please wait..." : "Book"}
+          {hostId == userId
+            ? `${loading ? "Updating please wait..." : "Update"}`
+            : `${loading ? "Booking please wait..." : "Book"}`}
         </button>
+
+        {/* {updatePopup && console.log("update")}
+        {bookingPopup && console.log("booking")} */}
       </div>
+      {updatePopup && <UpdateForm />}
+      {bookingPopup && <BookingForm />}
     </div>
   );
 };
 
-export default Booking;
+export default PropertyView;

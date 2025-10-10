@@ -9,7 +9,7 @@ import { ToastContainer } from "react-toastify";
 import MyBookings from "./Pages/MyBookings";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
-import Booking from "./Pages/Booking";
+import PropertyView from "./Pages/PropertyView";
 const App = () => {
   return (
     <div>
@@ -32,7 +32,7 @@ const App = () => {
         <Route path="/addlisting3" element={<AddListing3 />}></Route>
         <Route path="/mylistings" element={<MyListings />}></Route>
         <Route path="/mybookings" element={<MyBookings />}></Route>
-        <Route path="/booking/:id" element={<Booking />}></Route>
+        <Route path="/propertyview/:id" element={<PropertyView />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
       </Routes>
