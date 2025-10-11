@@ -106,8 +106,8 @@ const PropertyView = () => {
         {/* {updatePopup && console.log("update")}
         {bookingPopup && console.log("booking")} */}
       </div>
-      {updatePopup && <UpdateForm />}
-      {bookingPopup && <BookingForm />}
+      {updatePopup && <UpdateForm setUpdatePopup={setUpdatePopup} />}
+      {bookingPopup && <BookingForm setBookingPopup={setBookingPopup} />}
     </div>
   );
 };

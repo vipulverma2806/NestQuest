@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import "leaflet/dist/leaflet.css";
 import ListingContext from "./Context/ListingContext.jsx";
 import BookingContext from "./Context/BookingContext.jsx";
-import AuthContext from "./Context/AuthContext.jsx";
+import AuthContext from "./Context/authContext.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
