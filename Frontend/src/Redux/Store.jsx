@@ -1,1 +1,5 @@
-import { configureStore } from "react";
+import { configureStore } from "react-redux";
+
+const store = configureStore({
+  reducer: {},
+});
