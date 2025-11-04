@@ -12,13 +12,17 @@ import { listingDataContext } from "../Context/ListingContext";
 import { bookingDataContext } from "../Context/BookingContext";
 import { authDataContext } from "../Context/authContext";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 const PropertyView = () => {
   const [updatePopup, setUpdatePopup] = useState(false);
   const [bookingPopup, setBookingPopup] = useState(false);
   let { productViewPage, handleUpdate } = useContext(listingDataContext);
-  let { userId } = useContext(authDataContext);
+  // let { userId } = useContext(authDataContext);
+  let userId = useSelector((state) => state.auth.userId);
+  let listing = useSelector((state) => state.listing);
   const property = useParams();
   const navigate = useNavigate();
+  console.log(listing);
   let {
     title,
     description,
@@ -41,7 +45,7 @@ const PropertyView = () => {
   } = useContext(listingDataContext);
 
   let { handleBooking } = useContext(bookingDataContext);
-
+  console.log("userid", userId, "hostid", hostId);
   return (
     <div className="flex justify-center">
       <nav className="flex fixed bg-white w-full z-20 justify-between px-10 h-24 py-5">
@@ -62,35 +66,43 @@ const PropertyView = () => {
         </div>
       </nav>
       <div className="mt-30 flex flex-col justify-center m-10 shadow-gray-600 shadow-md  p-5 gap-x-10 gap-y-5 border-gray-400 rounded-2xl border-1 flex-wrap bg-blue-100 w-[85%]">
-        <h1 className="text-4xl pl-3">{`${landmark} , ${city}`}</h1>
+        <h1 className="text-4xl pl-3">{`${listing.landmark} , ${listing.city}`}</h1>
         <div className="h-[408px] border-red-500 border-4 w-[1008px] flex  justify-center  ">
           <div>
             <img
-              src={fimg1}
+              src={listing.fimg1}
               alt=""
               className="h-[400px] w-[500px] object-cover  "
             />
           </div>
           <div className="flex flex-col border-l-4 border-red-500 h-[400px]">
             <img
-              src={fimg2}
+              src={listing.fimg2}
               alt=""
               className="object-cover border-b-4 border-red-500 w-[500px] h-1/2"
             />
-            <img src={fimg3} alt="" className="object-cover w-[500px] h-1/2" />
+            <img
+              src={listing.fimg3}
+              alt=""
+              className="object-cover w-[500px] h-1/2"
+            />
           </div>
         </div>
-        <p className="text-3xl pl-3">{title} </p>
-        <p className="text-2xl pl-3">{description}</p>
-        <p className="text-2xl pl-3">{category}</p>
-        <p className="text-xl pl-3">Rent : {rent}</p>
+        <p className="text-3xl pl-3">{listing.title} </p>
+        <p className="text-2xl pl-3">{listing.description}</p>
+        <p className="text-2xl pl-3">{listing.category}</p>
+        <p className="text-xl pl-3">Rent : {listing.rent}</p>
         <p className="text-md pl-3"> Map View (Check Accuracy) </p>
 
-        <Map latitude={latitude} longitude={longitude} title={title}></Map>
+        <Map
+          latitude={listing.latitude}
+          longitude={listing.longitude}
+          title={listing.title}
+        ></Map>
 
         <button
           onClick={
-            hostId == userId
+            listing.hostId == userId
               ? () => setUpdatePopup(true)
               : () => setBookingPopup(true)
           }
@@ -98,7 +110,7 @@ const PropertyView = () => {
             loading ? "bg-green-500" : "bg-red-600"
           }`}
         >
-          {hostId == userId
+          {listing.hostId == userId
             ? `${loading ? "Updating please wait..." : "Update"}`
             : `${loading ? "Booking please wait..." : "Book"}`}
         </button>

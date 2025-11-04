@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
@@ -13,12 +13,22 @@ import { FaTreeCity } from "react-icons/fa6";
 import { BiBuildingHouse } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { authDataContext } from "../Context/authContext";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../Redux/AuthSlice";
+
 const IconStyle = "w-[35px]  h-[35px] text-black";
 const IconDiv = "flex  hover:border-b-2 justify-center items-center flex-col";
 const NavBar = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const name = useSelector((state) => state.auth.name);
+  console.log("vipul", name);
   const [menu, setMenu] = useState(false);
-  let { name, logout } = useContext(authDataContext);
+  // let { name } = useContext(authDataContext);
+
+  // useEffect(() => {
+  //   // dispatch(getUserData());
+  // }, [auth.loading]);
 
   return (
     <div className="relative z-10">
@@ -76,7 +86,7 @@ const NavBar = () => {
                       </li>
                       <li
                         className="hover:bg-red-300 rounded-2xl p-2 pb-4"
-                        onClick={logout}
+                        onClick={() => dispatch(logout())}
                       >
                         Logout
                       </li>

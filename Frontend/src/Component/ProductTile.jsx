@@ -6,14 +6,18 @@ import { listingDataContext } from "../Context/ListingContext";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { useContext } from "react";
 import { authDataContext } from "../Context/authContext";
+import { useSelector, useDispatch } from "react-redux";
+import { productViewPage } from "../Redux/ListingSlice";
 const ProductTile = ({ property }) => {
-  let { productViewPage } = useContext(listingDataContext);
-  let { userId } = useContext(authDataContext);
-
+  // let { productViewPage } = useContext(listingDataContext);
+  // let { userId } = useContext(authDataContext);
+  const userId = useSelector((state) => state.auth.userId);
+  const dispatch = useDispatch();
+  // console.log(property);
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`/propertyview/${property._id}`);
-    productViewPage(property);
+    dispatch(productViewPage(property));
   };
   return (
     <div className="hover:cursor-pointer relative z-0" onClick={handleClick}>

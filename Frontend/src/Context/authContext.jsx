@@ -15,35 +15,35 @@ const AuthContext = ({ children }) => {
   const [listing, setListing] = useState([]);
   const [userId, setUserId] = useState(0);
 
-  const getUserData = async () => {
-    try {
-      const userData = await axios.get(`${URL}/auth/getuserdata`);
-      console.log(userData.data);
-      setName(userData.data.name);
-      setListing(userData.data.listing);
-      setUserId(userData.data._id);
-    } catch (err) {
-      setName("");
-      setListing([]);
-      console.log(err);
-    }
-  };
+  // const getUserData = async () => {
+  //   try {
+  //     const userData = await axios.get(`${URL}/auth/getuserdata`);
+  //     console.log(userData.data);
+  //     setName(userData.data.name);
+  //     setListing(userData.data.listing);
+  //     setUserId(userData.data._id);
+  //   } catch (err) {
+  //     setName("");
+  //     setListing([]);
+  //     console.log(err);
+  //   }
+  // };
 
-  const logout = async () => {
-    try {
-      setLoading(true);
-      const success = await axios.delete(`${URL}/auth/logout`);
-      console.log("logout", success);
+  // const logout = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const success = await axios.delete(`${URL}/auth/logout`);
+  //     console.log("logout", success);
 
-      setLoading(false);
-      toast.success("Logout Successfull");
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //     setLoading(false);
+  //     toast.success("Logout Successfull");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   useEffect(() => {
-    getUserData();
+    // getUserData();
   }, [loading]);
 
   let value = {
@@ -51,9 +51,9 @@ const AuthContext = ({ children }) => {
     setName,
     email,
     setEmail,
-    getUserData,
+    // getUserData,
     listing,
-    logout,
+    // logout,
     userId,
   };
   return (

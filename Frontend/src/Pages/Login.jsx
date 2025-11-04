@@ -4,8 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { authDataContext } from "../Context/authContext";
 import { listingDataContext } from "../Context/ListingContext";
+import { getUserData } from "../Redux/AuthSlice";
+import { useDispatch } from "react-redux";
 const Login = () => {
   axios.defaults.withCredentials = true;
+  const dispatch = useDispatch();
   // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -24,7 +27,7 @@ const Login = () => {
       });
       setLoading(false);
       console.log("Login response:", res.data);
-
+      dispatch(getUserData());
       toast.success("Login Successful");
       navigate("/");
     } catch (error) {

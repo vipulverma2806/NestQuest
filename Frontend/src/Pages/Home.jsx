@@ -6,12 +6,17 @@ import { listingDataContext } from "../Context/ListingContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { authDataContext } from "../Context/authContext";
+import { getAll } from "../Redux/ListingSlice";
+import { useSelector, useDispatch } from "react-redux";
 const Home = () => {
-  let { getAll, allProperties } = useContext(listingDataContext);
+  // let { getAll, allProperties } = useContext(listingDataContext);
+  const dispatch = useDispatch();
+  const allProperties = useSelector((state) => state.listing.allProperties);
 
   const navigate = useNavigate();
   useEffect(() => {
-    getAll();
+    dispatch(getAll());
+    console.log("getAll");
   }, []);
   return (
     <div>

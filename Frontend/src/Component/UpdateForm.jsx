@@ -2,9 +2,28 @@ import React from "react";
 import { IoClose } from "react-icons/io5";
 import { useContext } from "react";
 import { listingDataContext } from "../Context/ListingContext";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 const fileCSS =
   "file:bg-gray-300 border-gray-400 border-2 rounded-xl p-1 hover:file:bg-gray-400 file:rounded-md file:px-2 px-1 w-[250px] py-1 file:py-1 file:mr-3";
+const catDiv =
+  "border-3 rounded-xl border-gray-400 px-3 py-1 hover:border-blue-600  cursor-pointer  ";
+
+const catSelect =
+  "border-3 rounded-xl border-red-600 px-3 py-1 hover:border-blue-600  cursor-pointer  ";
 const UpdateForm = ({ setUpdatePopup }) => {
+  const [clicked, setClicked] = useState("");
+  const listing = useSelector((state) => state.listing);
+  const allCategory = [
+    "PG",
+    "Pool House",
+    "Farm House",
+    "Flat",
+    "Rooms",
+    "Villa",
+    "Shops",
+    "Cabin",
+  ];
   let {
     title,
     setTitle,
@@ -35,8 +54,18 @@ const UpdateForm = ({ setUpdatePopup }) => {
 
     handleUpdate,
   } = useContext(listingDataContext);
+
+  console.log(listing.category);
+
+  const selectCat = (category) => {
+    listing.category = category;
+    // console.log(listing.category);
+    setClicked(category);
+  };
+
+  // console.log(listing.category);
   return (
-    <div className="fixed z-50 h-full w-full backdrop-blur-sm bg-black/60  flex justify-around top-0 ">
+    <div className="fixed  z-50  h-full w-full backdrop-blur-sm bg-black/60  flex justify-around top-0 ">
       <nav className="flex fixed  w-full z-20 justify-between px-10 h-24 py-5">
         <button
           onClick={() => setUpdatePopup(false)}
@@ -70,7 +99,7 @@ const UpdateForm = ({ setUpdatePopup }) => {
               className="border-2 border-gray-400 rounded-xl px-3 py-1"
               placeholder="eg. 2 bhk House"
               type="text"
-              value={title}
+              value={listing.title}
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
@@ -83,7 +112,7 @@ const UpdateForm = ({ setUpdatePopup }) => {
               className="border-2 border-gray-400 rounded-xl px-3 py-1"
               placeholder="eg. Fully furnished home"
               type="textbox"
-              value={description}
+              value={listing.description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
@@ -140,10 +169,46 @@ const UpdateForm = ({ setUpdatePopup }) => {
               className="border-2 rounded-xl border-gray-400 px-3 py-1"
               placeholder="eg. Rupees/day"
               type="number"
-              value={rent}
+              value={listing.rent}
               onChange={(e) => setRent(e.target.value)}
             />
           </div>
+
+          <div className="flex flex-col gap-y-2 ">
+            <label className="text-xl font-semibold" htmlFor="">
+              Category:
+            </label>
+            <div className="flex box-border gap-2 flex-wrap">
+              {allCategory.map((category, i) => {
+                // console.log(allCategory);
+                // console.log(category);
+                return (
+                  <div
+                    onClick={() => selectCat(category)}
+                    className={
+                      listing.category == category || clicked == category
+                        ? catSelect
+                        : catDiv
+                    }
+                  >
+                    {category}
+                  </div>
+                );
+              })}
+            </div>
+            <label className="text-xl font-semibold" htmlFor="">
+              Rent:
+            </label>
+            <input
+              required
+              className="border-2 rounded-xl border-gray-400 px-3 py-1"
+              placeholder="eg. Rupees/day"
+              type="number"
+              value={listing.rent}
+              onChange={(e) => setRent(e.target.value)}
+            />
+          </div>
+
           <div className="flex flex-col gap-y-2 ">
             <label className="text-xl font-semibold" htmlFor="">
               City:
@@ -153,7 +218,7 @@ const UpdateForm = ({ setUpdatePopup }) => {
               className="border-2 rounded-xl border-gray-400 px-3 py-1"
               placeholder="eg. Durg (CG)"
               type="text"
-              value={city}
+              value={listing.city}
               onChange={(e) => setCity(e.target.value)}
             />
           </div>
@@ -166,7 +231,7 @@ const UpdateForm = ({ setUpdatePopup }) => {
               className="border-2 rounded-xl border-gray-400 px-3 py-1"
               placeholder="eg. Near BIT College"
               type="text"
-              value={landmark}
+              value={listing.landmark}
               onChange={(e) => setLandmark(e.target.value)}
             />
           </div>
@@ -179,7 +244,7 @@ const UpdateForm = ({ setUpdatePopup }) => {
               className="border-2 rounded-xl mb-2 border-gray-400 px-3 py-1"
               placeholder="Latitude"
               type="number"
-              value={latitude}
+              value={listing.latitude}
               onChange={(e) => setLatitude(e.target.value)}
             />
             <input
@@ -187,7 +252,7 @@ const UpdateForm = ({ setUpdatePopup }) => {
               className="border-2 rounded-xl border-gray-400 px-3 py-1"
               placeholder="Longitude"
               type="number"
-              value={longitude}
+              value={listing.longitude}
               onChange={(e) => setLongitude(e.target.value)}
             />
           </div>
