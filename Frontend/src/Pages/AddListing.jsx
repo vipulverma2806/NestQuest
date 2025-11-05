@@ -3,10 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
 import { listingDataContext } from "../Context/ListingContext";
+import { useSelector, useDispatch } from "react-redux";
+import { productViewPage } from "../Redux/ListingSlice";
+
 const fileCSS =
   "file:bg-gray-300 border-gray-400 border-2 rounded-xl p-1 hover:file:bg-gray-400 file:rounded-md file:px-2 px-1 w-[250px] py-1 file:py-1 file:mr-3";
 const AddListing = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [listing, setListing] = useState({});
   let {
     title,
     setTitle,
@@ -63,12 +68,16 @@ const AddListing = () => {
   // });
   const handleImg = (e, setBack, setFront) => {
     const file = e.target.files[0];
-    setBack(file);
-    setFront(URL.createObjectURL(e.target.files[0]));
+    const fImgURL = URL.createObjectURL(e.target.files[0]);
+    setListing((prev) => ({ ...prev, [setFront]: fImgURL, [setBack]: file }));
+    // setBack(file);
+    // setFront();
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(productViewPage(listing));
+    console.log(listing);
     navigate("/addlisting2");
   };
 
@@ -108,8 +117,10 @@ const AddListing = () => {
               className="border-2 border-gray-400 rounded-xl px-3 py-1"
               placeholder="eg. 2 bhk House"
               type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={listing.title || ""}
+              onChange={(e) =>
+                setListing((prev) => ({ ...prev, title: e.target.value }))
+              }
             />
           </div>
           <div className="flex flex-col gap-y-2 ">
@@ -121,8 +132,10 @@ const AddListing = () => {
               className="border-2 border-gray-400 rounded-xl px-3 py-1"
               placeholder="eg. Fully furnished home"
               type="textbox"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={listing.description || ""}
+              onChange={(e) =>
+                setListing((prev) => ({ ...prev, description: e.target.value }))
+              }
             />
           </div>
           <div className="flex flex-col gap-y-2 ">
@@ -131,13 +144,13 @@ const AddListing = () => {
             </label>
             {/* -------------------------test------------------------- */}
 
-            <img src={fimg1} className={fimg1 && "h-50 w-min"} alt="" />
+            {/* <img src={fimg1} className={fimg1 && "h-50 w-min"} alt="" /> */}
 
             {/* --------------------------test-------------------- */}
             <input
               required
               className={fileCSS}
-              onChange={(e) => handleImg(e, setBImg1, setFImg1)}
+              onChange={(e) => handleImg(e, "bimg1", "fimg1")}
               // value={img1}
               type="file"
             />
@@ -151,7 +164,7 @@ const AddListing = () => {
               required
               className={fileCSS}
               type="file"
-              onChange={(e) => handleImg(e, setBImg2, setFImg2)}
+              onChange={(e) => handleImg(e, "bimg2", "fimg2")}
               // value={img2}
             />
           </div>
@@ -164,7 +177,7 @@ const AddListing = () => {
               required
               className={fileCSS}
               type="file"
-              onChange={(e) => handleImg(e, setBImg3, setFImg3)}
+              onChange={(e) => handleImg(e, "bimg3", "fimg3")}
               // value={img3}
             />
           </div>
@@ -178,8 +191,10 @@ const AddListing = () => {
               className="border-2 rounded-xl border-gray-400 px-3 py-1"
               placeholder="eg. Rupees/day"
               type="number"
-              value={rent}
-              onChange={(e) => setRent(e.target.value)}
+              value={listing.rent || ""}
+              onChange={(e) =>
+                setListing((prev) => ({ ...prev, rent: e.target.value }))
+              }
             />
           </div>
           <div className="flex flex-col gap-y-2 ">
@@ -191,8 +206,10 @@ const AddListing = () => {
               className="border-2 rounded-xl border-gray-400 px-3 py-1"
               placeholder="eg. Durg (CG)"
               type="text"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
+              value={listing.city || ""}
+              onChange={(e) =>
+                setListing((prev) => ({ ...prev, city: e.target.value }))
+              }
             />
           </div>
           <div className="flex flex-col gap-y-2 ">
@@ -204,8 +221,10 @@ const AddListing = () => {
               className="border-2 rounded-xl border-gray-400 px-3 py-1"
               placeholder="eg. Near BIT College"
               type="text"
-              value={landmark}
-              onChange={(e) => setLandmark(e.target.value)}
+              value={listing.landmark || ""}
+              onChange={(e) =>
+                setListing((prev) => ({ ...prev, landmark: e.target.value }))
+              }
             />
           </div>
           <div className="flex flex-col gap-y-2 ">
@@ -217,21 +236,26 @@ const AddListing = () => {
               className="border-2 rounded-xl mb-2 border-gray-400 px-3 py-1"
               placeholder="Latitude"
               type="number"
-              value={latitude}
-              onChange={(e) => setLatitude(e.target.value)}
+              value={listing.latitude || ""}
+              onChange={(e) =>
+                setListing((prev) => ({ ...prev, latitude: e.target.value }))
+              }
             />
             <input
               required
               className="border-2 rounded-xl border-gray-400 px-3 py-1"
               placeholder="Longitude"
               type="number"
-              value={longitude}
-              onChange={(e) => setLongitude(e.target.value)}
+              value={listing.longitude || ""}
+              onChange={(e) =>
+                setListing((prev) => ({ ...prev, longitude: e.target.value }))
+              }
             />
           </div>
           <button
             type="submit"
             // onClick={() => navigate("/addlisting2")}
+            onClick={(e) => handleSubmit(e)}
             className="rounded-full text-md font-semibold text-white bg-red-500 active:bg-red-700 p-4"
           >
             Next Page

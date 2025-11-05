@@ -7,9 +7,26 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { listingDataContext } from "../Context/ListingContext";
+import { useSelector, useDispatch } from "react-redux";
+import { divIcon } from "leaflet";
+import { setLoading } from "../Redux/AuthSlice";
 const AddListing3 = () => {
-  const navigate = useNavigate();
-  let {
+  // const dispatch = useDispatch();
+  // const {
+  //   title,
+  //   description,
+  //   fimg1,
+  //   fimg2,
+  //   fimg3,
+  //   rent,
+  //   city,
+  //   landmark,
+  //   latitude,
+  //   longitude,
+  //   category,
+  // } = useSelector((state) => state.listing);
+
+  const {
     title,
     description,
     fimg1,
@@ -21,10 +38,27 @@ const AddListing3 = () => {
     latitude,
     longitude,
     category,
-    handleSubmit,
-    setLoading,
-    loading,
-  } = useContext(listingDataContext);
+  } = useSelector((state) => state.listing);
+  const loading = useSelector((state) => state.auth.loading);
+  // console.log(listing);
+
+  const navigate = useNavigate();
+  // let {
+  //   title,
+  //   description,
+  //   fimg1,
+  //   fimg2,
+  //   fimg3,
+  //   rent,
+  //   city,
+  //   landmark,
+  //   latitude,
+  //   longitude,
+  //   category,
+  //   handleSubmit,
+  //   setLoading,
+  //   loading,
+  // } = useContext(listingDataContext);
 
   return (
     <div className="flex justify-center">
@@ -73,7 +107,7 @@ const AddListing3 = () => {
         <Map latitude={latitude} longitude={longitude} title={title}></Map>
 
         <button
-          onClick={handleSubmit}
+          // onClick={handleSubmit}
           className={`rounded-full hover:cursor-pointer text-xl font-semibold text-white  active:bg-red-700 w-1/4 p-4 ${
             loading ? "bg-green-500" : "bg-red-600"
           }`}

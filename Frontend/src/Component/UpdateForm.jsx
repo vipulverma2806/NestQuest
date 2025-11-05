@@ -261,7 +261,7 @@ const UpdateForm = ({ setUpdatePopup }) => {
             // onClick={() => navigate("/addlisting2")}
             className="rounded-full text-md font-semibold text-white bg-red-500 active:bg-red-700 p-4"
           >
-            Next Page
+            Update
           </button>
         </form>
       </div>

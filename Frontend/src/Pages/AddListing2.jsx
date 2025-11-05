@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { GiFamilyHouse } from "react-icons/gi";
 import { MdBedroomParent } from "react-icons/md";
@@ -11,16 +11,22 @@ import { BiBuildingHouse } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { listingDataContext } from "../Context/ListingContext";
 import { useContext } from "react";
+import { categorySelect } from "../Redux/ListingSlice";
+import { useDispatch } from "react-redux";
 
 const IconStyle = "w-[45px]  h-[45px] text-black";
 const IconDiv =
   "flex border-1  gap-y-5  border-gray-500 bg-white p-10 h-48 w-48 rounded-xl hover:border-b-8 hover:cursor-pointer active:bg-green-500 active:text-white justify-center items-center flex-col";
 
 const AddListing2 = () => {
-  let { category, setCategory } = useContext(listingDataContext);
+  const dispatch = useDispatch();
+  // let { category, setCategory } = useContext(listingDataContext);
+  const [category, setCategory] = useState("");
+
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(categorySelect({ category: category }));
     navigate("/addlisting3");
   };
 

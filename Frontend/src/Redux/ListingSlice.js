@@ -39,13 +39,16 @@ const ListingSlice = createSlice({
   },
   reducers: {
     productViewPage: (state, action) => {
-      state.fimg1 = action.payload.img1;
-      state.fimg2 = action.payload.img2;
-      state.fimg3 = action.payload.img3;
+      state.fimg1 = action.payload.fimg1;
+      state.fimg2 = action.payload.fimg2;
+      state.fimg3 = action.payload.fimg3;
+      state.bimg1 = action.payload.bimg1;
+      state.bimg2 = action.payload.bimg2;
+      state.bimg3 = action.payload.bimg3;
 
       state.title = action.payload.title;
       state.rent = action.payload.rent;
-      state.category = action.payload.category;
+
       state.description = action.payload.description;
       state.landmark = action.payload.landmark;
       state.latitude = action.payload.latitude;
@@ -53,6 +56,9 @@ const ListingSlice = createSlice({
       state.city = action.payload.city;
       state.propertyID = action.payload._id;
       state.hostId = action.payload.host;
+    },
+    categorySelect: (state, action) => {
+      state.category = action.payload.category;
     },
   },
   extraReducers: (builder) => {
@@ -64,5 +70,5 @@ const ListingSlice = createSlice({
   },
 });
 
-export const { productViewPage } = ListingSlice.actions;
+export const { productViewPage, categorySelect } = ListingSlice.actions;
 export default ListingSlice.reducer;
