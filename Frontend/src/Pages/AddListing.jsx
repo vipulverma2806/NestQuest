@@ -12,6 +12,7 @@ const AddListing = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [listing, setListing] = useState({});
+  const [sendBackImg, setSendBackImg] = useState();
   let {
     title,
     setTitle,
@@ -41,42 +42,16 @@ const AddListing = () => {
     setLongitude,
   } = useContext(listingDataContext);
 
-  const handleTest = async (e) => {};
-  //   e.preventDefault();
-  //   const formdata = new FormData();
-  //   formdata.append("img1", image[0]);
-  //   formdata.append("img2", image[1]);
-  //   formdata.append("img3", image[2]);
-  //   const result = await axios.post(
-  //     "http://localhost:5000/postimage",
-  //     formdata
-  //   );
-  //   console.log(result.data);
-  //   console.log(formdata.get("img1"));
-  // };
-  // const [form, setForm] = useState({
-  //   title: "",
-  //   description: "",
-  //   img1: "",
-  //   img2: "",
-  //   img3: "",
-  //   rent: "",
-  //   city: "",
-  //   landmark: "",
-  //   latitude: "",
-  //   longitude: "",
-  // });
-  const handleImg = (e, setBack, setFront) => {
+  const handleImg = (e, setFront) => {
     const file = e.target.files[0];
     const fImgURL = URL.createObjectURL(e.target.files[0]);
-    setListing((prev) => ({ ...prev, [setFront]: fImgURL, [setBack]: file }));
-    // setBack(file);
-    // setFront();
+    setListing((prev) => ({ ...prev, [setFront]: fImgURL }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(productViewPage(listing));
+
     console.log(listing);
     navigate("/addlisting2");
   };
@@ -142,15 +117,14 @@ const AddListing = () => {
             <label className="text-xl font-semibold" htmlFor="">
               Image 1:
             </label>
-            {/* -------------------------test------------------------- */}
 
-            {/* <img src={fimg1} className={fimg1 && "h-50 w-min"} alt="" /> */}
-
-            {/* --------------------------test-------------------- */}
             <input
               required
               className={fileCSS}
-              onChange={(e) => handleImg(e, "bimg1", "fimg1")}
+              onChange={(e) => {
+                handleImg(e, "fimg1");
+                setBImg1(e.target.files[0]);
+              }}
               // value={img1}
               type="file"
             />
@@ -164,7 +138,10 @@ const AddListing = () => {
               required
               className={fileCSS}
               type="file"
-              onChange={(e) => handleImg(e, "bimg2", "fimg2")}
+              onChange={(e) => {
+                handleImg(e, "fimg2");
+                setBImg2(e.target.files[0]);
+              }}
               // value={img2}
             />
           </div>
@@ -177,7 +154,10 @@ const AddListing = () => {
               required
               className={fileCSS}
               type="file"
-              onChange={(e) => handleImg(e, "bimg3", "fimg3")}
+              onChange={(e) => {
+                handleImg(e, "fimg3");
+                setBImg3(e.target.files[0]);
+              }}
               // value={img3}
             />
           </div>

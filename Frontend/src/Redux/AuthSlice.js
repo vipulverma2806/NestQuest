@@ -19,11 +19,21 @@ export const getUserData = createAsyncThunk(
   }
 );
 
+export const checkAuth = createAsyncThunk(
+  "auth/checkAuth",
+  async (_, { rejectWithValue }) => {
+    try{
+      const res = await axios.post("http://localhost:5000/auth/");
+    }
+  }
+);
+
 export const logout = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
       const success = await axios.delete(`${URL}/auth/logout`);
+
       console.log(`logout success`);
 
       return success.data;

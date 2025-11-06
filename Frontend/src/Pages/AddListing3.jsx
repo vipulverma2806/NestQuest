@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import v1 from "../assets/v1.jpg";
 import v2 from "../assets/v2.jpg";
 import v3 from "../assets/v3.jpg";
@@ -10,22 +10,9 @@ import { listingDataContext } from "../Context/ListingContext";
 import { useSelector, useDispatch } from "react-redux";
 import { divIcon } from "leaflet";
 import { setLoading } from "../Redux/AuthSlice";
+import { handleSubmit } from "../Redux/ListingSlice";
 const AddListing3 = () => {
-  // const dispatch = useDispatch();
-  // const {
-  //   title,
-  //   description,
-  //   fimg1,
-  //   fimg2,
-  //   fimg3,
-  //   rent,
-  //   city,
-  //   landmark,
-  //   latitude,
-  //   longitude,
-  //   category,
-  // } = useSelector((state) => state.listing);
-
+  let { bimg1, bimg2, bimg3 } = useContext(listingDataContext);
   const {
     title,
     description,
@@ -41,24 +28,8 @@ const AddListing3 = () => {
   } = useSelector((state) => state.listing);
   const loading = useSelector((state) => state.auth.loading);
   // console.log(listing);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  // let {
-  //   title,
-  //   description,
-  //   fimg1,
-  //   fimg2,
-  //   fimg3,
-  //   rent,
-  //   city,
-  //   landmark,
-  //   latitude,
-  //   longitude,
-  //   category,
-  //   handleSubmit,
-  //   setLoading,
-  //   loading,
-  // } = useContext(listingDataContext);
 
   return (
     <div className="flex justify-center">
@@ -79,6 +50,7 @@ const AddListing3 = () => {
           Review your listing
         </div>
       </nav>
+
       <div className="mt-30 flex flex-col justify-center m-10 shadow-gray-600 shadow-md  p-5 gap-x-10 gap-y-5 border-gray-400 rounded-2xl border-1 flex-wrap bg-blue-100 w-[85%]">
         <h1 className="text-4xl pl-3">{`${landmark} , ${city}`}</h1>
         <div className="h-[408px] border-red-500 border-4 flex w-[1008px]   justify-center  ">
@@ -107,7 +79,7 @@ const AddListing3 = () => {
         <Map latitude={latitude} longitude={longitude} title={title}></Map>
 
         <button
-          // onClick={handleSubmit}
+          onClick={() => dispatch(handleSubmit({ bimg1, bimg2, bimg3 }))}
           className={`rounded-full hover:cursor-pointer text-xl font-semibold text-white  active:bg-red-700 w-1/4 p-4 ${
             loading ? "bg-green-500" : "bg-red-600"
           }`}

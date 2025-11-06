@@ -26,9 +26,9 @@ const NavBar = () => {
   const [menu, setMenu] = useState(false);
   // let { name } = useContext(authDataContext);
 
-  // useEffect(() => {
-  //   // dispatch(getUserData());
-  // }, [auth.loading]);
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [auth.loading]);
 
   return (
     <div className="relative z-10">
