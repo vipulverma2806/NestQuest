@@ -39,7 +39,7 @@ const PropertyView = () => {
     loading,
 
     propertyID,
-
+    previous,
     hostId,
   } = useSelector((state) => state.listing);
   console.log(listing);
@@ -49,7 +49,11 @@ const PropertyView = () => {
     <div className="flex justify-center">
       <nav className="flex fixed bg-white w-full z-20 justify-between px-10 h-24 py-5">
         <button
-          onClick={() => navigate("/")}
+          onClick={
+            previous == "home"
+              ? () => navigate("/")
+              : () => navigate("/mylistings")
+          }
           className="rounded-full hover:cursor-pointer hidden sm:block bg-red-500 active:bg-red-700 p-4"
         >
           <FaArrowLeft className="text-2xl text-white" />

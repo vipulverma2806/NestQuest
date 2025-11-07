@@ -8,16 +8,18 @@ import { useContext } from "react";
 import { authDataContext } from "../Context/authContext";
 import { useSelector, useDispatch } from "react-redux";
 import { productViewPage } from "../Redux/ListingSlice";
-const ProductTile = ({ property }) => {
+const ProductTile = ({ property, previous }) => {
   // let { productViewPage } = useContext(listingDataContext);
   // let { userId } = useContext(authDataContext);
   const userId = useSelector((state) => state.auth.userId);
   const dispatch = useDispatch();
   // console.log(property);
+  const newProperty = { ...property, previous };
+
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`/propertyview/${property._id}`);
-    dispatch(productViewPage(property));
+    dispatch(productViewPage(newProperty));
   };
   return (
     <div className="hover:cursor-pointer relative z-0" onClick={handleClick}>

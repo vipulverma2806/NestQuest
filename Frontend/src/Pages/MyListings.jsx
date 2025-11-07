@@ -40,7 +40,12 @@ const MyListings = () => {
       </nav>
       <div className="md:pt-48 sm:pt-60 pt-80 flex gap-16  w-screen flex-wrap items-center justify-center p-10">
         {listing.map((property, i) => {
-          return <ProductTile property={property}></ProductTile>;
+          return (
+            <ProductTile
+              property={property}
+              previous={"mylisting"}
+            ></ProductTile>
+          );
         })}
       </div>
     </div>

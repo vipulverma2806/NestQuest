@@ -77,6 +77,7 @@ const ListingSlice = createSlice({
     navigate: null,
     city: "",
     loading: null,
+    previous: "",
   },
   reducers: {
     productViewPage: (state, action) => {
@@ -86,7 +87,7 @@ const ListingSlice = createSlice({
       // state.bimg1 = action.payload.bimg1;
       // state.bimg2 = action.payload.bimg2;
       // state.bimg3 = action.payload.bimg3;
-
+      state.previous = action.payload.previous;
       state.title = action.payload.title;
       state.rent = action.payload.rent;
 
