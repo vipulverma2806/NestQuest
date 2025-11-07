@@ -4,14 +4,15 @@ import axios from "axios";
 import { setLoading } from "./AuthSlice";
 import { toast } from "react-toastify";
 const URL = import.meta.env.VITE_URL;
-
+import { useNavigate } from "react-router-dom";
+import { getUserData } from "./AuthSlice";
 export const getAll = createAsyncThunk(
   "listingMain/getAll",
   async (_, { rejectWithValue }) => {
     try {
-      console.log("pending");
+      // console.log("pending");
       const totalList = await axios.get(`${URL}/listingMain/getAll`);
-      console.log("fullfilled");
+      // console.log("fullfilled");
       return totalList.data;
     } catch (err) {
       return rejectWithValue(err.message);
@@ -45,6 +46,7 @@ export const handleSubmit = createAsyncThunk(
       const result = await axios.post(`${URL}/listingMain/post`, formdata);
       console.log("listingMain/past Api responded");
       dispatch(setLoading(false));
+      dispatch(getUserData());
       return result.data;
     } catch (err) {
       console.log(err);
@@ -57,7 +59,7 @@ const ListingSlice = createSlice({
   name: "listingSlice",
   initialState: {
     title: "",
-    descriptiion: "",
+    description: "",
     fimg1: null,
     fimg2: null,
     fimg3: null,
@@ -72,12 +74,15 @@ const ListingSlice = createSlice({
     propertyID: 0,
     allProperties: [],
     hostId: "",
+    navigate: null,
+    city: "",
+    loading: null,
   },
   reducers: {
     productViewPage: (state, action) => {
-      state.fimg1 = action.payload.fimg1;
-      state.fimg2 = action.payload.fimg2;
-      state.fimg3 = action.payload.fimg3;
+      state.fimg1 = action.payload.img1;
+      state.fimg2 = action.payload.img2;
+      state.fimg3 = action.payload.img3;
       // state.bimg1 = action.payload.bimg1;
       // state.bimg2 = action.payload.bimg2;
       // state.bimg3 = action.payload.bimg3;
@@ -96,27 +101,42 @@ const ListingSlice = createSlice({
     categorySelect: (state, action) => {
       state.category = action.payload.category;
     },
+    setNavigate: (state, action) => {
+      state.navigate = action.payload;
+    },
+    resetListing: (state) => {
+      state.title = "";
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(getAll.fulfilled, (state, action) => {
-        console.log("addCase fulfill");
+        // console.log("addCase fulfill");
         state.allProperties = action.payload;
-        console.log("getAll fulfilled");
+        // console.log("getAll fulfilled");
       })
       .addCase(getAll.rejected, (state, action) => {
         toast.error("network Error");
       })
+      .addCase(handleSubmit.pending, (state, action) => {
+        state.navigate = false;
+        state.loading = true;
+      })
       .addCase(handleSubmit.fulfilled, (state, action) => {
-        console.log("uploaded");
+        // console.log("uploaded");
         toast.success("listing uploaded");
+
+        state.navigate = true;
+        state.loading = false;
       })
       .addCase(handleSubmit.rejected, (state, action) => {
-        console.log("Rejected");
+        // console.log("Rejected");
         toast.error("Some error occured rejected");
+        state.loading = false;
       });
   },
 });
 
-export const { productViewPage, categorySelect } = ListingSlice.actions;
+export const { productViewPage, categorySelect, setNavigate, resetListing } =
+  ListingSlice.actions;
 export default ListingSlice.reducer;

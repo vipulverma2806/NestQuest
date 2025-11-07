@@ -9,7 +9,7 @@ export default function Map({ latitude, longitude, title }) {
       center={center}
       zoom={13}
       style={{ height: 400, width: "100%" }}
-      className="rounded-4xl border-2 border-gray-400 shadow-2xl mt-5 z-0 "
+      className="rounded-4xl border-2  border-gray-400 shadow-2xl mt-5 z-0 "
     >
       <TileLayer
         // Free OSM tiles

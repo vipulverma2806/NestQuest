@@ -5,7 +5,7 @@ const BookingForm = () => {
     <div className="absolute top-0">
       <div className="w-1/2 h-1/2 ">
         booking
-        {console.log("booking")}
+        {/* {console.log("booking")} */}
       </div>
     </div>
   );

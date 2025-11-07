@@ -21,14 +21,14 @@ const Register = () => {
       setWait(false);
       if (result.data.errorResponse?.code === 11000)
         return toast.error("Email already exists");
-      console.log(result.data);
+      // console.log(result.data);
       toast.success("Registered Successfully");
       setName("");
       setPassword("");
       setEmail("");
       navigate("/login");
     } catch (error) {
-      console.error("Registration failed:", error);
+      // console.error("Registration failed:", error);
     }
   };
 

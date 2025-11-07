@@ -17,14 +17,14 @@ const BookingContext = ({ children }) => {
   };
   const handleBooking = async (propertyID) => {
     try {
-      console.log(propertyID);
+      // console.log(propertyID);
       const result = await axios.put(`${URL}/booking/bookingMain`, {
         propertyID,
       });
-      console.log(result);
+      // console.log(result);
       notify(result);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

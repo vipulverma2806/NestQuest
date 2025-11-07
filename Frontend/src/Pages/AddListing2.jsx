@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { GiFamilyHouse } from "react-icons/gi";
 import { MdBedroomParent } from "react-icons/md";
@@ -12,7 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { listingDataContext } from "../Context/ListingContext";
 import { useContext } from "react";
 import { categorySelect } from "../Redux/ListingSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import AddListing from "./AddListing";
 
 const IconStyle = "w-[45px]  h-[45px] text-black";
 const IconDiv =
@@ -22,13 +23,16 @@ const AddListing2 = () => {
   const dispatch = useDispatch();
   // let { category, setCategory } = useContext(listingDataContext);
   const [category, setCategory] = useState("");
-
+  const title = useSelector((state) => state.listing.title);
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(categorySelect({ category: category }));
     navigate("/addlisting3");
   };
+  useEffect(() => {
+    if (!title) return navigate("/addlisting");
+  }, [title]);
 
   return (
     <div>
@@ -47,7 +51,7 @@ const AddListing2 = () => {
           NestQuest
         </h1>
         <div
-          className={`rounded-full hidden md:block text-md font-semibold text-white 
+          className={`rounded-full hidden md:block text-md font-semibold text-white
           ${category ? "bg-green-500" : "bg-red-500 active:bg-red-700"} p-4`}
         >
           {category ? `you selected ${category} category` : "Set your category"}
@@ -60,7 +64,7 @@ const AddListing2 = () => {
             <FaArrowLeft className="text-2xl text-white" />
           </button>
           <div
-            className={`rounded-full text-md font-semibold text-white 
+            className={`rounded-full text-md font-semibold text-white
           ${category ? "bg-green-500" : "bg-red-500 active:bg-red-700"} p-4`}
           >
             {category ? `Selected: ${category}` : "Set your category"}

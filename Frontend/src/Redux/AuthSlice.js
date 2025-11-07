@@ -10,10 +10,10 @@ export const getUserData = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const userData = await axios.get(`${URL}/auth/getUserData`);
-      console.log("sssucesssssssss");
+      // console.log("sssucesssssssss");
       return userData.data;
     } catch (err) {
-      console.log("nhi cahala");
+      // console.log("nhi cahala");
       return rejectWithValue(err.message);
     }
   }
@@ -22,9 +22,9 @@ export const getUserData = createAsyncThunk(
 export const checkAuth = createAsyncThunk(
   "auth/checkAuth",
   async (_, { rejectWithValue }) => {
-    try{
+    try {
       const res = await axios.post("http://localhost:5000/auth/");
-    }
+    } catch (err) {}
   }
 );
 
@@ -34,7 +34,7 @@ export const logout = createAsyncThunk(
     try {
       const success = await axios.delete(`${URL}/auth/logout`);
 
-      console.log(`logout success`);
+      // console.log(`logout success`);
 
       return success.data;
     } catch (err) {
@@ -67,7 +67,7 @@ const authSlice = createSlice({
     builder
       .addCase(logout.pending, (state, action) => {
         state.loading = true;
-        console.log("pending");
+        // console.log("pending");
       })
       .addCase(logout.fulfilled, (state, action) => {
         state.loading = false;
@@ -76,29 +76,29 @@ const authSlice = createSlice({
         state.email = "";
         state.userId = 0;
         state.listing = [];
-        console.log(action.payload);
+        // console.log(action.payload);
       })
       .addCase(logout.rejected, (state, action) => {
         state.loading = false;
-        console.log(action.payload);
+        // console.log(action.payload);
         toast.success("Error occured");
       })
       .addCase(getUserData.pending, (state) => {
-        console.log("pending ");
+        state.loading = true;
       })
       .addCase(getUserData.fulfilled, (state, action) => {
         state.loading = false;
-        console.log("yelo", action.payload);
+        // console.log("yelo", action.payload);
         state.name = action.payload.name;
         state.email = action.payload.email;
         state.userId = action.payload._id;
-        console.log("this is userId", state.userId);
+        // console.log("this is userId", state.userId);
         state.listing = action.payload.listing;
         toast.success("getUserData Successfull");
       })
       .addCase(getUserData.rejected, (state, action) => {
         state.loading = false;
-        console.log(action.payload);
+        // console.log(action.payload);
         toast.success("Error getUser occured");
       });
   },

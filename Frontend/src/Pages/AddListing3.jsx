@@ -27,65 +27,91 @@ const AddListing3 = () => {
     category,
   } = useSelector((state) => state.listing);
   const loading = useSelector((state) => state.auth.loading);
+  const uploaded = useSelector((state) => state.listing.navigate);
+
   // console.log(listing);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  useEffect(() => {
+    if (!title) return navigate("/addlisting");
+    if (uploaded) return navigate("/");
+  }, [uploaded]);
 
   return (
-    <div className="flex justify-center">
-      <nav className="flex fixed bg-white w-full z-20 justify-between px-10 h-24 py-5">
+    <div className="flex flex-col items-center min-h-screen bg-gray-50">
+      {/* Navbar */}
+      <nav className="fixed flex bg-white w-full shadow z-20 justify-between px-6 md:px-10 h-20 items-center">
         <button
           onClick={() => navigate("/addlisting2")}
-          className="rounded-full hover:cursor-pointer hidden sm:block bg-red-500 active:bg-red-700 p-4"
+          className="rounded-full hidden sm:flex bg-red-500 hover:bg-red-600 p-3 transition"
         >
-          <FaArrowLeft className="text-2xl text-white" />
+          <FaArrowLeft className="text-white text-xl" />
         </button>
+
         <h1
           onClick={() => navigate("/")}
-          className=" text-red-500 hover:cursor-pointer absolute left-1/2 -translate-x-1/2 h-[55px] font-extrabold text-4xl"
+          className="text-red-500 hover:cursor-pointer font-extrabold text-3xl sm:text-4xl"
         >
           NestQuest
         </h1>
-        <div className="rounded-full text-md font-semibold text-white hidden sm:block bg-red-500 active:bg-red-700 p-4">
+
+        <div className="hidden sm:flex rounded-full text-white bg-red-500 px-5 py-3 font-semibold">
           Review your listing
         </div>
       </nav>
 
-      <div className="mt-30 flex flex-col justify-center m-10 shadow-gray-600 shadow-md  p-5 gap-x-10 gap-y-5 border-gray-400 rounded-2xl border-1 flex-wrap bg-blue-100 w-[85%]">
-        <h1 className="text-4xl pl-3">{`${landmark} , ${city}`}</h1>
-        <div className="h-[408px] border-red-500 border-4 flex w-[1008px]   justify-center  ">
-          <div>
+      <div className="pt-24 w-full flex justify-center">
+        <div className="flex flex-col w-[90%] max-w-5xl bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-10">
+          <h1 className="text-3xl font-semibold mb-4">{`${landmark}, ${city}`}</h1>
+
+          {/* Images */}
+          <div className="flex flex-col  md:flex-row gap-4">
             <img
               src={fimg1}
               alt=""
-              className="h-[400px] w-[500px] object-cover  "
+              className="object-cover w-full md:w-[60%] h-80 rounded-lg"
             />
+
+            <div className="flex flex-col w-full md:w-[40%] gap-4">
+              <img
+                src={fimg2}
+                alt=""
+                className="object-cover w-full h-40 rounded-lg"
+              />
+              <img
+                src={fimg3}
+                alt=""
+                className="object-cover w-full h-40 rounded-lg"
+              />
+            </div>
           </div>
-          <div className="flex flex-col border-l-4 border-red-500 h-[400px]">
-            <img
-              src={fimg2}
-              alt=""
-              className="object-cover border-b-4 border-red-500 w-[500px] h-1/2"
-            />
-            <img src={fimg3} alt="" className="object-cover w-[500px] h-1/2" />
+
+          {/* Property Details */}
+          <div className="mt-6 space-y-3">
+            <p className="text-2xl font-bold">{title}</p>
+            <p className="text-lg text-gray-700">{description}</p>
+            <p className="text-lg font-medium text-gray-800">{category}</p>
+            <p className="text-xl font-semibold text-green-600">Rent: {rent}</p>
           </div>
+
+          {/* Map */}
+          <p className="text-md mt-6 font-semibold">
+            📍 Map View (Check Accuracy)
+          </p>
+          <div className="w-full h-96 mt-2 rounded-xl overflow-hidden">
+            <Map latitude={latitude} longitude={longitude} title={title} />
+          </div>
+
+          {/* Button */}
+          <button
+            onClick={() => dispatch(handleSubmit({ bimg1, bimg2, bimg3 }))}
+            className={`rounded-xl mt-8 text-lg md:text-xl font-semibold text-white px-6 py-4 w-full md:w-1/3 mx-auto transition ${
+              loading ? "bg-green-500" : "bg-red-600 hover:bg-red-700"
+            }`}
+          >
+            {loading ? "Adding... Please wait" : "Add Listing"}
+          </button>
         </div>
-        <p className="text-3xl pl-3">{title} </p>
-        <p className="text-2xl pl-3">{description}</p>
-        <p className="text-2xl pl-3">{category}</p>
-        <p className="text-xl pl-3">Rent : {rent}</p>
-        <p className="text-md pl-3"> Map View (Check Accuracy) </p>
-
-        <Map latitude={latitude} longitude={longitude} title={title}></Map>
-
-        <button
-          onClick={() => dispatch(handleSubmit({ bimg1, bimg2, bimg3 }))}
-          className={`rounded-full hover:cursor-pointer text-xl font-semibold text-white  active:bg-red-700 w-1/4 p-4 ${
-            loading ? "bg-green-500" : "bg-red-600"
-          }`}
-        >
-          {loading ? "Adding please wait..." : "Add Listing"}
-        </button>
       </div>
     </div>
   );

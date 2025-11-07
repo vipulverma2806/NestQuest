@@ -3,18 +3,27 @@ import { FaArrowLeft } from "react-icons/fa";
 import ProductTile from "../Component/ProductTile";
 import axios from "axios";
 import { authDataContext } from "../Context/authContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getUserData } from "../Redux/AuthSlice";
 const MyListings = () => {
   // let { listing } = useContext(authDataContext);
   let listing = useSelector((state) => state.auth.listing);
+  console.log(listing);
   const navigate = useNavigate();
+
+  const loading = useSelector((state) => state.listing.loading);
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getUserData());
+  // }, [loading]);
+
   return (
     <div>
-      <nav className="flex fixed bg-white w-full justify-between px-10 h-24 py-5">
+      <nav className="flex z-50 fixed bg-white w-full justify-between px-10 h-24 py-5">
         <button
-          onClick={() => navigate("/mylistings")}
+          onClick={() => navigate("/")}
           className="rounded-full hover:cursor-pointer hidden sm:block  bg-red-500 active:bg-red-700 p-4"
         >
           <FaArrowLeft className="text-2xl text-white" />
@@ -29,13 +38,56 @@ const MyListings = () => {
           My Listings
         </div>
       </nav>
-      <div className="md:pt-48 sm:pt-60 pt-80 flex gap-8  w-screen flex-wrap items-center justify-center p-10">
+      <div className="md:pt-48 sm:pt-60 pt-80 flex gap-16  w-screen flex-wrap items-center justify-center p-10">
         {listing.map((property, i) => {
           return <ProductTile property={property}></ProductTile>;
         })}
       </div>
     </div>
   );
+
+  // return (
+  //   <div className="min-h-screen bg-gray-50">
+  //     {/* NAVBAR */}
+  //     <nav className="fixed top-0 left-0 w-full bg-white shadow-sm z-50">
+  //       <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+  //         {/* Back Button */}
+  //         <button
+  //           onClick={() => navigate("/")}
+  //           className="rounded-full hidden sm:flex bg-red-500 hover:bg-red-600 p-3 transition"
+  //         >
+  //           <FaArrowLeft className="text-2xl text-white" />
+  //         </button>
+
+  //         {/* Logo / Title */}
+  //         <h1
+  //           onClick={() => navigate("/")}
+  //           className="text-red-500 font-extrabold text-3xl sm:text-4xl cursor-pointer"
+  //         >
+  //           NestQuest
+  //         </h1>
+
+  //         {/* Right Button */}
+  //         <button className="hidden sm:flex bg-red-500 text-white font-semibold rounded-full hover:bg-red-600 px-6 py-3 transition">
+  //           My Listings
+  //         </button>
+  //       </div>
+  //     </nav>
+
+  //     {/* CONTENT */}
+  //     <div className="pt-36 md:pt-40 lg:pt-44 px-4 md:px-10">
+  //       <h2 className="text-3xl font-bold text-gray-700 text-center mb-8">
+  //         Your Properties
+  //       </h2>
+
+  //       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-7xl mx-auto">
+  //         {listing.map((property, i) => (
+  //           <ProductTile key={i} property={property} />
+  //         ))}
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
 };
 
 export default MyListings;

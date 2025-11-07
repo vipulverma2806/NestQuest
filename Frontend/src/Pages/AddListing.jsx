@@ -52,7 +52,7 @@ const AddListing = () => {
     e.preventDefault();
     dispatch(productViewPage(listing));
 
-    console.log(listing);
+    // console.log(listing);
     navigate("/addlisting2");
   };
 
@@ -122,7 +122,7 @@ const AddListing = () => {
               required
               className={fileCSS}
               onChange={(e) => {
-                handleImg(e, "fimg1");
+                handleImg(e, "img1");
                 setBImg1(e.target.files[0]);
               }}
               // value={img1}
@@ -139,7 +139,7 @@ const AddListing = () => {
               className={fileCSS}
               type="file"
               onChange={(e) => {
-                handleImg(e, "fimg2");
+                handleImg(e, "img2");
                 setBImg2(e.target.files[0]);
               }}
               // value={img2}
@@ -155,7 +155,7 @@ const AddListing = () => {
               className={fileCSS}
               type="file"
               onChange={(e) => {
-                handleImg(e, "fimg3");
+                handleImg(e, "img3");
                 setBImg3(e.target.files[0]);
               }}
               // value={img3}

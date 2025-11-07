@@ -22,7 +22,7 @@ const PropertyView = () => {
   let listing = useSelector((state) => state.listing);
   const property = useParams();
   const navigate = useNavigate();
-  console.log(listing);
+  // console.log(listing);
   let {
     title,
     description,
@@ -36,16 +36,15 @@ const PropertyView = () => {
     longitude,
     category,
 
-    setLoading,
     loading,
-    allProperties,
-    propertyID,
-    setPropertyID,
-    hostId,
-  } = useContext(listingDataContext);
 
-  let { handleBooking } = useContext(bookingDataContext);
-  console.log("userid", userId, "hostid", hostId);
+    propertyID,
+
+    hostId,
+  } = useSelector((state) => state.listing);
+  console.log(listing);
+  // let { handleBooking } = useContext(bookingDataContext);
+  // console.log("userid", userId, "hostid", hostId);
   return (
     <div className="flex justify-center">
       <nav className="flex fixed bg-white w-full z-20 justify-between px-10 h-24 py-5">

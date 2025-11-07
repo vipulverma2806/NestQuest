@@ -55,7 +55,7 @@ const UpdateForm = ({ setUpdatePopup }) => {
     handleUpdate,
   } = useContext(listingDataContext);
 
-  console.log(listing.category);
+  // console.log(listing.category);
 
   const selectCat = (category) => {
     listing.category = category;

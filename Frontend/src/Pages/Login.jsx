@@ -26,12 +26,12 @@ const Login = () => {
         password,
       });
       setLoading(false);
-      console.log("Login response:", res.data);
+      // console.log("Login response:", res.data);
       dispatch(getUserData());
       toast.success("Login Successful");
       navigate("/");
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       if (error.response.data === "NA")
         return toast.error("Invalid Crediantials");
     }

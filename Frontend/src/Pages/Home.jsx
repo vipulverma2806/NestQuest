@@ -8,16 +8,19 @@ import { useNavigate } from "react-router-dom";
 import { authDataContext } from "../Context/authContext";
 import { getAll } from "../Redux/ListingSlice";
 import { useSelector, useDispatch } from "react-redux";
+
 const Home = () => {
   // let { getAll, allProperties } = useContext(listingDataContext);
   const dispatch = useDispatch();
   const allProperties = useSelector((state) => state.listing.allProperties);
-
+  const loading = useSelector((state) => state.auth.loading);
   const navigate = useNavigate();
   useEffect(() => {
     dispatch(getAll());
-    console.log("getAll");
-  }, []);
+
+    // console.log("getAll");
+  }, [loading]);
+  console.log(allProperties[0]);
   return (
     <div>
       <NavBar></NavBar>

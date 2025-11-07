@@ -15,21 +15,50 @@ import { useNavigate } from "react-router-dom";
 import { authDataContext } from "../Context/authContext";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Redux/AuthSlice";
+import axios from "axios";
+import { setNavigate, resetListing } from "../Redux/ListingSlice";
+import { persistor } from "../Redux/Store";
+const URL = import.meta.env.VITE_URL;
 
 const IconStyle = "w-[35px]  h-[35px] text-black";
-const IconDiv = "flex  hover:border-b-2 justify-center items-center flex-col";
+const IconDiv =
+  "flex  hover:border-b-2 hover:cursor-pointer justify-center items-center flex-col";
 const NavBar = () => {
+  axios.defaults.withCredentials = true;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const name = useSelector((state) => state.auth.name);
-  console.log("vipul", name);
+  const loading = useSelector((state) => state.auth.loading);
+  const listing = useSelector((state) => state.listing);
+
+  // console.log("checkAuth Loading", loading);
   const [menu, setMenu] = useState(false);
+  const [auth, setAuth] = useState(false);
   // let { name } = useContext(authDataContext);
 
   useEffect(() => {
-    dispatch(checkAuth());
-  }, [auth.loading]);
+    const checkAuth = async () => {
+      try {
+        // console.log("working in useeffect Navbar");
+        const res = await axios.get(`${URL}/auth/checkOnlyAuth`);
+        // console.log("checkAuth", res);
+        setAuth(true);
+      } catch (err) {
+        // console.log("checkAuth catch", err.response.data);
+        setAuth(false);
+      }
+    };
 
+    const clearListing = () => {
+      dispatch(resetListing());
+      console.log("clearlisting ");
+    };
+    clearListing();
+    dispatch(setNavigate(false));
+    checkAuth();
+  }, [name]);
+
+  // console.log(listing);
   return (
     <div className="relative z-10">
       <div className="fixed py-4 px-4 bg-white pb-4 w-full">
@@ -46,7 +75,7 @@ const NavBar = () => {
           </div>
 
           <div className="">
-            {name ? (
+            {auth ? (
               <button
                 className="border-2 border-gray-400 h-[55px]  w-[100px] flex justify-between p-4 items-center  rounded-s-full rounded-e-full cursor-pointer"
                 onClick={() => setMenu(!menu)}
@@ -107,7 +136,7 @@ const NavBar = () => {
         </div>
 
         {/* select category ------------------------------------ */}
-        <div className="flex flex-wrap justify-center h-20 bg-white pt-3 items-center mx-3 gap-x-10">
+        <div className="flex flex-wrap justify-center h-auto lg:h-24 bg-white pt-3 items-center mx-3 gap-x-10">
           <div className={IconDiv}>
             <MdWhatshot className={IconStyle} />
             <h2>Trending</h2>

@@ -10,6 +10,7 @@ import MyBookings from "./Pages/MyBookings";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import PropertyView from "./Pages/PropertyView";
+import Protected from "./Component/Protected";
 const App = () => {
   return (
     <div>
@@ -27,11 +28,46 @@ const App = () => {
       />
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/addlisting" element={<AddListing />}></Route>
-        <Route path="/addlisting2" element={<AddListing2 />}></Route>
-        <Route path="/addlisting3" element={<AddListing3 />}></Route>
-        <Route path="/mylistings" element={<MyListings />}></Route>
-        <Route path="/mybookings" element={<MyBookings />}></Route>
+        <Route
+          path="/addlisting"
+          element={
+            <Protected>
+              <AddListing />
+            </Protected>
+          }
+        ></Route>
+        <Route
+          path="/addlisting2"
+          element={
+            <Protected>
+              <AddListing2 />
+            </Protected>
+          }
+        ></Route>
+        <Route
+          path="/addlisting3"
+          element={
+            <Protected>
+              <AddListing3 />
+            </Protected>
+          }
+        ></Route>
+        <Route
+          path="/mylistings"
+          element={
+            <Protected>
+              <MyListings />
+            </Protected>
+          }
+        ></Route>
+        <Route
+          path="/mybookings"
+          element={
+            <Protected>
+              <MyBookings />
+            </Protected>
+          }
+        ></Route>
         <Route path="/propertyview/:id" element={<PropertyView />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
