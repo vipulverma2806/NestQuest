@@ -16,7 +16,7 @@ import { authDataContext } from "../Context/authContext";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Redux/AuthSlice";
 import axios from "axios";
-import { setNavigate, resetListing } from "../Redux/ListingSlice";
+import { setNavigate, resetListing, setSelectCat } from "../Redux/ListingSlice";
 import { persistor } from "../Redux/Store";
 const URL = import.meta.env.VITE_URL;
 
@@ -57,6 +57,17 @@ const NavBar = () => {
     dispatch(setNavigate(false));
     checkAuth();
   }, [name]);
+
+  const categories = [
+    { id: 1, label: "All", icon: MdWhatshot },
+    { id: 2, label: "Cabin", icon: GiWoodCabin },
+    { id: 3, label: "Shops", icon: SiHomeassistantcommunitystore },
+    { id: 4, label: "PG", icon: IoBedOutline },
+    { id: 5, label: "Farm House", icon: FaTreeCity },
+    { id: 6, label: "Flat", icon: BiBuildingHouse },
+    { id: 7, label: "Pool House", icon: MdOutlinePool },
+    { id: 8, label: "Rooms", icon: MdBedroomParent },
+  ];
 
   // console.log(listing);
   return (
@@ -137,7 +148,20 @@ const NavBar = () => {
 
         {/* select category ------------------------------------ */}
         <div className="flex flex-wrap justify-center h-auto lg:h-24 bg-white pt-3 items-center mx-3 gap-x-10">
-          <div className={IconDiv}>
+          {categories.map((category, i) => {
+            const Icon = category.icon;
+            return (
+              <div
+                className={IconDiv}
+                onClick={() => dispatch(setSelectCat(category.label))}
+              >
+                <Icon className={IconStyle} />
+                <h2>{category.label}</h2>
+              </div>
+            );
+          })}
+
+          {/* <div className={IconDiv} onClick={() => selectCat()}>
             <MdWhatshot className={IconStyle} />
             <h2>Trending</h2>
           </div>
@@ -172,7 +196,7 @@ const NavBar = () => {
           </div>
           <div className={IconDiv}>
             <GiFamilyHouse className={IconStyle} /> <h2>Villa</h2>
-          </div>
+          </div> */}
         </div>
       </div>
 

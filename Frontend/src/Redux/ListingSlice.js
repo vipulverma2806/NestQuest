@@ -78,6 +78,7 @@ const ListingSlice = createSlice({
     city: "",
     loading: null,
     previous: "",
+    selectCat: "All",
   },
   reducers: {
     productViewPage: (state, action) => {
@@ -107,6 +108,9 @@ const ListingSlice = createSlice({
     },
     resetListing: (state) => {
       state.title = "";
+    },
+    setSelectCat: (state, action) => {
+      state.selectCat = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -138,6 +142,11 @@ const ListingSlice = createSlice({
   },
 });
 
-export const { productViewPage, categorySelect, setNavigate, resetListing } =
-  ListingSlice.actions;
+export const {
+  productViewPage,
+  categorySelect,
+  setNavigate,
+  resetListing,
+  setSelectCat,
+} = ListingSlice.actions;
 export default ListingSlice.reducer;

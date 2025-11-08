@@ -32,7 +32,7 @@ const UpdateForm = ({ setUpdatePopup }) => {
     bimg1,
     setBImg1,
     bimg2,
-    setBImg2,
+    setBImg2, //object cover
     bimg3,
     setBImg3,
     fimg1,
