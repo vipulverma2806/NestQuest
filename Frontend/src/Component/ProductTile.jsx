@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { listingDataContext } from "../Context/ListingContext";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { useContext } from "react";
-import { authDataContext } from "../Context/authContext";
+// import { authDataContext } from "../Context/authContext";
 import { useSelector, useDispatch } from "react-redux";
 import { productViewPage } from "../Redux/ListingSlice";
 const ProductTile = ({ property, previous }) => {

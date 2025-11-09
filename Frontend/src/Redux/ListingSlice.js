@@ -20,8 +20,40 @@ export const getAll = createAsyncThunk(
   }
 );
 
+export const handleUpdate = createAsyncThunk(
+  "listing/update",
+  async (updatedListing, { rejectWithValue, dispatch }) => {
+    try {
+      let formdata = new FormData();
+      formdata.append("title", updatedListing.title);
+      formdata.append("description", updatedListing.description);
+      // console.log(bimg1, bimg2, bimg3);
+      formdata.append("bimg1", updatedListing.bimg1);
+      formdata.append("bimg2", updatedListing.bimg2);
+      formdata.append("bimg3", updatedListing.bimg3);
+      formdata.append("rent", updatedListing.rent);
+      formdata.append("city", updatedListing.city);
+      formdata.append("landmark", updatedListing.landmark);
+      formdata.append("latitude", updatedListing.latitude);
+      formdata.append("longitude", updatedListing.longitude);
+      formdata.append("category", updatedListing.category);
+      formdata.append("propertyID", updatedListing.propertyID);
+      console.log("formdata is", formdata);
+      dispatch(setLoading(true));
+      const result = await axios.put(`${URL}/listingMain/update`, formdata);
+      console.log("update result", result);
+      dispatch(setLoading(false));
+      dispatch(getUserData());
+      return result.data;
+    } catch (err) {
+      console.log("update error", err);
+      return rejectWithValue(err.data);
+    }
+  }
+);
+
 export const handleSubmit = createAsyncThunk(
-  "listingMain/past",
+  "listingMain/post",
   async ({ bimg1, bimg2, bimg3 }, { getState, rejectWithValue, dispatch }) => {
     try {
       const state = getState();
@@ -108,6 +140,7 @@ const ListingSlice = createSlice({
     },
     resetListing: (state) => {
       state.title = "";
+      state.navigate = null;
     },
     setSelectCat: (state, action) => {
       state.selectCat = action.payload;
@@ -138,6 +171,10 @@ const ListingSlice = createSlice({
         // console.log("Rejected");
         toast.error("Some error occured rejected");
         state.loading = false;
+      })
+      .addCase(handleUpdate.fulfilled, (state, action) => {
+        toast.success("updated Successfully");
+        state.navigate = true;
       });
   },
 });

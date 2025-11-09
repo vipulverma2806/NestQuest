@@ -2,7 +2,7 @@ import React from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import ProductTile from "../Component/ProductTile";
 import axios from "axios";
-import { authDataContext } from "../Context/authContext";
+// import { authDataContext } from "../Context/authContext";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";

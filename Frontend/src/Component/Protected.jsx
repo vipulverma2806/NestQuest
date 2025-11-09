@@ -21,8 +21,9 @@ const Protected = ({ children }) => {
       // console.log(res);
       setAuth(true);
       setLoading(false);
+      console.log("Auth Success", res);
     } catch (err) {
-      // console.log(err.response.data);
+      console.log("auth", err.response.data);
       setAuth(false);
       navigate("/");
     }

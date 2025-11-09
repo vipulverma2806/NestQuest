@@ -1,8 +1,9 @@
 import Listing from "../Model/listing.model.js";
 import User from "../Model/user.model.js";
 import uploadOnCloudinary from "../Config/cloudinary.js";
-const listingController = async (req, res) => {
+const update = async (req, res) => {
   req.body.host = req.id;
+  const propertyID = req.body.propertyID;
   try {
     const img1 = await uploadOnCloudinary(req.files.bimg1[0].path);
     const img2 = await uploadOnCloudinary(req.files.bimg2[0].path);
@@ -11,20 +12,15 @@ const listingController = async (req, res) => {
     req.body.img2 = img2;
     req.body.img3 = img3;
     try {
-      const result = await Listing.create(req.body);
-      await User.findByIdAndUpdate(req.id, {
-        $push: { listing: result._id },
+      const result = await Listing.findByIdAndUpdate(propertyID, req.body, {
+        new: true,
       });
-      // console.log("listingController", result);
-      res.json("added Successfullly");
+      res.status(200).json({ msg: "updated Successfullly", result });
     } catch (err) {
-      console.log(err);
+      res.status(401).json("Some Error Occured");
     }
   } catch (err) {
-    console.log(err);
+    res.status(401).json("Some Error Occured");
   }
-  //   console.log(req.files.bimg1);
-  //   console.log(req.body);
 };
-
-export default listingController;
+export default update;

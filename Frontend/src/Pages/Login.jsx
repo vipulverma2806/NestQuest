@@ -2,21 +2,21 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { authDataContext } from "../Context/authContext";
+// import { authDataContext } from "../Context/authContext";
 import { listingDataContext } from "../Context/ListingContext";
 import { getUserData } from "../Redux/AuthSlice";
 import { useDispatch } from "react-redux";
 const Login = () => {
   axios.defaults.withCredentials = true;
   const dispatch = useDispatch();
-  // const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   // const [wait, setWait] = useState(false);
   const navigate = useNavigate();
-  let { setName, email, setEmail } = useContext(authDataContext);
-  let { loading, setLoading } = useContext(listingDataContext);
-
+  // let { setName, email, setEmail } = useContext(authDataContext);
+  // let { loading, setLoading } = useContext(listingDataContext);
+  const [loading, setLoading] = useState(false);
   const handleLogin = async (e) => {
     e.preventDefault();
     try {

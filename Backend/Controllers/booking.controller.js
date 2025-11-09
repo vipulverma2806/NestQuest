@@ -7,7 +7,7 @@ const bookingController = async (req, res) => {
       { new: true }
     );
     res.json(result.booked);
-    console.log(result);
+    // console.log(result);
   } catch (err) {
     console.log(err);
   }

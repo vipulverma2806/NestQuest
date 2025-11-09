@@ -68,7 +68,14 @@ const App = () => {
             </Protected>
           }
         ></Route>
-        <Route path="/propertyview/:id" element={<PropertyView />}></Route>
+        <Route
+          path="/propertyview/:id"
+          element={
+            <Protected>
+              <PropertyView />
+            </Protected>
+          }
+        ></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
       </Routes>

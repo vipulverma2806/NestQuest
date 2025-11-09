@@ -10,13 +10,13 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { listingDataContext } from "../Context/ListingContext";
 import { bookingDataContext } from "../Context/BookingContext";
-import { authDataContext } from "../Context/authContext";
+// import { authDataContext } from "../Context/authContext";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 const PropertyView = () => {
   const [updatePopup, setUpdatePopup] = useState(false);
   const [bookingPopup, setBookingPopup] = useState(false);
-  let { productViewPage, handleUpdate } = useContext(listingDataContext);
+  // let { productViewPage, handleUpdate } = useContext(listingDataContext);
   // let { userId } = useContext(authDataContext);
   let userId = useSelector((state) => state.auth.userId);
   let listing = useSelector((state) => state.listing);

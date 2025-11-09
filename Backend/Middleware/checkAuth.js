@@ -12,7 +12,7 @@ const checkAuth = async (req, res, next) => {
     next();
   } catch (err) {
     console.log("error in checkAuth", err);
-    res.json("Authentication failed");
+    res.status(401).json("Authentication failed");
   }
 
   // try {

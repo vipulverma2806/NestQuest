@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import { useContext } from "react";
 import { listingDataContext } from "../Context/ListingContext";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { handleUpdate } from "../Redux/ListingSlice";
+import { useNavigate } from "react-router-dom";
 const fileCSS =
   "file:bg-gray-300 border-gray-400 border-2 rounded-xl p-1 hover:file:bg-gray-400 file:rounded-md file:px-2 px-1 w-[250px] py-1 file:py-1 file:mr-3";
 const catDiv =
@@ -14,6 +16,14 @@ const catSelect =
 const UpdateForm = ({ setUpdatePopup }) => {
   const [clicked, setClicked] = useState("");
   const listing = useSelector((state) => state.listing);
+  const [updatedListing, setUpdatedListing] = useState({});
+  const dispatch = useDispatch();
+  console.log(updatedListing);
+
+  useEffect(() => {
+    setUpdatedListing(listing);
+  }, [listing]);
+
   const allCategory = [
     "PG",
     "Pool House",
@@ -52,16 +62,22 @@ const UpdateForm = ({ setUpdatePopup }) => {
     longitude,
     setLongitude,
 
-    handleUpdate,
+    // handleUpdate,
   } = useContext(listingDataContext);
 
   // console.log(listing.category);
-
+  const uploaded = useSelector((state) => state.listing.navigate);
   const selectCat = (category) => {
-    listing.category = category;
+    setUpdatedListing((prev) => ({ ...prev, category: category }));
     // console.log(listing.category);
     setClicked(category);
   };
+
+  const handleImg = (e, bImg) => {};
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (uploaded) return navigate("/");
+  }, [uploaded]);
 
   // console.log(listing.category);
   return (
@@ -86,7 +102,10 @@ const UpdateForm = ({ setUpdatePopup }) => {
       </div> */}
       <div className=" h-full mt-15 flex justify-center  w-full items-center">
         <form
-          onSubmit={handleUpdate}
+          onSubmit={(e) => {
+            e.preventDefault();
+            dispatch(handleUpdate(updatedListing));
+          }}
           className=" overflow-scroll rounded-2xl bg-blue-100 flex flex-col w-[900px] gap-y-5 h-3/4 p-10 mx-10 shadow-gray-600 shadow-xl "
           action=""
         >
@@ -99,8 +118,13 @@ const UpdateForm = ({ setUpdatePopup }) => {
               className="border-2 border-gray-400 rounded-xl px-3 py-1"
               placeholder="eg. 2 bhk House"
               type="text"
-              value={listing.title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={updatedListing.title || ""}
+              onChange={(e) =>
+                setUpdatedListing((prev) => ({
+                  ...prev,
+                  title: e.target.value,
+                }))
+              }
             />
           </div>
           <div className="flex flex-col gap-y-2 ">
@@ -112,8 +136,13 @@ const UpdateForm = ({ setUpdatePopup }) => {
               className="border-2 border-gray-400 rounded-xl px-3 py-1"
               placeholder="eg. Fully furnished home"
               type="textbox"
-              value={listing.description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={updatedListing.description || ""}
+              onChange={(e) =>
+                setUpdatedListing((prev) => ({
+                  ...prev,
+                  description: e.target.value,
+                }))
+              }
             />
           </div>
           <div className="flex flex-col gap-y-2 ">
@@ -122,13 +151,23 @@ const UpdateForm = ({ setUpdatePopup }) => {
             </label>
             {/* -------------------------test------------------------- */}
 
-            <img src={fimg1} className={fimg1 && "h-50 w-min"} alt="" />
+            {/* <img
+              src={updatedListing.fimg1}
+              className={fimg1 && "h-50 w-min"}
+              alt=""
+            /> */}
 
             {/* --------------------------test-------------------- */}
             <input
               required
               className={fileCSS}
-              onChange={(e) => handleImg(e, setBImg1, setFImg1)}
+              // onChange={(e) => handleImg(e, setBImg1, setFImg1)}
+              onChange={(e) => {
+                setUpdatedListing((prev) => ({
+                  ...prev,
+                  bimg1: e.target.files[0],
+                }));
+              }}
               // value={img1}
               type="file"
             />
@@ -137,12 +176,21 @@ const UpdateForm = ({ setUpdatePopup }) => {
             <label className="text-xl font-semibold" htmlFor="">
               Image 2:
             </label>
-            <img src={fimg2} className={fimg2 && "h-50 w-min"} alt="" />
+            {/* <img
+              src={updatedListing.fimg2}
+              className={fimg2 && "h-50 w-min"}
+              alt=""
+            /> */}
             <input
               required
               className={fileCSS}
               type="file"
-              onChange={(e) => handleImg(e, setBImg2, setFImg2)}
+              onChange={(e) => {
+                setUpdatedListing((prev) => ({
+                  ...prev,
+                  bimg2: e.target.files[0],
+                }));
+              }}
               // value={img2}
             />
           </div>
@@ -150,12 +198,21 @@ const UpdateForm = ({ setUpdatePopup }) => {
             <label className="text-xl font-semibold" htmlFor="">
               Image 3:
             </label>
-            <img src={fimg3} className={fimg3 && "h-50 w-min"} alt="" />
+            {/* <img
+              src={updatedListing.fimg3}
+              className={updatedListing.fimg3 && "h-50 w-min"}
+              alt=""
+            /> */}
             <input
               required
               className={fileCSS}
               type="file"
-              onChange={(e) => handleImg(e, setBImg3, setFImg3)}
+              onChange={(e) => {
+                setUpdatedListing((prev) => ({
+                  ...prev,
+                  bimg3: e.target.files[0],
+                }));
+              }}
               // value={img3}
             />
           </div>
@@ -169,8 +226,13 @@ const UpdateForm = ({ setUpdatePopup }) => {
               className="border-2 rounded-xl border-gray-400 px-3 py-1"
               placeholder="eg. Rupees/day"
               type="number"
-              value={listing.rent}
-              onChange={(e) => setRent(e.target.value)}
+              value={updatedListing.rent || ""}
+              onChange={(e) =>
+                setUpdatedListing((prev) => ({
+                  ...prev,
+                  rent: e.target.value,
+                }))
+              }
             />
           </div>
 
@@ -186,7 +248,7 @@ const UpdateForm = ({ setUpdatePopup }) => {
                   <div
                     onClick={() => selectCat(category)}
                     className={
-                      listing.category == category || clicked == category
+                      updatedListing.category == category || clicked == category
                         ? catSelect
                         : catDiv
                     }
@@ -196,17 +258,6 @@ const UpdateForm = ({ setUpdatePopup }) => {
                 );
               })}
             </div>
-            <label className="text-xl font-semibold" htmlFor="">
-              Rent:
-            </label>
-            <input
-              required
-              className="border-2 rounded-xl border-gray-400 px-3 py-1"
-              placeholder="eg. Rupees/day"
-              type="number"
-              value={listing.rent}
-              onChange={(e) => setRent(e.target.value)}
-            />
           </div>
 
           <div className="flex flex-col gap-y-2 ">
@@ -218,8 +269,13 @@ const UpdateForm = ({ setUpdatePopup }) => {
               className="border-2 rounded-xl border-gray-400 px-3 py-1"
               placeholder="eg. Durg (CG)"
               type="text"
-              value={listing.city}
-              onChange={(e) => setCity(e.target.value)}
+              value={updatedListing.city || ""}
+              onChange={(e) =>
+                setUpdatedListing((prev) => ({
+                  ...prev,
+                  city: e.target.value,
+                }))
+              }
             />
           </div>
           <div className="flex flex-col gap-y-2 ">
@@ -231,8 +287,13 @@ const UpdateForm = ({ setUpdatePopup }) => {
               className="border-2 rounded-xl border-gray-400 px-3 py-1"
               placeholder="eg. Near BIT College"
               type="text"
-              value={listing.landmark}
-              onChange={(e) => setLandmark(e.target.value)}
+              value={updatedListing.landmark || ""}
+              onChange={(e) =>
+                setUpdatedListing((prev) => ({
+                  ...prev,
+                  landmark: e.target.value,
+                }))
+              }
             />
           </div>
           <div className="flex flex-col gap-y-2 ">
@@ -244,16 +305,26 @@ const UpdateForm = ({ setUpdatePopup }) => {
               className="border-2 rounded-xl mb-2 border-gray-400 px-3 py-1"
               placeholder="Latitude"
               type="number"
-              value={listing.latitude}
-              onChange={(e) => setLatitude(e.target.value)}
+              value={updatedListing.latitude || ""}
+              onChange={(e) =>
+                setUpdatedListing((prev) => ({
+                  ...prev,
+                  latitude: e.target.value,
+                }))
+              }
             />
             <input
               required
               className="border-2 rounded-xl border-gray-400 px-3 py-1"
               placeholder="Longitude"
               type="number"
-              value={listing.longitude}
-              onChange={(e) => setLongitude(e.target.value)}
+              value={updatedListing.longitude || ""}
+              onChange={(e) =>
+                setUpdatedListing((prev) => ({
+                  ...prev,
+                  longitude: e.target.value,
+                }))
+              }
             />
           </div>
           <button

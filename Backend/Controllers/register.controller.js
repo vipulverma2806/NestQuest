@@ -5,7 +5,7 @@ const register = async (req, res) => {
     const { name, email, password } = req.body;
     const hashed = await vipul.hash(password, 10);
     const regInfo = await User.create({ name, email, password: hashed });
-    console.log(regInfo);
+    // console.log(regInfo);
     res.status(200).json("successful");
   } catch (err) {
     console.log(err);

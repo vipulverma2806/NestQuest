@@ -12,7 +12,7 @@ import { IoBedOutline } from "react-icons/io5";
 import { FaTreeCity } from "react-icons/fa6";
 import { BiBuildingHouse } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-import { authDataContext } from "../Context/authContext";
+// import { authDataContext } from "../Context/authContext";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Redux/AuthSlice";
 import axios from "axios";
@@ -28,6 +28,8 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const name = useSelector((state) => state.auth.name);
+  // const authState = useSelector((state) => state.auth);
+  // console.log({ name: name, auth: authState });
   const loading = useSelector((state) => state.auth.loading);
   const listing = useSelector((state) => state.listing);
 
@@ -41,7 +43,7 @@ const NavBar = () => {
       try {
         // console.log("working in useeffect Navbar");
         const res = await axios.get(`${URL}/auth/checkOnlyAuth`);
-        // console.log("checkAuth", res);
+        console.log("checkAuth", res);
         setAuth(true);
       } catch (err) {
         // console.log("checkAuth catch", err.response.data);
@@ -95,7 +97,8 @@ const NavBar = () => {
                 <div className=" flex justify-center  ml-2 items-center bg-red-500 active:bg-red-700 h-[35px] w-[35px] text-white rounded-full">
                   <h1 className="font-semibold text-2xl text-center relative bottom-1 ">
                     {" "}
-                    {name.trim()[0]}
+                    {name?.trim()?.[0]}
+                    {console.log("name", name)}
                   </h1>
                 </div>
 
