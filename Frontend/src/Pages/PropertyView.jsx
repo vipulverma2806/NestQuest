@@ -13,9 +13,11 @@ import { bookingDataContext } from "../Context/BookingContext";
 // import { authDataContext } from "../Context/authContext";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import DeleteConfirm from "../Component/DeleteConfirm";
 const PropertyView = () => {
   const [updatePopup, setUpdatePopup] = useState(false);
   const [bookingPopup, setBookingPopup] = useState(false);
+  const [deletePopup, setDeletePopup] = useState(false);
   // let { productViewPage, handleUpdate } = useContext(listingDataContext);
   // let { userId } = useContext(authDataContext);
   let userId = useSelector((state) => state.auth.userId);
@@ -42,7 +44,7 @@ const PropertyView = () => {
     previous,
     hostId,
   } = useSelector((state) => state.listing);
-  console.log(listing);
+  // console.log(listing);
   // let { handleBooking } = useContext(bookingDataContext);
   // console.log("userid", userId, "hostid", hostId);
   return (
@@ -102,26 +104,38 @@ const PropertyView = () => {
           longitude={listing.longitude}
           title={listing.title}
         ></Map>
-
-        <button
-          onClick={
-            listing.hostId == userId
-              ? () => setUpdatePopup(true)
-              : () => setBookingPopup(true)
-          }
-          className={`rounded-full  hover:cursor-pointer text-xl font-semibold text-white  active:bg-red-700 w-full  md:w-1/4  p-4 ${
-            loading ? "bg-green-500" : "bg-red-600"
-          }`}
-        >
-          {listing.hostId == userId
-            ? `${loading ? "Updating please wait..." : "Update"}`
-            : `${loading ? "Booking please wait..." : "Book"}`}
-        </button>
-
-        {/* {updatePopup && console.log("update")}
-        {bookingPopup && console.log("booking")} */}
+        <div className="flex sm:justify-between sm:flex-row gap-y-3 sm:gap-x-3 flex-col ">
+          <button
+            onClick={
+              listing.hostId == userId
+                ? () => setUpdatePopup(true)
+                : () => setBookingPopup(true)
+            }
+            className={`rounded-full sm:max-w-50   hover:cursor-pointer text-xl font-semibold text-white active:bg-red-800 hover:bg-red-700 w-full  md:w-1/4  p-4 ${
+              loading ? "bg-green-500" : "bg-red-600"
+            }`}
+          >
+            {listing.hostId == userId
+              ? `${loading ? "Updating please wait..." : "Update"}`
+              : `${loading ? "Booking please wait..." : "Book"}`}
+          </button>
+          {listing.hostId == userId && (
+            <button
+              onClick={() => setDeletePopup(true)}
+              className={`rounded-full sm:max-w-50   hover:cursor-pointer text-xl font-semibold text-white  hover:bg-red-700 active:bg-red-800 w-full  md:w-1/4  p-4 bg-red-600`}
+            >
+              Delete
+            </button>
+          )}
+        </div>
       </div>
       {updatePopup && <UpdateForm setUpdatePopup={setUpdatePopup} />}
+      {deletePopup && (
+        <DeleteConfirm
+          setDeletePopup={setDeletePopup}
+          PropertyID={listing.propertyID}
+        />
+      )}
       {bookingPopup && <BookingForm setBookingPopup={setBookingPopup} />}
     </div>
   );

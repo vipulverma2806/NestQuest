@@ -1,4 +1,4 @@
 const checkOnlyAuth = (req, res) => {
-  res.json(200).status("Authentication Approved");
+  res.status(200).json("Authentication Approved");
 };
 export default checkOnlyAuth;

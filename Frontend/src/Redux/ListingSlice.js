@@ -20,17 +20,39 @@ export const getAll = createAsyncThunk(
   }
 );
 
+export const deleteProperty = createAsyncThunk(
+  "listingMain/delete",
+  async (propertyID, { rejectWithValue }) => {
+    try {
+      const deleted = await axios.delete(
+        `${URL}/listingMain/delete/${propertyID}`
+      );
+      return deleted.data;
+      console.log("deleted", deleted);
+    } catch (err) {
+      console.log("deleted", err);
+      return rejectWithValue(err.data);
+    }
+  }
+);
+
 export const handleUpdate = createAsyncThunk(
-  "listing/update",
+  "listingMain/update",
   async (updatedListing, { rejectWithValue, dispatch }) => {
     try {
       let formdata = new FormData();
       formdata.append("title", updatedListing.title);
       formdata.append("description", updatedListing.description);
-      // console.log(bimg1, bimg2, bimg3);
-      formdata.append("bimg1", updatedListing.bimg1);
-      formdata.append("bimg2", updatedListing.bimg2);
-      formdata.append("bimg3", updatedListing.bimg3);
+      console.log(
+        updatedListing.bimg1,
+        updatedListing.bimg2,
+        updatedListing.bimg3
+      );
+      if (updatedListing.bimg1) formdata.append("bimg1", updatedListing.bimg1);
+      if (updatedListing.bimg2) formdata.append("bimg2", updatedListing.bimg2);
+      if (updatedListing.bimg3) formdata.append("bimg3", updatedListing.bimg3);
+      // formdata.append("bimg2", updatedListing.bimg2);
+      // formdata.append("bimg3", updatedListing.bimg3);
       formdata.append("rent", updatedListing.rent);
       formdata.append("city", updatedListing.city);
       formdata.append("landmark", updatedListing.landmark);
@@ -39,10 +61,10 @@ export const handleUpdate = createAsyncThunk(
       formdata.append("category", updatedListing.category);
       formdata.append("propertyID", updatedListing.propertyID);
       console.log("formdata is", formdata);
-      dispatch(setLoading(true));
+
       const result = await axios.put(`${URL}/listingMain/update`, formdata);
       console.log("update result", result);
-      dispatch(setLoading(false));
+
       dispatch(getUserData());
       return result.data;
     } catch (err) {
@@ -174,6 +196,28 @@ const ListingSlice = createSlice({
       })
       .addCase(handleUpdate.fulfilled, (state, action) => {
         toast.success("updated Successfully");
+        state.loading = false;
+        state.navigate = true;
+      })
+      .addCase(handleUpdate.pending, (state, action) => {
+        state.loading = true;
+        toast.success("please wait loadind add kro");
+      })
+      .addCase(handleUpdate.rejected, (state, action) => {
+        toast.error("Some error occured");
+        state.loading = false;
+      })
+      .addCase(deleteProperty.rejected, (state, action) => {
+        toast.error("Some error occured");
+        state.loading = false;
+      })
+      .addCase(deleteProperty.pending, (state, action) => {
+        state.loading = true;
+        toast.error("please wait delete add add kro");
+      })
+      .addCase(deleteProperty.fulfilled, (state, action) => {
+        state.loading = false;
+        toast.success("Deleted successfully");
         state.navigate = true;
       });
   },

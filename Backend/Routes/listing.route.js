@@ -4,6 +4,7 @@ import listingController from "../Controllers/listing.controller.js";
 import getAll from "../Controllers/getAll.controller.js";
 import update from "../Controllers/update.controller.js";
 import checkAuth from "../Middleware/checkAuth.js";
+import deleteProperty from "../Controllers/delete.controller.js";
 const listingRouter = express.Router();
 
 listingRouter.post(
@@ -18,6 +19,7 @@ listingRouter.post(
 );
 
 listingRouter.get("/getAll", getAll);
+listingRouter.delete("/delete/:propertyID", checkAuth, deleteProperty);
 listingRouter.put(
   "/update",
   upload.fields([

@@ -15,9 +15,9 @@ const MyListings = () => {
 
   const loading = useSelector((state) => state.listing.loading);
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getUserData());
-  // }, [loading]);
+  useEffect(() => {
+    dispatch(getUserData());
+  }, [loading]);
 
   return (
     <div>

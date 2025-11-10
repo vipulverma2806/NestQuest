@@ -16,9 +16,10 @@ const catSelect =
 const UpdateForm = ({ setUpdatePopup }) => {
   const [clicked, setClicked] = useState("");
   const listing = useSelector((state) => state.listing);
+  const loading = useSelector((state) => state.listing.loading);
   const [updatedListing, setUpdatedListing] = useState({});
   const dispatch = useDispatch();
-  console.log(updatedListing);
+  // console.log(updatedListing);
 
   useEffect(() => {
     setUpdatedListing(listing);
@@ -159,7 +160,6 @@ const UpdateForm = ({ setUpdatePopup }) => {
 
             {/* --------------------------test-------------------- */}
             <input
-              required
               className={fileCSS}
               // onChange={(e) => handleImg(e, setBImg1, setFImg1)}
               onChange={(e) => {
@@ -182,7 +182,6 @@ const UpdateForm = ({ setUpdatePopup }) => {
               alt=""
             /> */}
             <input
-              required
               className={fileCSS}
               type="file"
               onChange={(e) => {
@@ -204,7 +203,6 @@ const UpdateForm = ({ setUpdatePopup }) => {
               alt=""
             /> */}
             <input
-              required
               className={fileCSS}
               type="file"
               onChange={(e) => {
@@ -330,7 +328,9 @@ const UpdateForm = ({ setUpdatePopup }) => {
           <button
             type="submit"
             // onClick={() => navigate("/addlisting2")}
-            className="rounded-full text-md font-semibold text-white bg-red-500 active:bg-red-700 p-4"
+            className={`rounded-xl mt-8 text-lg md:text-xl font-semibold text-white px-6 py-4 w-full md:w-1/3 mx-auto transition ${
+              loading ? "bg-green-500" : "bg-red-600 hover:bg-red-700"
+            }`}
           >
             Update
           </button>

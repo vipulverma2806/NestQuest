@@ -43,7 +43,7 @@ const NavBar = () => {
       try {
         // console.log("working in useeffect Navbar");
         const res = await axios.get(`${URL}/auth/checkOnlyAuth`);
-        console.log("checkAuth", res);
+        // console.log("checkAuth", res);
         setAuth(true);
       } catch (err) {
         // console.log("checkAuth catch", err.response.data);
@@ -53,7 +53,7 @@ const NavBar = () => {
 
     const clearListing = () => {
       dispatch(resetListing());
-      console.log("clearlisting ");
+      // console.log("clearlisting ");
     };
     clearListing();
     dispatch(setNavigate(false));
@@ -98,7 +98,7 @@ const NavBar = () => {
                   <h1 className="font-semibold text-2xl text-center relative bottom-1 ">
                     {" "}
                     {name?.trim()?.[0]}
-                    {console.log("name", name)}
+                    {/* {console.log("name", name)} */}
                   </h1>
                 </div>
 
