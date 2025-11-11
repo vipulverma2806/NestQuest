@@ -163,43 +163,6 @@ const NavBar = () => {
               </div>
             );
           })}
-
-          {/* <div className={IconDiv} onClick={() => selectCat()}>
-            <MdWhatshot className={IconStyle} />
-            <h2>Trending</h2>
-          </div>
-
-          <div className={IconDiv}>
-            <GiWoodCabin className={IconStyle} />
-            <h2>Cabin</h2>
-          </div>
-          <div className={IconDiv}>
-            <SiHomeassistantcommunitystore className={IconStyle} />
-            <h2>Shops</h2>
-          </div>
-          <div className={IconDiv}>
-            <IoBedOutline className={IconStyle} />
-            <h2>PG</h2>
-          </div>
-          <div className={IconDiv}>
-            <FaTreeCity className={IconStyle} />
-            <h2>Farm House</h2>
-          </div>
-          <div className={IconDiv}>
-            <BiBuildingHouse className={IconStyle} />
-            <h2>Flat</h2>
-          </div>
-          <div className={IconDiv}>
-            <MdOutlinePool className={IconStyle} />
-            <h2>Pool House</h2>
-          </div>
-          <div className={IconDiv}>
-            <MdBedroomParent className={IconStyle} />
-            <h2>Rooms</h2>
-          </div>
-          <div className={IconDiv}>
-            <GiFamilyHouse className={IconStyle} /> <h2>Villa</h2>
-          </div> */}
         </div>
       </div>
 

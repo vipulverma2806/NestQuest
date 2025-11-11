@@ -24,7 +24,7 @@ const MyBookings = () => {
         </div>
       </nav>
       <div className="flex flex-wrap p-44">
-        <ProductTile></ProductTile>
+        {/* <ProductTile></ProductTile> */}
       </div>
     </div>
   );
