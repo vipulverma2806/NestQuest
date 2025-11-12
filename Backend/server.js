@@ -20,7 +20,7 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 app.use("/listingMain", listingRouter);
-app.use("/booking", bookingRouter);
+app.use("/bookingMain", bookingRouter);
 app.use("/auth", authRouter);
 connectDB();
 app.listen("5000", () => console.log("server started"));

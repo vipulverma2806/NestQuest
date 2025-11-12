@@ -38,7 +38,7 @@ const Home = () => {
   return (
     <div>
       <NavBar></NavBar>
-      <div className="md:pt-48 sm:pt-60 pt-80 flex gap-8  w-screen flex-wrap items-center justify-center p-10">
+      <div className="md:pt-50 sm:pt-60 pt-80 flex gap-8  w-screen flex-wrap items-center justify-center p-10">
         {sorted.length === 0 ? (
           <div className="h-20 w-full text-xl pt-10 font-bold text-center ">
             Not Available

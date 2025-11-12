@@ -21,15 +21,22 @@ const ProductTile = ({ property, previous }) => {
     navigate(`/propertyview/${property._id}`);
     dispatch(productViewPage(newProperty));
   };
+
+  console.log(property)
   return (
-    <div className="hover:cursor-pointer relative z-0" onClick={handleClick}>
+    <div
+      className="hover:cursor-pointer  relative z-0"
+      onClick={property.host == userId ? handleClick : property.booked ? undefined : handleClick}
+    >
       {property.booked ? (
-        <div className=" z-10 absolute right-5 p-1  rounded-3xl mt-1 mr-1 bg-white">
-          <div className=" p-1 rounded-3xl border-2   border-green-600 ">
-            <IoIosCheckmarkCircleOutline className="text-green-600  inline text-xl" />
-            <span className="text-green-600 inline font-semibold  text-md p-1 ">
-              Booked
-            </span>
+        <div className="backdrop-blur-3xl bg-white/30 h-full w-full">
+          <div className=" z-10 absolute top-1 right-5 p-1  rounded-3xl mt-1 mr-1 bg-white">
+            <div className=" p-1 rounded-3xl border-2   border-green-600 ">
+              <IoIosCheckmarkCircleOutline className="text-green-600  inline text-xl" />
+              <span className="text-green-600 inline font-semibold  text-md p-1 ">
+                Booked
+              </span>
+            </div>
           </div>
         </div>
       ) : null}
@@ -37,7 +44,7 @@ const ProductTile = ({ property, previous }) => {
         <img
           src={property.img1}
           alt="image not found"
-          className="h-[300px] w-[300px] mb-2 rounded-2xl  object-cover"
+          className="h-[300px] w-[300px]  mb-2 rounded-2xl  object-cover"
         />
         <img
           src={property.img2}

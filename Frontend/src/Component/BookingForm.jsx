@@ -1,30 +1,67 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import axios from "axios";
+const URL = import.meta.env.VITE_URL;
+axios.defaults.withCredentials = true;
 const BookingForm = ({ setBookingpopup }) => {
   const listing = useSelector((state) => state.listing);
   const loading = useSelector((state) => state.listing.loading);
+  const guest = useSelector((state) => state.auth.userId);
   const [minDate, setMinDate] = useState();
   const [checkIn, setCheckIn] = useState();
   const [checkOut, setCheckOut] = useState();
-  const [nights, setNights] = useState();
+  const [nights, setNights] = useState(0);
   const [bill, setBill] = useState({ price: 0, GST: 0, platformFee: 0 });
-  const [total,setTotal]
+  const [totalRent, setTotalRent] = useState(0);
+  const [invalid, setInvalid] = useState(false);
+  console.log("bahar", nights);
+  const host = listing.hostId;
+  const handleBooking = async (propertyID) => {
+    try {
+      const response = await axios.post(`${URL}/bookingMain/booking/${propertyID}`, {
+        host,
+        guest,
+        checkIn,
+        checkOut,
+        totalRent,
+      });
+      console.log(response);
+    } catch (err) {
+      console.log("err",err);
+    }
+  };
+
   useEffect(() => {
     if (checkIn && checkOut) {
       const inDate = new Date(checkIn);
       const outDate = new Date(checkOut);
       const N = (outDate - inDate) / (1000 * 60 * 60 * 24);
-      setNights(N);
-      setBill({
-        price: listing.rent * nights,
-        GST: (listing.rent * 7) / 100,
-        platformFee: (listing.rent * 5) / 100,
-      });
-      setTotal(bill.price + bill.GST + bill.platformFee)
-      console.log(inDate, outDate);
-      console.log(totalNights);
+
+      if (N > 0) {
+        setNights(N);
+        setBill({
+          price: parseFloat(listing.rent * N),
+          GST: parseFloat(((listing.rent * 7) / 100).toFixed(2)),
+          platformFee: parseFloat(((listing.rent * 5) / 100).toFixed(2)),
+        });
+        setInvalid(false);
+      } else {
+        setNights(0);
+        setBill({
+          price: 0,
+          GST: 0,
+          platformFee: 0,
+        });
+        setInvalid(true);
+      }
+
+      console.log(N);
     }
   }, [checkIn, checkOut]);
+
+  useEffect(() => {
+    setTotalRent((bill.price + bill.GST + bill.platformFee).toFixed(2));
+  }, [bill.price]);
 
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
@@ -62,14 +99,25 @@ const BookingForm = ({ setBookingpopup }) => {
               className=" border rounded-lg p-2"
             />
           </div>
-          <div className="  h-full px-7">
+
+          <div className="h-5">
+            {invalid ? (
+              <div className="text-red-700">
+                *Please select a valid date range
+              </div>
+            ) : null}
+          </div>
+
+          <div className="  h-full pt-2 px-7">
             <button
               type="submit "
               onClick={(e) => {
                 e.preventDefault();
+                handleBooking(listing.propertyID);
+                console.log(listing.propertyID);
               }}
               disabled={loading}
-              className={`rounded-xl mt-10 text-xl font-semibold text-white px-6 py-4 w-full  mx-auto transition ${
+              className={`rounded-xl  text-xl font-semibold text-white px-6 py-4 w-full  mx-auto transition ${
                 loading ? "bg-green-500" : "bg-red-600 hover:bg-red-700"
               }`}
             >
@@ -80,7 +128,7 @@ const BookingForm = ({ setBookingpopup }) => {
               disabled={loading}
               onClick={() => setBookingpopup(false)}
               className={
-                "rounded-xl mt-7 text-xl font-semibold text-white px-6 py-4 w-full  mx-auto transition bg-red-600 hover:bg-red-700"
+                "rounded-xl mt-5 text-xl font-semibold text-white px-6 py-4 w-full  mx-auto transition bg-red-600 hover:bg-red-700"
               }
             >
               Cancel
@@ -112,19 +160,19 @@ const BookingForm = ({ setBookingpopup }) => {
             <span>
               {listing.rent} ₹ X {nights} nights
             </span>
-            <span className=" ">{listing.rent * nights} ₹ </span>
+            <span className=" ">{bill.price} </span>
           </div>
           <div className="w-full   justify-between flex">
             <span className="">GST</span>
-            <span className=" ">{(listing.rent * 7) / 100}</span>{" "}
+            <span className=" ">{bill.GST}</span>{" "}
           </div>
           <div className="  flex justify-between ">
             <span className="">Platform fee</span>
-            <span className=" ">{(listing.rent * 5) / 100}</span>
+            <span className=" ">{bill.platformFee}</span>
           </div>
           <div className="  border-t pt-3 flex justify-between ">
             <span className="">Total Price</span>
-            <span className=" ">0</span>
+            <span className=" ">₹ {totalRent}</span>
           </div>
         </div>
       </div>

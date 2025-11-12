@@ -21,12 +21,12 @@ const userSchema = mongoose.Schema(
         ref: "Listing",
       },
     ],
-    // booking: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Booking",
-    //   },
-    // ],
+    booking: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Listing",
+      },
+    ],
   },
   { timestamps: true }
 );

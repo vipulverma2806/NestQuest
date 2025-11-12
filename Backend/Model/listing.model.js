@@ -60,6 +60,10 @@ const listingSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    isBooked:{
+      type:Boolean,
+      default:false,
+    }
   },
   { timestamps: true }
 );
