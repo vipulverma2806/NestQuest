@@ -36,6 +36,26 @@ export const deleteProperty = createAsyncThunk(
   }
 );
 
+export const cancelProperty = createAsyncThunk(
+  "listingMain/cancel",
+  async (propertyID, { rejectWithValue }) => {
+    try {
+      const canceled = await axios.put(
+        `${URL}/listingMain/cancel/${propertyID}`
+      );
+      return canceled.data;
+      console.log("canceled", canceled);
+    } catch (err) {
+      console.log("canceled", err);
+      return rejectWithValue(err.data);
+    }
+  }
+);
+
+
+
+
+
 export const handleUpdate = createAsyncThunk(
   "listingMain/update",
   async (updatedListing, { rejectWithValue, dispatch }) => {
@@ -128,6 +148,7 @@ const ListingSlice = createSlice({
     propertyID: 0,
     allProperties: [],
     hostId: "",
+    guestId:"",
     navigate: null,
     city: "",
     loading: null,
@@ -153,6 +174,7 @@ const ListingSlice = createSlice({
       state.city = action.payload.city;
       state.propertyID = action.payload._id;
       state.hostId = action.payload.host;
+      state.guestId = action.payload.guest;
     },
     categorySelect: (state, action) => {
       state.category = action.payload.category;
@@ -218,6 +240,19 @@ const ListingSlice = createSlice({
       .addCase(deleteProperty.fulfilled, (state, action) => {
         state.loading = false;
         toast.success("Deleted successfully");
+        state.navigate = true;
+      })
+      .addCase(cancelProperty.rejected, (state, action) => {
+        toast.error("Some error occured");
+        state.loading = false;
+      })
+      .addCase(cancelProperty.pending, (state, action) => {
+        state.loading = true;
+        toast.error("please wait ");
+      })
+      .addCase(cancelProperty.fulfilled, (state, action) => {
+        state.loading = false;
+        toast.success("canceled successfully");
         state.navigate = true;
       });
   },

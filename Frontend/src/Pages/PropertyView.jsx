@@ -18,6 +18,7 @@ const PropertyView = () => {
   const [updatePopup, setUpdatePopup] = useState(false);
   const [bookingPopup, setBookingPopup] = useState(false);
   const [deletePopup, setDeletePopup] = useState(false);
+  const [cancelPopup, setCancelPopup] = useState(false);
   // let { productViewPage, handleUpdate } = useContext(listingDataContext);
   // let { userId } = useContext(authDataContext);
   let userId = useSelector((state) => state.auth.userId);
@@ -109,6 +110,8 @@ const PropertyView = () => {
             onClick={
               listing.hostId == userId
                 ? () => setUpdatePopup(true)
+                : listing.guestId == userId
+                ? () => setCancelPopup(true)
                 : () => setBookingPopup(true)
             }
             className={`rounded-full sm:max-w-50   hover:cursor-pointer text-xl font-semibold text-white active:bg-red-800 hover:bg-red-700 w-full  md:w-1/4  p-4 ${
@@ -117,6 +120,8 @@ const PropertyView = () => {
           >
             {listing.hostId == userId
               ? `${loading ? "Updating please wait..." : "Update"}`
+              : listing.guestId == userId
+              ? `${loading ? "Canceling please wait..." : "Cancel"}`
               : `${loading ? "Booking please wait..." : "Book"}`}
           </button>
           {listing.hostId == userId && (
@@ -130,13 +135,19 @@ const PropertyView = () => {
         </div>
       </div>
       {updatePopup && <UpdateForm setUpdatePopup={setUpdatePopup} />}
+      {bookingPopup && <BookingForm setBookingPopup={setBookingPopup} />}
       {deletePopup && (
         <DeleteConfirm
           setDeletePopup={setDeletePopup}
           PropertyID={listing.propertyID}
         />
       )}
-      {bookingPopup && <BookingForm setBookingPopup={setBookingPopup} />}
+      {cancelPopup && (
+        <CancelConfirm
+          setCancelPopup={setCancelPopup}
+          PropertyID={listing.propertyID}
+        />
+      )}
     </div>
   );
 };

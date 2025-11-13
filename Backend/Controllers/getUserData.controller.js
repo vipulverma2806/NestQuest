@@ -10,7 +10,7 @@ const getUserData = async (req, res) => {
     //   .populate("listing");
     // res.json(user.name);
 
-    // console.log("uerdata", userData);
+    console.log("uerdata", userData.listing);
     res.status(201).json(userData);
   } catch (err) {
     console.log(err);

@@ -18,17 +18,25 @@ const ProductTile = ({ property, previous }) => {
 
   const navigate = useNavigate();
   const handleClick = () => {
+    if (property.isBooked) {
+      if (!(property.guestId == userId)) {
+        if (!(property.hostId == userId)) return undefined;
+      }
+    }
+
     navigate(`/propertyview/${property._id}`);
     dispatch(productViewPage(newProperty));
   };
 
-  console.log(property)
+  console.log(property);
   return (
     <div
       className="hover:cursor-pointer  relative z-0"
-      onClick={property.host == userId ? handleClick : property.booked ? undefined : handleClick}
+      onClick={handleClick}
+
+      // onClick={property.guest == userId || property.host == userId ? handleClick :undefined}
     >
-      {property.booked ? (
+      {property.isBooked ? (
         <div className="backdrop-blur-3xl bg-white/30 h-full w-full">
           <div className=" z-10 absolute top-1 right-5 p-1  rounded-3xl mt-1 mr-1 bg-white">
             <div className=" p-1 rounded-3xl border-2   border-green-600 ">

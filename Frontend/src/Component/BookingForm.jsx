@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const URL = import.meta.env.VITE_URL;
 axios.defaults.withCredentials = true;
 const BookingForm = ({ setBookingpopup }) => {
+  const navigate = useNavigate()
   const listing = useSelector((state) => state.listing);
   const loading = useSelector((state) => state.listing.loading);
+  
   const guest = useSelector((state) => state.auth.userId);
   const [minDate, setMinDate] = useState();
   const [checkIn, setCheckIn] = useState();
@@ -25,11 +29,19 @@ const BookingForm = ({ setBookingpopup }) => {
         checkOut,
         totalRent,
       });
-      console.log(response);
+      console.log("working",response);
+      toast.success("Booking successful")
+      navigate("/")
+      
     } catch (err) {
       console.log("err",err);
     }
   };
+
+
+ 
+
+
 
   useEffect(() => {
     if (checkIn && checkOut) {

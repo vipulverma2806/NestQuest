@@ -12,7 +12,7 @@ const bookingController = async (req, res) => {
     if (!listing) return res.status(404).json("Property not found");
     if (new Date(checkIn) >= new Date(checkOut))
       return res.status(402).json("Invalid Date range");
-    if (listing.booked) return res.status(720).json("Already Booked");
+    if (listing.isBooked) return res.status(720).json("Already Booked");
     const booking = await Booking.create({
       checkIn,
       checkOut,
@@ -27,7 +27,7 @@ const bookingController = async (req, res) => {
       $push: { booking: listing },
     });
     listing.guest = guest;
-    listing.booked = true;
+    listing.isBooked = true;
     await listing.save();
 
     console.log(booking);
