@@ -49,6 +49,7 @@ const authSlice = createSlice({
     name: "",
     email: "",
     listing: [],
+    booking:[],
     userId: 0,
     loading: false,
   },
@@ -85,19 +86,23 @@ const authSlice = createSlice({
       })
       .addCase(getUserData.pending, (state) => {
         state.loading = true;
+        console.log(state.loading)
       })
       .addCase(getUserData.fulfilled, (state, action) => {
         state.loading = false;
+        console.log(state.loading)
         // console.log("yelo", action.payload);
         state.name = action.payload.name;
         state.email = action.payload.email;
         state.userId = action.payload._id;
         // console.log("this is userId", state.userId);
         state.listing = action.payload.listing;
+        state.booking = action.payload.booking;
         toast.success("getUserData Successfull");
       })
       .addCase(getUserData.rejected, (state, action) => {
         state.loading = false;
+        console.log(state.loading)
         // console.log(action.payload);
         toast.success("Error getUser occured");
       });

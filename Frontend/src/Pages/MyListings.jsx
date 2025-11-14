@@ -16,7 +16,9 @@ const MyListings = () => {
   const loading = useSelector((state) => state.listing.loading);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getUserData());
+    if (!listing) {
+      return dispatch(getUserData());
+    }
   }, [loading]);
 
   return (
@@ -43,7 +45,7 @@ const MyListings = () => {
           return (
             <ProductTile
               property={property}
-              previous={"mylisting"}
+              previous={"mylistings"}
             ></ProductTile>
           );
         })}

@@ -6,11 +6,13 @@ const getUserData = async (req, res) => {
   try {
     const userData = await User.findById(req.id)
       .select("-password")
-      .populate("listing");
+      .populate("listing")
+      .populate("booking");
+
     //   .populate("listing");
     // res.json(user.name);
 
-    console.log("uerdata", userData.listing);
+    console.log("booking", userData.booking);
     res.status(201).json(userData);
   } catch (err) {
     console.log(err);

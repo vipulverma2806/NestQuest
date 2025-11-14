@@ -43,10 +43,11 @@ export const cancelProperty = createAsyncThunk(
       const canceled = await axios.put(
         `${URL}/listingMain/cancel/${propertyID}`
       );
-      return canceled.data;
       console.log("canceled", canceled);
+      return canceled.data;
+      
     } catch (err) {
-      console.log("canceled", err);
+      console.log("canceled Error", err);
       return rejectWithValue(err.data);
     }
   }

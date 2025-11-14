@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 import { CiSearch } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
@@ -30,24 +31,28 @@ const NavBar = () => {
   const name = useSelector((state) => state.auth.name);
   // const authState = useSelector((state) => state.auth);
   // console.log({ name: name, auth: authState });
-  const loading = useSelector((state) => state.auth.loading);
+  // const loading = useSelector((state) => state.auth.loading);
   const listing = useSelector((state) => state.listing);
 
   // console.log("checkAuth Loading", loading);
   const [menu, setMenu] = useState(false);
   const [auth, setAuth] = useState(false);
+  const [loadingIcon, setLoadingIcon] = useState(false);
   // let { name } = useContext(authDataContext);
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
         // console.log("working in useeffect Navbar");
+        setLoadingIcon(true);
         const res = await axios.get(`${URL}/auth/checkOnlyAuth`);
+        setLoadingIcon(false);
         // console.log("checkAuth", res);
         setAuth(true);
       } catch (err) {
         // console.log("checkAuth catch", err.response.data);
         setAuth(false);
+        setLoadingIcon(false);
       }
     };
 
@@ -88,7 +93,13 @@ const NavBar = () => {
           </div>
 
           <div className="">
-            {auth ? (
+            {loadingIcon ? (
+              <ClipLoader
+                color="#e63946"
+                size={40}
+                aria-label="Loading Spinner"
+              />
+            ) : auth ? (
               <button
                 className="border-2 border-gray-400 h-[55px]  w-[100px] flex justify-between p-4 items-center  rounded-s-full rounded-e-full cursor-pointer"
                 onClick={() => setMenu(!menu)}

@@ -18,17 +18,20 @@ const ProductTile = ({ property, previous }) => {
 
   const navigate = useNavigate();
   const handleClick = () => {
+    console.log(property.isBooked);
     if (property.isBooked) {
-      if (!(property.guestId == userId)) {
-        if (!(property.hostId == userId)) return undefined;
+      console.log("property-isBooked - true" , property.guest);
+      if (!(property.guest == userId)) {
+        console.log("property.guestId == userId false");
+        if (!(property.host == userId)) return undefined;
       }
     }
-
+    console.log("property-isBooked", property.isBooked);
     navigate(`/propertyview/${property._id}`);
     dispatch(productViewPage(newProperty));
   };
 
-  console.log(property);
+  // console.log(property);
   return (
     <div
       className="hover:cursor-pointer  relative z-0"

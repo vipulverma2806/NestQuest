@@ -46,7 +46,7 @@ const listingSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-   
+
     host: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -56,11 +56,11 @@ const listingSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    isBooked:{
-      required:true,
-      type:Boolean,
-      default:false
-    }
+    isBooked: {
+      required: true,
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

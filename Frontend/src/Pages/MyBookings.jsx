@@ -1,9 +1,27 @@
 import React from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import ProductTile from "../Component/ProductTile";
+import axios from "axios";
+import { useContext, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getUserData } from "../Redux/AuthSlice";
 const MyBookings = () => {
   const navigate = useNavigate();
+
+  let booking = useSelector((state) => state.auth.booking);
+  console.log(booking);
+
+  const loading = useSelector((state) => state.listing.loading);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!booking) {
+      return dispatch(getUserData());
+    }
+  }, [loading]);
+  // useMemo(() => {
+  //   dispatch(getUserData());
+  // }, [loading]);
   return (
     <div>
       <nav className="flex fixed bg-white w-full justify-between px-10 h-24 py-5">
@@ -23,8 +41,18 @@ const MyBookings = () => {
           My Bookings
         </div>
       </nav>
-      <div className="flex flex-wrap p-44">
-        {/* <ProductTile></ProductTile> */}
+      <div className="md:pt-48 sm:pt-60 pt-80 flex gap-16  w-screen flex-wrap items-center justify-center p-10">
+        {booking.length > 0
+          ? booking.map((property, i) => {
+              return (
+                <ProductTile
+                  key={i}
+                  property={property}
+                  previous={"mybookings"}
+                ></ProductTile>
+              );
+            })
+          : "Not Available"}
       </div>
     </div>
   );

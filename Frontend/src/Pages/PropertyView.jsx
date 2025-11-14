@@ -14,6 +14,7 @@ import { bookingDataContext } from "../Context/BookingContext";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DeleteConfirm from "../Component/DeleteConfirm";
+import CancelConfirm from "../Component/CancelConfirm";
 const PropertyView = () => {
   const [updatePopup, setUpdatePopup] = useState(false);
   const [bookingPopup, setBookingPopup] = useState(false);
@@ -44,6 +45,7 @@ const PropertyView = () => {
     propertyID,
     previous,
     hostId,
+    guestId,
   } = useSelector((state) => state.listing);
   // console.log(listing);
   // let { handleBooking } = useContext(bookingDataContext);
@@ -53,9 +55,11 @@ const PropertyView = () => {
       <nav className="flex fixed bg-white w-full z-20 justify-between px-10 h-24 py-5">
         <button
           onClick={
-            previous == "home"
-              ? () => navigate("/")
-              : () => navigate("/mylistings")
+            previous == "mylistings" || previous == "mybookings"
+                ? previous == "mylistings"
+                ? () => navigate("/mylistings")
+                : () => navigate("/mybookings")
+                : () => navigate("/")
           }
           className="rounded-full hover:cursor-pointer hidden sm:block bg-red-500 active:bg-red-700 p-4"
         >
@@ -71,7 +75,7 @@ const PropertyView = () => {
           {listing.hostId == userId ? "Update here" : "Booking page"}
         </div>
       </nav>
-      <div className="mt-30 flex flex-col justify-center m-10 shadow-gray-600 shadow-md  p-5 gap-x-10 gap-y-5 border-gray-400 rounded-2xl border-1 flex-wrap bg-blue-100 w-[85%]">
+      <div className="mt-30 flex flex-col justify-center m-10 shadow-gray-600 shadow-md  p-5 gap-x-10 gap-y-5 border-gray-400 rounded-2xl border flex-wrap bg-blue-100 w-[85%]">
         <h1 className="text-4xl pl-3">{`${listing.landmark} , ${listing.city}`}</h1>
         <div className="lg:h-[408px]  flex-col w-full flex lg:flex-row justify-center  ">
           <div className="w-full h-full m-1 ">
