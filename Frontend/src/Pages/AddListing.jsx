@@ -57,8 +57,11 @@ const AddListing = () => {
   };
 
   return (
-    <div>
-      <nav className="flex fixed bg-white w-full justify-between px-10 h-24 py-5">
+    <div className="p-4 flex just h-full bg-gray-300">
+      <nav className="flex fixed top-3 shadow-md shadow-black rounded-3xl bg-white w-[97%] justify-between px-10 h-24 py-5">
+
+{/* fixed py-4 px-4 shadow-md shadow-black bg-white rounded-3xl pb-4 w-[97%] */}
+
         <button
           className="rounded-full hidden sm:block bg-red-500 active:bg-red-700 p-4"
           onClick={() => navigate("/")}
@@ -77,10 +80,10 @@ const AddListing = () => {
       </nav>
 
       {/* -------------------------Form------------------------- */}
-      <div className="pt-30  pb-10 flex justify-center   w-full items-center">
+      <div className="pt-20 mt-10 pb-10 flex justify-center   w-full items-center">
         <form
           onSubmit={handleSubmit}
-          className=" rounded-2xl bg-blue-100 flex flex-col w-[900px] gap-y-5  p-10 mx-10 shadow-gray-600 shadow-xl "
+          className="  pt-15 bg-blue-100 shadow-md shadow-black rounded-3xl flex flex-col w-[900px] gap-y-5  p-10 mx-10 "
           action=""
         >
           <div className="flex flex-col gap-y-2 ">

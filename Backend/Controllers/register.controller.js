@@ -12,7 +12,7 @@ const register = async (req, res) => {
     res.json(err);
   }
 
-  console.log(req.body);
+  // console.log(req.body);
 
   //   res.json("ok working");
 };

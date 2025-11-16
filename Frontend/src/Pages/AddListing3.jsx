@@ -38,12 +38,12 @@ const AddListing3 = () => {
   }, [uploaded]);
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-50">
+   <div className="p-4 flex just h-full bg-gray-300">
       {/* Navbar */}
-      <nav className="fixed flex bg-white w-full shadow z-20 justify-between px-6 md:px-10 h-20 items-center">
+      <nav className="flex fixed top-3 shadow-md shadow-black h-40 md:h-24 rounded-3xl bg-white w-[97%] items-center justify-between px-10 py-5 ">
         <button
           onClick={() => navigate("/addlisting2")}
-          className="rounded-full hidden sm:flex bg-red-500 hover:bg-red-600 p-3 transition"
+          className="rounded-full hidden sm:flex bg-red-500 hover:bg-red-600 p-4 transition"
         >
           <FaArrowLeft className="text-white text-xl" />
         </button>
@@ -60,8 +60,8 @@ const AddListing3 = () => {
         </div>
       </nav>
 
-      <div className="pt-24 w-full flex justify-center">
-        <div className="flex flex-col w-[90%] max-w-5xl bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-10">
+      <div className="pt-20 mt-10 pb-10 flex justify-center   w-full items-center">
+        <div className="flex flex-col w-[90%] max-w-5xl shadow-md shadow-black rounded-3xl bg-white  p-6 md:p-8 mb-10">
           <h1 className="text-3xl font-semibold mb-4">{`${landmark}, ${city}`}</h1>
 
           {/* Images */}
@@ -69,19 +69,19 @@ const AddListing3 = () => {
             <img
               src={fimg1}
               alt=""
-              className="object-cover w-full md:w-[60%] h-80 rounded-lg"
+              className="object-cover border shadow-xs shadow-black w-full md:w-[60%] h-84 rounded-lg"
             />
 
             <div className="flex flex-col w-full md:w-[40%] gap-4">
               <img
                 src={fimg2}
                 alt=""
-                className="object-cover w-full h-40 rounded-lg"
+                className="object-cover w-full h-40 rounded-lg shadow-xs shadow-black"
               />
               <img
                 src={fimg3}
                 alt=""
-                className="object-cover w-full h-40 rounded-lg"
+                className="object-cover w-full h-40 rounded-lg shadow-xs shadow-black"
               />
             </div>
           </div>

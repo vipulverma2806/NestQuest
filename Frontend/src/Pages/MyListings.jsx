@@ -15,11 +15,12 @@ const MyListings = () => {
 
   const loading = useSelector((state) => state.listing.loading);
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (!listing) {
-      return dispatch(getUserData());
-    }
-  }, [loading]);
+  // useEffect(() => {
+  //   // if (!listing) {
+  //   //   return dispatch(getUserData());
+  //   // }
+  //   dispatch(getUserData());
+  // }, [loading]);
 
   return (
     <div>
@@ -41,14 +42,29 @@ const MyListings = () => {
         </div>
       </nav>
       <div className="md:pt-48 sm:pt-60 pt-80 flex gap-16  w-screen flex-wrap items-center justify-center p-10">
-        {listing.map((property, i) => {
+        {listing.length > 0 ? (
+          listing.map((property, i) => {
+            return (
+              <ProductTile
+                property={property}
+                previous={"mylistings"}
+              ></ProductTile>
+            );
+          })
+        ) : (
+          <div className="h-20 w-full text-xl pt-10 font-bold text-center ">
+            Not Available
+          </div>
+        )}
+
+        {/* {listing.map((property, i) => {
           return (
             <ProductTile
               property={property}
               previous={"mylistings"}
             ></ProductTile>
           );
-        })}
+        })} */}
       </div>
     </div>
   );

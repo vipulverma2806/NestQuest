@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const login = async (req, res) => {
   const JWT_SECRET = process.env.JWT_SECRET;
-  console.log(req.body);
+  // console.log(req.body);
   const { email, password } = req.body;
   try {
     const found = await User.findOne({ email });

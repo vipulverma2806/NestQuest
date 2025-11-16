@@ -74,12 +74,13 @@ const NavBar = () => {
     { id: 6, label: "Flat", icon: BiBuildingHouse },
     { id: 7, label: "Pool House", icon: MdOutlinePool },
     { id: 8, label: "Rooms", icon: MdBedroomParent },
+    { id: 9, label: "Villa", icon: GiFamilyHouse },
   ];
 
   // console.log(listing);
   return (
-    <div className="relative z-10">
-      <div className="fixed py-4 px-4 bg-white pb-4 w-full">
+    <div className="relative  z-10">
+      <div className="fixed py-4 px-4 shadow-md shadow-black bg-white rounded-3xl pb-4 w-[97%]">
         <div className="border-b-2 px-4 border-gray-200 pb-4 w-full flex justify-between">
           <h1 className=" text-red-500 h-[55px] font-extrabold text-4xl">
             NestQuest

@@ -20,6 +20,17 @@ const IconDiv =
   "flex border-1  gap-y-5  border-gray-500 bg-white p-10 h-48 w-48 rounded-xl hover:border-b-8 hover:cursor-pointer active:bg-green-500 active:text-white justify-center items-center flex-col";
 
 const AddListing2 = () => {
+  const categories = [
+    { id: 1, label: "Villa", icon: GiFamilyHouse },
+    { id: 2, label: "Cabin", icon: GiWoodCabin },
+    { id: 3, label: "Shops", icon: SiHomeassistantcommunitystore },
+    { id: 4, label: "PG", icon: IoBedOutline },
+    { id: 5, label: "Farm House", icon: FaTreeCity },
+    { id: 6, label: "Flat", icon: BiBuildingHouse },
+    { id: 7, label: "Pool House", icon: MdOutlinePool },
+    { id: 8, label: "Rooms", icon: MdBedroomParent },
+  ];
+
   const dispatch = useDispatch();
   // let { category, setCategory } = useContext(listingDataContext);
   const [category, setCategory] = useState("");
@@ -35,8 +46,8 @@ const AddListing2 = () => {
   }, [title]);
 
   return (
-    <div>
-      <nav className="flex  fixed bg-white w-full justify-between px-10 md:h-24 h-48 py-5">
+    <div className="p-4 flex just h-full bg-gray-300">
+      <nav className="flex fixed top-3 shadow-md shadow-black h-40 md:h-24 rounded-3xl bg-white w-[97%] justify-between px-10 py-5 ">
         {" "}
         <button
           onClick={() => navigate("/addlisting")}
@@ -46,7 +57,7 @@ const AddListing2 = () => {
         </button>
         <h1
           onClick={() => navigate("/")}
-          className=" text-red-500 h-[55px] hover:cursor-pointer  absolute left-1/2 -translate-x-1/2 bg-white font-extrabold text-4xl"
+          className=" text-red-500 md:h-[55px]  hover:cursor-pointer bg-white absolute left-1/2 -translate-x-1/2 bg-whit font-extrabold text-4xl"
         >
           NestQuest
         </h1>
@@ -72,10 +83,23 @@ const AddListing2 = () => {
         </div>
       </nav>
 
-      <div className=" mb-5 rounded-2xl bg-white pt-52 md:pt-28 flex flex-col justify-center items-center  gap-y-5  p-1  mx-10  ">
-        <div className="flex justify-center items-center shadow-gray-600 shadow-md  p-5 gap-x-10 gap-y-10 border-gray-400 rounded-2xl border-1 flex-wrap bg-blue-100 w-[85%]">
+      {/* <div className=" mb-5 rounded-2xl bg-white pt-52 md:pt-28 flex flex-col justify-center items-center  gap-y-5  p-1  mx-10  "> */}
+      <div className="pt-20 mt-10 pb-10 flex justify-center   w-full items-center">
+        {/* <div className="flex justify-center items-center shadow-gray-600 shadow-md  p-5 gap-x-10 gap-y-10 border-gray-400 rounded-2xl border flex-wrap bg-blue-100 w-[85%]"> */}
+
+        <div className="  pt-15 bg-blue-100 shadow-md shadow-black rounded-3xl flex flex-wrap justify-center items-center gap-x-10 gap-y-10  w-[85%]  p-10 mx-10 ">
           {/* <div className="flex justify-center w-full h-auto flex-wrap gap-x-10 gap-y-10  bg-white pt-3 items-center mx-3 "> */}
-          <div onClick={() => setCategory("cabin")} className={IconDiv}>
+
+          {categories.map((category, i) => {
+            const Icon = category.icon;
+            return (
+              <div onClick={() => setCategory(category.label)} className={IconDiv}>
+                <Icon className={IconStyle} />
+                <h2>{category.label}</h2>
+              </div>
+            );
+          })}
+          {/* <div onClick={() => setCategory("cabin")} className={IconDiv}>
             <GiWoodCabin className={IconStyle} />
             <h2>Cabin</h2>
           </div>
@@ -105,7 +129,7 @@ const AddListing2 = () => {
           </div>
           <div className={IconDiv} onClick={() => setCategory("Villa")}>
             <GiFamilyHouse className={IconStyle} /> <h2>Villa</h2>
-          </div>
+          </div> */}
           {/* </div> */}
           <button
             type="submit"

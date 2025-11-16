@@ -36,7 +36,7 @@ const Home = () => {
   }, [selectCat, allProperties]);
   // console.log(allProperties[0]);
   return (
-    <div>
+    <div className="p-4 flex just h-screen bg-gray-300">
       <NavBar></NavBar>
       <div className="md:pt-50 sm:pt-60 pt-80 flex gap-8  w-screen flex-wrap items-center justify-center p-10">
         {sorted.length === 0 ? (

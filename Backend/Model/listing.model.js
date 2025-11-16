@@ -22,6 +22,20 @@ const listingSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+
+    img1_id: {
+      type: String,
+      required: true,
+    },
+    img2_id: {
+      type: String,
+      required: true,
+    },
+    img3_id: {
+      type: String,
+      required: true,
+    },
+
     rent: {
       type: Number,
       required: true,

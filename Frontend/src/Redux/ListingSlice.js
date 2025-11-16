@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 const URL = import.meta.env.VITE_URL;
 import { useNavigate } from "react-router-dom";
 import { getUserData } from "./AuthSlice";
+
 export const getAll = createAsyncThunk(
   "listingMain/getAll",
   async (_, { rejectWithValue }) => {
@@ -22,13 +23,14 @@ export const getAll = createAsyncThunk(
 
 export const deleteProperty = createAsyncThunk(
   "listingMain/delete",
-  async (propertyID, { rejectWithValue }) => {
+  async (propertyID, { rejectWithValue,dispatch }) => {
     try {
       const deleted = await axios.delete(
         `${URL}/listingMain/delete/${propertyID}`
       );
+      dispatch(getUserData());
       return deleted.data;
-      console.log("deleted", deleted);
+      // console.log("deleted", deleted);
     } catch (err) {
       console.log("deleted", err);
       return rejectWithValue(err.data);
@@ -235,11 +237,12 @@ const ListingSlice = createSlice({
         state.loading = false;
       })
       .addCase(deleteProperty.pending, (state, action) => {
-        state.loading = true;
+        
         toast.error("please wait delete add add kro");
       })
       .addCase(deleteProperty.fulfilled, (state, action) => {
         state.loading = false;
+        
         toast.success("Deleted successfully");
         state.navigate = true;
       })

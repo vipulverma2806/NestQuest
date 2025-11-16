@@ -12,7 +12,7 @@ const getUserData = async (req, res) => {
     //   .populate("listing");
     // res.json(user.name);
 
-    console.log("booking", userData.booking);
+    // console.log("booking", userData.booking);
     res.status(201).json(userData);
   } catch (err) {
     console.log(err);

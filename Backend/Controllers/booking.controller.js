@@ -4,7 +4,7 @@ import User from "../Model/user.model.js";
 
 const bookingController = async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const { checkIn, checkOut, host, guest, totalRent } = req.body;
     const propertyId = req.params.id;
 
@@ -30,7 +30,7 @@ const bookingController = async (req, res) => {
     listing.isBooked = true;
     await listing.save();
 
-    console.log(booking);
+    // console.log(booking);
     res.status(200).json("Booking completed")
   } catch (err) {
     console.log(err);

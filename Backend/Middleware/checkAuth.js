@@ -6,7 +6,7 @@ const checkAuth = async (req, res, next) => {
   if (!req.cookies.token) return res.status(404).json("No Token Login first");
   try {
     const decode = jwt.verify(req.cookies.token, process.env.JWT_SECRET);
-    console.log("decode checkauth", decode);
+    // console.log("decode checkauth", decode);
     const user = await User.findById(decode.id);
     req.id = user.id;
     next();

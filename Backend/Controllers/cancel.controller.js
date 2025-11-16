@@ -29,7 +29,7 @@ const cancelProperty = async (req, res) => {
         { new: true }
       );
       // console.log("if outgoing", updated);
-      console.log("property._id", property._id);
+      // console.log("property._id", property._id);
     }
 
     await Booking.findOneAndDelete({ listing: propertyID });

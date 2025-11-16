@@ -7,9 +7,15 @@ const listingController = async (req, res) => {
     const img1 = await uploadOnCloudinary(req.files.bimg1[0].path);
     const img2 = await uploadOnCloudinary(req.files.bimg2[0].path);
     const img3 = await uploadOnCloudinary(req.files.bimg3[0].path);
-    req.body.img1 = img1;
-    req.body.img2 = img2;
-    req.body.img3 = img3;
+    req.body.img1 = img1.secure_url;
+    req.body.img2 = img2.secure_url;
+    req.body.img3 = img3.secure_url;
+
+    req.body.img1_id = img1.public_id;
+    req.body.img2_id = img2.public_id;
+    req.body.img3_id = img3.public_id;
+
+
     try {
       const result = await Listing.create(req.body);
       await User.findByIdAndUpdate(req.id, {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { deleteProperty } from "../Redux/ListingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -6,11 +6,13 @@ import { useEffect } from "react";
 
 const DeleteConfirm = ({ setDeletePopup, PropertyID }) => {
   const dispatch = useDispatch();
+  const [loading,setLoading] = useState()
   const deleted = useSelector((state) => state.listing.navigate);
-  const loading = useSelector((state) => state.listing.loading);
+  // const loading = useSelector((state) => state.listing.loading);
   const navigate = useNavigate();
   useEffect(() => {
     if (deleted) return navigate("/");
+    return ()=> setLoading(false);
   }, [deleted]);
 
   return (
@@ -21,8 +23,11 @@ const DeleteConfirm = ({ setDeletePopup, PropertyID }) => {
         </div>
         <div className="flex justify-center flex-col lg:flex-row gap-y-5 items-center  text-white  gap-x-12 text-2xl ">
           <button
-            onClick={() => dispatch(deleteProperty(PropertyID))}
-            className={`bg-red-600 hover:bg-red-700  px-6 py-2 rounded-xl ${
+          disabled={loading}
+            onClick={() =>{ 
+              setLoading(true)
+              dispatch(deleteProperty(PropertyID))}}
+            className={` px-6 py-2 rounded-xl ${
               loading ? "bg-green-500" : "bg-red-600 hover:bg-red-700"
             }`}
           >
