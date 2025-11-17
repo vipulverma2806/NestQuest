@@ -59,29 +59,32 @@ Users can see all previous and active bookings.
 ##  Screenshots
 
 ### User registration
-(./Frontend/public/screenshots/register.png)
+![register](./Frontend/public/screenshots/register.png)
 ### User Login
-(./Frontend/public/screenshots/login.png)
+![login](./Frontend/public/screenshots/login.png)
 ### Home page
-(./Frontend/public/screenshots/home.png)
+![home](./Frontend/public/screenshots/home.png)
 ### Search Bar 
-(./Frontend/public/screenshots/search.png)
+![searchBar](./Frontend/public/screenshots/search.png)
 ### Add Listing Page-1 
-(./Frontend/public/screenshots/addListing1.png)
+![addListing1](./Frontend/public/screenshots/addListing1.png)
 ### Add Listing Page-2
-(./Frontend/public/screenshots/addListing2.png)
+![addListing2](./Frontend/public/screenshots/addListing2.png)
 ### Add Listing Page-3
-(./Frontend/public/screenshots/addListing3.png)
+![addListing3](./Frontend/public/screenshots/addListing3.png)
 ### Booked Property by User
-(./Frontend/public/screenshots/mybookings.png)
+![booked](./Frontend/public/screenshots/mybookings.png)
 ### Listed property by User
-(./Frontend/public/screenshots/mylistings.png)
-### Confirm Booking by adding date (./Frontend/public/screenshots/bookingconfirm.png)
+![Listed](./Frontend/public/screenshots/mylistings.png)
+### Confirm Booking by adding date
+![confirm booking](./Frontend/public/screenshots/bookingconfirm.png)
 ### Cancel Booking
-(./Frontend/public/screenshots/cancelconfirm.png)
+![cancel](./Frontend/public/screenshots/cancelconfirm.png)
 ### Update
-(./Frontend/public/screenshots/update.png)
+
+![Update](./Frontend/public/screenshots/update.png)
 ### Update page
-(./Frontend/public/screenshots/updatePage.png)
+
+![UpdatePage](./Frontend/public/screenshots/updatePage.png)
 
 
