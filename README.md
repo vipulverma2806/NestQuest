@@ -59,12 +59,29 @@ Users can see all previous and active bookings.
 ##  Screenshots
 
 ### User registration
-![Form](./Frontend/public/screenshots/Register.png)
+(./Frontend/public/screenshots/register.png)
 ### User Login
-![Login](./Frontend/public/screenshots/Login.png)
-### User personal dashboard
-![Admin Dashboard](./Frontend/public/screenshots/PDash.png)
-### Common dashboard
-![Admin Dashboard](./Frontend/public/screenshots/feed.png)
+(./Frontend/public/screenshots/login.png)
+### Home page
+(./Frontend/public/screenshots/home.png)
+### Search Bar 
+(./Frontend/public/screenshots/search.png)
+### Add Listing Page-1 
+(./Frontend/public/screenshots/addListing1.png)
+### Add Listing Page-2
+(./Frontend/public/screenshots/addListing2.png)
+### Add Listing Page-3
+(./Frontend/public/screenshots/addListing3.png)
+### Booked Property by User
+(./Frontend/public/screenshots/mybookings.png)
+### Listed property by User
+(./Frontend/public/screenshots/mylistings.png)
+### Confirm Booking by adding date (./Frontend/public/screenshots/bookingconfirm.png)
+### Cancel Booking
+(./Frontend/public/screenshots/cancelconfirm.png)
+### Update
+(./Frontend/public/screenshots/update.png)
+### Update page
+(./Frontend/public/screenshots/updatePage.png)
 
 
