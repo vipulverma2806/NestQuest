@@ -10,7 +10,7 @@ export const getUserData = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const userData = await axios.get(`${URL}/auth/getUserData`);
-      // console.log("sssucesssssssss");
+      console.log("getUserData", userData);
       return userData.data;
     } catch (err) {
       // console.log("nhi cahala");
@@ -63,6 +63,9 @@ const authSlice = createSlice({
     setLoading: (state, action) => {
       state.loading = action.payload;
     },
+    setResetId:(state,action)=>{
+      state.userId = 0;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -77,6 +80,7 @@ const authSlice = createSlice({
         state.email = "";
         state.userId = 0;
         state.listing = [];
+        state.booking = [];
         // console.log(action.payload);
       })
       .addCase(logout.rejected, (state, action) => {
@@ -86,11 +90,11 @@ const authSlice = createSlice({
       })
       .addCase(getUserData.pending, (state) => {
         state.loading = true;
-        console.log(state.loading)
+        // console.log(state.loading)
       })
       .addCase(getUserData.fulfilled, (state, action) => {
         state.loading = false;
-        console.log(state.loading)
+        // console.log(state.loading)
         // console.log("yelo", action.payload);
         state.name = action.payload.name;
         state.email = action.payload.email;
@@ -109,5 +113,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setEmail, setName, setLoading } = authSlice.actions;
+export const { setEmail, setName, setLoading,setResetId, } = authSlice.actions;
 export default authSlice.reducer;

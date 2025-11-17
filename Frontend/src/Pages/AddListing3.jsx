@@ -38,9 +38,9 @@ const AddListing3 = () => {
   }, [uploaded]);
 
   return (
-   <div className="p-4 flex just h-full bg-gray-300">
+   <div className="p-4 flex just h-full      bg-gray-300">
       {/* Navbar */}
-      <nav className="flex fixed top-3 shadow-md shadow-black h-40 md:h-24 rounded-3xl bg-white w-[97%] items-center justify-between px-10 py-5 ">
+      <nav className="flex fixed top-3 z-50 shadow-md shadow-black h-40 md:h-24 rounded-3xl bg-white w-[97%] items-center justify-between px-10 py-5 ">
         <button
           onClick={() => navigate("/addlisting2")}
           className="rounded-full hidden sm:flex bg-red-500 hover:bg-red-600 p-4 transition"
@@ -50,7 +50,7 @@ const AddListing3 = () => {
 
         <h1
           onClick={() => navigate("/")}
-          className="text-red-500 hover:cursor-pointer font-extrabold text-3xl sm:text-4xl"
+          className="text-red-500 hover:cursor-pointer relative left-16 font-extrabold text-3xl sm:text-4xl"
         >
           NestQuest
         </h1>
@@ -64,7 +64,7 @@ const AddListing3 = () => {
         <div className="flex flex-col w-[90%] max-w-5xl shadow-md shadow-black rounded-3xl bg-white  p-6 md:p-8 mb-10">
           <h1 className="text-3xl font-semibold mb-4">{`${landmark}, ${city}`}</h1>
 
-          {/* Images */}
+         
           <div className="flex flex-col  md:flex-row gap-4">
             <img
               src={fimg1}
@@ -86,7 +86,7 @@ const AddListing3 = () => {
             </div>
           </div>
 
-          {/* Property Details */}
+         
           <div className="mt-6 space-y-3">
             <p className="text-2xl font-bold">{title}</p>
             <p className="text-lg text-gray-700">{description}</p>

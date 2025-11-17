@@ -24,7 +24,7 @@ const bookingController = async (req, res) => {
     });
 
     const user = await User.findByIdAndUpdate(guest, {
-      $push: { booking: listing },
+      $push: { booking: listing._id },
     });
     listing.guest = guest;
     listing.isBooked = true;

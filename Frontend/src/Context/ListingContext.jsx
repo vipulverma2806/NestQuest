@@ -39,11 +39,11 @@ const ListingContext = ({ children }) => {
       formdata.append("longitude", longitude);
       formdata.append("category", category);
 
-      console.log("working");
+      // console.log("working");
       setLoading(true);
       const result = await axios.post(`${URL}/listingMain/post`, formdata);
       setLoading(false);
-      console.log(result);
+      // console.log(result);
     } catch (err) {
       console.log(err);
     }
@@ -51,9 +51,9 @@ const ListingContext = ({ children }) => {
 
   const getAll = async () => {
     try {
-      console.log("fgfgfg");
+      // console.log("fgfgfg");
       const totalList = await axios.get(`${URL}/listingMain/getAll`);
-      console.log(totalList.data);
+      // console.log(totalList.data);
       setAllProperties(totalList.data);
     } catch (err) {
       console.log(err);

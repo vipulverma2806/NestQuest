@@ -17,7 +17,7 @@ import AddListing from "./AddListing";
 
 const IconStyle = "w-[45px]  h-[45px] text-black";
 const IconDiv =
-  "flex border-1  gap-y-5  border-gray-500 bg-white p-10 h-48 w-48 rounded-xl hover:border-b-8 hover:cursor-pointer active:bg-green-500 active:text-white justify-center items-center flex-col";
+  "flex border-1  gap-y-5  border-gray-500 bg-white p-10 h-48 w-48 rounded-xl hover:border-b-8 hover:cursor-pointer active:bg-green-500 active:text-white shadow-sm shadow-black justify-center items-center flex-col";
 
 const AddListing2 = () => {
   const categories = [
@@ -70,7 +70,7 @@ const AddListing2 = () => {
         <div className="md:hidden pt-10 flex flex-row justify-around w-full  items-center  ">
           <button
             onClick={() => navigate("/addlisting")}
-            className="rounded-full bg-red-500 active:bg-red-700 p-4"
+            className="rounded-full hover:cursor-pointer hidden sm:block  bg-red-500 active:bg-red-700 p-4"
           >
             <FaArrowLeft className="text-2xl text-white" />
           </button>

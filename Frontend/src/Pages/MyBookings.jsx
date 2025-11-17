@@ -10,7 +10,7 @@ const MyBookings = () => {
   const navigate = useNavigate();
 
   let booking = useSelector((state) => state.auth.booking);
-  console.log(booking);
+  // console.log(booking);
 
   const loading = useSelector((state) => state.listing.loading);
   const dispatch = useDispatch();
@@ -23,8 +23,15 @@ const MyBookings = () => {
   //   dispatch(getUserData());
   // }, [loading]);
   return (
-    <div>
-      <nav className="flex fixed bg-white w-full justify-between px-10 h-24 py-5">
+    <div className="p-4 flex just h-screen bg-gray-300">
+      <nav
+        className="flex  z-50  bg-white  justify-between px-10  py-5
+      
+      
+      fixed  shadow-md shadow-black  rounded-3xl pb-4 w-[97%]
+
+      "
+      >
         <button
           onClick={() => navigate("/")}
           className="rounded-full hidden sm:block  hover:cursor-pointer bg-red-500 active:bg-red-700 p-4"
@@ -41,7 +48,7 @@ const MyBookings = () => {
           My Bookings
         </div>
       </nav>
-      <div className="md:pt-48 sm:pt-60 pt-80 flex gap-16  w-screen flex-wrap items-center justify-center p-10">
+      <div className="md:pt-36 sm:pt-60 pt-80 flex gap-16  w-screen flex-wrap items-center justify-center p-10">
         {booking.length > 0
           ? booking.map((property, i) => {
               return (

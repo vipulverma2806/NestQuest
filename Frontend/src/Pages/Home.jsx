@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 // import { authDataContext } from "../Context/authContext";
 import { getAll } from "../Redux/ListingSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { getUserData, setResetId } from "../Redux/AuthSlice";
 
 const Home = () => {
   // let { getAll, allProperties } = useContext(listingDataContext);
@@ -16,11 +17,34 @@ const Home = () => {
   const loading = useSelector((state) => state.auth.loading);
   const selectCat = useSelector((state) => state.listing.selectCat);
   const [sorted, setSorted] = useState([]);
+  const [auth, setAuth] = useState(false);
+  const [online,setOnline] = useState(true);
+  const checkAuth = async () => {
+    try {
+      const res = await axios.get(`${URL}/auth/checkOnlyAuth`);
+      // console.log(res);
+      setAuth(true);
+      // console.log("Auth Success", res);
+    } catch (err) {
+      console.log("auth", err.response);
+      setAuth(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("online", dispatch(getUserData()));
+    window.addEventListener("offline",dispatch(setResetId()));
+
+    return () => {
+      window.removeEventListener("online", () =>dispatch(getUserData()) );
+      window.removeEventListener("offline", () =>dispatch(setResetId()));
+    };
+  },[]);
 
   const navigate = useNavigate();
   useEffect(() => {
     dispatch(getAll());
-
+    checkAuth();
     // console.log("getAll");
   }, [loading]);
 
@@ -36,20 +60,43 @@ const Home = () => {
   }, [selectCat, allProperties]);
   // console.log(allProperties[0]);
   return (
-    <div className="p-4 flex just h-screen bg-gray-300">
-      <NavBar></NavBar>
-      <div className="md:pt-50 sm:pt-60 pt-80 flex gap-8  w-screen flex-wrap items-center justify-center p-10">
-        {sorted.length === 0 ? (
-          <div className="h-20 w-full text-xl pt-10 font-bold text-center ">
+    <div className="p-4 flex just h-full bg-gray-300">
+      <NavBar setAuth={auth}></NavBar>
+      <div className="md:pt-57 sm:pt-70 pt-80 flex gap-8 w-screen flex-wrap items-center justify-center p-10">
+        {online ? 
+           sorted.length === 0 ? (
+          <div className=" w-full h-screen flex-1 text-xl pt-10 font-bold text-center ">
             Not Available
           </div>
         ) : (
           sorted.map((property, i) => {
             return (
-              <ProductTile property={property} previous={"home"} key={i} />
-            );
-          })
-        )}
+              <ProductTile
+                setAuth={auth}
+                property={property}
+                previous={"home"}
+                key={i}
+              />
+            )}
+          )
+        )
+
+
+
+
+          :
+
+
+          <div className=" w-full h-screen flex-1 text-xl pt-10 font-bold text-center "> 
+            Please Connect to Internet
+
+          </div>
+
+        }
+
+
+
+       
       </div>
     </div>
   );

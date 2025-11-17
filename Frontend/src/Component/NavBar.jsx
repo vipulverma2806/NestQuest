@@ -19,6 +19,10 @@ import { logout } from "../Redux/AuthSlice";
 import axios from "axios";
 import { setNavigate, resetListing, setSelectCat } from "../Redux/ListingSlice";
 import { persistor } from "../Redux/Store";
+import { toast } from "react-toastify";
+
+import { productViewPage } from "../Redux/ListingSlice";
+
 const URL = import.meta.env.VITE_URL;
 
 const IconStyle = "w-[35px]  h-[35px] text-black";
@@ -38,7 +42,32 @@ const NavBar = () => {
   const [menu, setMenu] = useState(false);
   const [auth, setAuth] = useState(false);
   const [loadingIcon, setLoadingIcon] = useState(false);
+  const [input, setInput] = useState("");
+  const [searchArr, setSearchArr] = useState([]);
   // let { name } = useContext(authDataContext);
+
+  const userId = useSelector((state) => state.auth.userId);
+
+  const searchFunction = async (input) => {
+    if (!input.trim() || input.length < 3) {
+      setSearchArr([])
+      return null;
+    }
+
+    try {
+      const result = await axios.get(
+        `${URL}/listingMain/search?query=${input}`
+      );
+      setSearchArr(result.data);
+      console.log("searchresult", result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    searchFunction(input);
+  }, [input]);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -77,17 +106,40 @@ const NavBar = () => {
     { id: 9, label: "Villa", icon: GiFamilyHouse },
   ];
 
+  const handleClick = (property) => {
+    // console.log(property.isBooked);
+    if (property.isBooked) {
+      // console.log("property-isBooked - true" , property.guest);
+      if (!(property.guest == userId)) {
+        console.log("property.guestId == userId false");
+        if (!(property.host == userId)) {
+          toast.error("Already Booked");
+          return undefined;
+        }
+      }
+    }
+    // console.log("property-isBooked", property.isBooked);
+    navigate(`/propertyview/${property._id}`);
+    const newProperty = { ...property, previous: "home" };
+    dispatch(productViewPage(newProperty));
+  };
+
   // console.log(listing);
   return (
-    <div className="relative  z-10">
+    <div className="relative  bg-red-400 z-10">
       <div className="fixed py-4 px-4 shadow-md shadow-black bg-white rounded-3xl pb-4 w-[97%]">
         <div className="border-b-2 px-4 border-gray-200 pb-4 w-full flex justify-between">
           <h1 className=" text-red-500 h-[55px] font-extrabold text-4xl">
             NestQuest
           </h1>
 
-          <div className="border-2 border-gray-400 h-[55px] md:flex lg:w-[530px] absolute left-1/2 -translate-x-1/2 md:w-[300px]  rounded-s-full  right-10  hidden rounded-e-full ">
-            <input type="text" className="w-full outline-0 pl-4 text-md" />
+          <div className="border-2 border-gray-400 h-[55px] md:flex lg:w-[530px] absolute left-1/2 -translate-x-1/2 md:w-[300px]  rounded-s-full hidden right-10  rounded-e-full ">
+            <input
+              type="text"
+              onChange={(e) => setInput(e.target.value)}
+              value={input}
+              className="w-full outline-0 pl-4 text-md"
+            />
             <div className="flex  items-center ">
               <CiSearch className="p-1  mr-3 bg-red-500 active:bg-red-700 h-[35px] w-[35px] text-white rounded-full" />
             </div>
@@ -179,6 +231,41 @@ const NavBar = () => {
       </div>
 
       {/* select cat end------------------------------------- */}
+
+      {searchArr?.length > 0 && (
+        <div className="w-[1235px] left-20 rounded-full  top-23  flex flex-col gap-5  z-50  fixed    justify-start  items-center ">
+          <div
+            className="w-[530px] 
+              
+              overflow-y-scroll fixed
+              
+               max-h-[300px]   flex flex-col bg-white  rounded-2xl border border-gray-600 cursor-pointer"
+          >
+            {searchArr.map((property, i) => {
+              return (
+                <div
+                  onClick={
+                    auth
+                      ? () => handleClick(property)
+                      : () => navigate("/login")
+                  }
+                  className="border-b flex justify-between border-[black] p-[10px]"
+                >
+                  {console.log(property)}
+                  <span className="truncate">
+                    {property.title} in {property.landmark}, {property.city}
+                  </span>
+                  {property.isBooked ? (
+                    <span className="bg-green-700 text-white font-semibold px-3 rounded-xl">
+                      Booked
+                    </span>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

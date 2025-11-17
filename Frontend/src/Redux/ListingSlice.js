@@ -40,12 +40,13 @@ export const deleteProperty = createAsyncThunk(
 
 export const cancelProperty = createAsyncThunk(
   "listingMain/cancel",
-  async (propertyID, { rejectWithValue }) => {
+  async (propertyID, { rejectWithValue,dispatch }) => {
     try {
       const canceled = await axios.put(
         `${URL}/listingMain/cancel/${propertyID}`
       );
-      console.log("canceled", canceled);
+      // console.log("canceled", canceled);
+      dispatch(getUserData());
       return canceled.data;
       
     } catch (err) {
@@ -63,6 +64,7 @@ export const handleUpdate = createAsyncThunk(
   "listingMain/update",
   async (updatedListing, { rejectWithValue, dispatch }) => {
     try {
+      // console.log("category update",updatedListing.category)
       let formdata = new FormData();
       formdata.append("title", updatedListing.title);
       formdata.append("description", updatedListing.description);
@@ -74,6 +76,7 @@ export const handleUpdate = createAsyncThunk(
       if (updatedListing.bimg1) formdata.append("bimg1", updatedListing.bimg1);
       if (updatedListing.bimg2) formdata.append("bimg2", updatedListing.bimg2);
       if (updatedListing.bimg3) formdata.append("bimg3", updatedListing.bimg3);
+
       // formdata.append("bimg2", updatedListing.bimg2);
       // formdata.append("bimg3", updatedListing.bimg3);
       formdata.append("rent", updatedListing.rent);
@@ -83,10 +86,10 @@ export const handleUpdate = createAsyncThunk(
       formdata.append("longitude", updatedListing.longitude);
       formdata.append("category", updatedListing.category);
       formdata.append("propertyID", updatedListing.propertyID);
-      console.log("formdata is", formdata);
+      
 
       const result = await axios.put(`${URL}/listingMain/update`, formdata);
-      console.log("update result", result);
+      // console.log("update result", result);
 
       dispatch(getUserData());
       return result.data;
@@ -107,7 +110,7 @@ export const handleSubmit = createAsyncThunk(
       let formdata = new FormData();
       formdata.append("title", listing.title);
       formdata.append("description", listing.description);
-      console.log(bimg1, bimg2, bimg3);
+      // console.log(bimg1, bimg2, bimg3);
       formdata.append("bimg1", bimg1);
       formdata.append("bimg2", bimg2);
       formdata.append("bimg3", bimg3);
@@ -118,10 +121,10 @@ export const handleSubmit = createAsyncThunk(
       formdata.append("longitude", listing.longitude);
       formdata.append("category", listing.category);
 
-      console.log("listingMain/past working");
+      // console.log("listingMain/past working");
       dispatch(setLoading(true));
       const result = await axios.post(`${URL}/listingMain/post`, formdata);
-      console.log("listingMain/past Api responded");
+      // console.log("listingMain/past Api responded");
       dispatch(setLoading(false));
       dispatch(getUserData());
       return result.data;
@@ -178,6 +181,7 @@ const ListingSlice = createSlice({
       state.propertyID = action.payload._id;
       state.hostId = action.payload.host;
       state.guestId = action.payload.guest;
+      state.category = action.payload.category;
     },
     categorySelect: (state, action) => {
       state.category = action.payload.category;

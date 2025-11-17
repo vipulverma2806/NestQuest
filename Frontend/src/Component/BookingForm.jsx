@@ -3,13 +3,15 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { getUserData } from "../Redux/AuthSlice";
 const URL = import.meta.env.VITE_URL;
 axios.defaults.withCredentials = true;
-const BookingForm = ({ setBookingpopup }) => {
-  const navigate = useNavigate()
+const BookingForm = ({ setBookingPopup }) => {
+  const navigate = useNavigate();
   const listing = useSelector((state) => state.listing);
-  const loading = useSelector((state) => state.listing.loading);
-  
+  // const loading = useSelector((state) => state.listing.loading);
+  const dispatch = useDispatch();
   const guest = useSelector((state) => state.auth.userId);
   const [minDate, setMinDate] = useState();
   const [checkIn, setCheckIn] = useState();
@@ -18,30 +20,31 @@ const BookingForm = ({ setBookingpopup }) => {
   const [bill, setBill] = useState({ price: 0, GST: 0, platformFee: 0 });
   const [totalRent, setTotalRent] = useState(0);
   const [invalid, setInvalid] = useState(false);
-  console.log("bahar", nights);
+  const [loading, setLoading] = useState(false);
+  // console.log("bahar", nights);
   const host = listing.hostId;
   const handleBooking = async (propertyID) => {
     try {
-      const response = await axios.post(`${URL}/bookingMain/booking/${propertyID}`, {
-        host,
-        guest,
-        checkIn,
-        checkOut,
-        totalRent,
-      });
-      console.log("working",response);
-      toast.success("Booking successful")
-      navigate("/")
-      
+      setLoading(true);
+      const response = await axios.post(
+        `${URL}/bookingMain/booking/${propertyID}`,
+        {
+          host,
+          guest,
+          checkIn,
+          checkOut,
+          totalRent,
+        }
+      );
+      // console.log("working",response);
+      dispatch(getUserData());
+      setLoading(false);
+      toast.success("Booking successful");
+      navigate("/");
     } catch (err) {
-      console.log("err",err);
+      console.log("err", err);
     }
   };
-
-
- 
-
-
 
   useEffect(() => {
     if (checkIn && checkOut) {
@@ -67,7 +70,7 @@ const BookingForm = ({ setBookingpopup }) => {
         setInvalid(true);
       }
 
-      console.log(N);
+      // console.log(N);
     }
   }, [checkIn, checkOut]);
 
@@ -85,7 +88,16 @@ const BookingForm = ({ setBookingpopup }) => {
         <h1 className="border-b text-2xl text-center pt-3 pb-5">
           Confirm and Book
         </h1>
-        <form action="" className="px-3 gap-y-4 flex-col pt-4 flex">
+        <form
+          action=""
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            handleBooking(listing.propertyID);
+            // console.log(listing.propertyID);
+          }}
+          className="px-3 gap-y-4 flex-col pt-4 flex"
+        >
           <div>
             <h2 className="text-xl pt-3 font-semibold">Your Trip-</h2>
           </div>
@@ -98,6 +110,7 @@ const BookingForm = ({ setBookingpopup }) => {
               onChange={(e) => setCheckIn(e.target.value)}
               min={minDate}
               className=" border rounded-lg p-2"
+              required={true}
             />
           </div>
           <div className="flex text-xl justify-between items-center ">
@@ -109,6 +122,7 @@ const BookingForm = ({ setBookingpopup }) => {
               onChange={(e) => setCheckOut(e.target.value)}
               min={minDate}
               className=" border rounded-lg p-2"
+              required={true}
             />
           </div>
 
@@ -123,22 +137,16 @@ const BookingForm = ({ setBookingpopup }) => {
           <div className="  h-full pt-2 px-7">
             <button
               type="submit "
-              onClick={(e) => {
-                e.preventDefault();
-                handleBooking(listing.propertyID);
-                console.log(listing.propertyID);
-              }}
               disabled={loading}
               className={`rounded-xl  text-xl font-semibold text-white px-6 py-4 w-full  mx-auto transition ${
                 loading ? "bg-green-500" : "bg-red-600 hover:bg-red-700"
               }`}
             >
-              Book now
+              {loading ? "wait..." : "Book"}
             </button>
             <button
-              type="submit "
               disabled={loading}
-              onClick={() => setBookingpopup(false)}
+              onClick={() => setBookingPopup(false)}
               className={
                 "rounded-xl mt-5 text-xl font-semibold text-white px-6 py-4 w-full  mx-auto transition bg-red-600 hover:bg-red-700"
               }
@@ -163,7 +171,7 @@ const BookingForm = ({ setBookingpopup }) => {
             </div>
             <div>{listing.title}</div>
             <div>{listing.category}</div>
-            <div>star</div>
+            
           </div>
         </div>
         <div className="min-h-[310px] border p-5 gap-y-7 flex flex-col  text-xl rounded-3xl">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { cancelProperty } from "../Redux/ListingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ const CancelConfirm = ({ setCancelPopup, PropertyID }) => {
   const dispatch = useDispatch();
   const canceled = useSelector((state) => state.listing.navigate);
   const loading = useSelector((state) => state.listing.loading);
+  // const [loading,setLoading] = useState(false)
   const navigate = useNavigate();
   useEffect(() => {
     if (canceled) return navigate("/");
@@ -22,7 +23,7 @@ const CancelConfirm = ({ setCancelPopup, PropertyID }) => {
         <div className="flex justify-center flex-col lg:flex-row gap-y-5 items-center  text-white  gap-x-12 text-2xl ">
           <button
             onClick={() => dispatch(cancelProperty(PropertyID))}
-            className={`bg-red-600 lg:w-[35%]  hover:bg-red-700  px-6 py-2 rounded-xl ${
+            className={` lg:w-[35%]  hover:bg-red-700  px-6 py-2 rounded-xl ${
               loading ? "bg-green-500" : "bg-red-600 hover:bg-red-700"
             }`}
           >

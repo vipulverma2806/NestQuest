@@ -8,25 +8,34 @@ import { useContext } from "react";
 // import { authDataContext } from "../Context/authContext";
 import { useSelector, useDispatch } from "react-redux";
 import { productViewPage } from "../Redux/ListingSlice";
-const ProductTile = ({ property, previous }) => {
+import './index.css';
+import { toast } from "react-toastify";
+
+const ProductTile = ({ property, previous}) => {
   // let { productViewPage } = useContext(listingDataContext);
   // let { userId } = useContext(authDataContext);
   const userId = useSelector((state) => state.auth.userId);
   const dispatch = useDispatch();
   // console.log(property);
   const newProperty = { ...property, previous };
-
+  console.log(newProperty)
   const navigate = useNavigate();
   const handleClick = () => {
-    console.log(property.isBooked);
+    console.log("onclick true access");
+    console.log(userId)
     if (property.isBooked) {
-      console.log("property-isBooked - true" , property.guest);
+      // console.log("property-isBooked - true" , property.guest);
       if (!(property.guest == userId)) {
         console.log("property.guestId == userId false");
-        if (!(property.host == userId)) return undefined;
+        if (!(property.host == userId)) 
+        {
+          toast.error("Already Booked")
+          return undefined;
+        }
+          
       }
     }
-    console.log("property-isBooked", property.isBooked);
+    // console.log("property-isBooked", property.isBooked);
     navigate(`/propertyview/${property._id}`);
     dispatch(productViewPage(newProperty));
   };
@@ -34,8 +43,8 @@ const ProductTile = ({ property, previous }) => {
   // console.log(property);
   return (
     <div
-      className="hover:cursor-pointer  relative z-0"
-      onClick={handleClick}
+      className="hover:cursor-pointer border shadow-2xl shadow-black  rounded-2xl relative z-0"
+      onClick={userId ? handleClick :()=> console.log()}
 
       // onClick={property.guest == userId || property.host == userId ? handleClick :undefined}
     >
@@ -51,32 +60,32 @@ const ProductTile = ({ property, previous }) => {
           </div>
         </div>
       ) : null}
-      <div className="h-[300px] w-[300px]  rounded-2xl overflow-y-scroll">
+      <div className="h-[300px] w-[300px] no-scrollbar rounded-t-2xl overflow-y-scroll scroll-smooth">
         <img
           src={property.img1}
           alt="image not found"
-          className="h-[300px] w-[300px]  mb-2 rounded-2xl  object-cover"
+          className="h-[300px] w-[300px]  mb-2 rounded-t-2xl  object-cover"
         />
         <img
           src={property.img2}
           alt="image not found"
-          className="h-[300px] w-[300px] mb-2 rounded-2xl  object-cover"
+          className="h-[300px] w-[300px] mb-2   object-cover"
         />
         <img
           src={property.img3}
           alt="image not found"
-          className="h-[300px] w-[300px] rounded-2xl  object-cover"
+          className="h-[300px] w-[300px] rounded-b-2xl  object-cover"
         />
       </div>
-      <div className="px-1 py-2">
+      <div className="rounded-b-2xl w-[300px] h-[110px]  bg-white px-4 py-2">
         <div className="flex justify-between">
-          <span className="text-2xl">
+          <span className="text-2xl truncate">
             in {property.city}, {property.landmark}
           </span>
           <FaStar className="text-yellow-500" />
         </div>
-        <div className="text-xl">{property.title}</div>
-        <div className="text-xl">{property.rent} rs./day</div>
+        <div className="text-xl truncate">{property.title}</div>
+        <div className="text-xl truncate">{property.rent} rs./day</div>
       </div>
     </div>
   );

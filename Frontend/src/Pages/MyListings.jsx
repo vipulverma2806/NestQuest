@@ -10,7 +10,7 @@ import { getUserData } from "../Redux/AuthSlice";
 const MyListings = () => {
   // let { listing } = useContext(authDataContext);
   let listing = useSelector((state) => state.auth.listing);
-  console.log(listing);
+  // console.log(listing);
   const navigate = useNavigate();
 
   const loading = useSelector((state) => state.listing.loading);
@@ -23,8 +23,10 @@ const MyListings = () => {
   // }, [loading]);
 
   return (
-    <div>
-      <nav className="flex z-50 fixed bg-white w-full justify-between px-10 h-24 py-5">
+    <div className="p-4 flex just h-full bg-gray-300">
+      <nav className="flex  z-50  bg-white  justify-between px-10  py-5 fixed  shadow-md shadow-black  rounded-3xl pb-4 w-[97%]
+
+      ">
         <button
           onClick={() => navigate("/")}
           className="rounded-full hover:cursor-pointer hidden sm:block  bg-red-500 active:bg-red-700 p-4"
@@ -41,7 +43,7 @@ const MyListings = () => {
           My Listings
         </div>
       </nav>
-      <div className="md:pt-48 sm:pt-60 pt-80 flex gap-16  w-screen flex-wrap items-center justify-center p-10">
+      <div className="md:pt-36 sm:pt-60 pt-80 flex gap-10 h-screen  w-screen flex-wrap items-center justify-center p-5">
         {listing.length > 0 ? (
           listing.map((property, i) => {
             return (
@@ -52,7 +54,7 @@ const MyListings = () => {
             );
           })
         ) : (
-          <div className="h-20 w-full text-xl pt-10 font-bold text-center ">
+          <div className=" w-full text-xl   font-bold text-center ">
             Not Available
           </div>
         )}

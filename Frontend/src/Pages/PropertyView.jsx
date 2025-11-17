@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import v1 from "../assets/v1.jpg";
 import v2 from "../assets/v2.jpg";
 import v3 from "../assets/v3.jpg";
@@ -50,9 +50,16 @@ const PropertyView = () => {
   // console.log(listing);
   // let { handleBooking } = useContext(bookingDataContext);
   // console.log("userid", userId, "hostid", hostId);
+
+  useEffect(()=>{
+   
+  })
+
+
+
   return (
-    <div className="flex justify-center">
-      <nav className="flex fixed bg-white w-full z-20 justify-between px-10 h-24 py-5">
+    <div className="p-4 flex just h-full      bg-gray-300">
+       <nav className="flex fixed top-3 z-50 shadow-md shadow-black h-40 md:h-24 rounded-3xl bg-white w-[97%] items-center justify-between px-10 py-5 ">
         <button
           onClick={
             previous == "mylistings" || previous == "mybookings"
@@ -75,33 +82,36 @@ const PropertyView = () => {
           {listing.hostId == userId ? "Update here" : "Booking page"}
         </div>
       </nav>
-      <div className="mt-30 flex flex-col justify-center m-10 shadow-gray-600 shadow-md  p-5 gap-x-10 gap-y-5 border-gray-400 rounded-2xl border flex-wrap bg-blue-100 w-[85%]">
+      <div className="pt-20 mt-10 pb-10 flex justify-center   w-full items-center">
+          <div className="flex flex-col w-[90%] max-w-5xl gap-y-5 shadow-md shadow-black rounded-3xl bg-white  p-6 md:p-8 ">
+
         <h1 className="text-4xl pl-3">{`${listing.landmark} , ${listing.city}`}</h1>
-        <div className="lg:h-[408px]  flex-col w-full flex lg:flex-row justify-center  ">
-          <div className="w-full h-full m-1 ">
+        <div className="lg:h-84  md:flex-row gap-4 flex-col w-full flex lg:flex-row justify-center  ">
+          
             <img
               src={listing.fimg1}
               alt=""
-              className="lg:h-[400px] md:h-[300px] h-full border-4 border-red-500 w-full object-cover  "
+               className="object-cover border shadow-xs shadow-black w-full md:w-[60%] h-84 rounded-lg"
             />
-          </div>
-          <div className="flex  flex-col  h-[400px h-full">
+         
+           <div className="flex flex-col w-full md:w-[40%] gap-4">
             <img
               src={listing.fimg2}
               alt=""
-              className="object-cover m-1 border-4 border-red-500 w-full h-1/2"
+              className="object-cover w-full h-40 rounded-lg shadow-xs shadow-black"
             />
             <img
               src={listing.fimg3}
               alt=""
-              className="object-cover m-1 border-4 border-red-500 w-full h-1/2"
+              className="object-cover w-full h-40 rounded-lg shadow-xs shadow-black"
             />
           </div>
         </div>
         <p className="text-3xl pl-3">{listing.title} </p>
         <p className="text-2xl pl-3">{listing.description}</p>
         <p className="text-2xl pl-3">{listing.category}</p>
-        <p className="text-xl pl-3">Rent : {listing.rent}</p>
+        {console.log("listing",listing.category)}
+        <p className="text-xl pl-3">Rent : {listing.rent} rs./night</p>
         <p className="text-md pl-3"> Map View (Check Accuracy) </p>
 
         <Map
@@ -152,6 +162,7 @@ const PropertyView = () => {
           PropertyID={listing.propertyID}
         />
       )}
+      </div>
     </div>
   );
 };
