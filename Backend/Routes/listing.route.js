@@ -6,6 +6,7 @@ import update from "../Controllers/update.controller.js";
 import checkAuth from "../Middleware/checkAuth.js";
 import deleteProperty from "../Controllers/delete.controller.js";
 import cancelProperty from "../Controllers/cancel.controller.js";
+import search from "../Controllers/search.controller.js"
 const listingRouter = express.Router();
 
 listingRouter.post(
@@ -20,6 +21,7 @@ listingRouter.post(
 );
 
 listingRouter.get("/getAll", getAll);
+listingRouter.get("/search", search);
 listingRouter.delete("/delete/:propertyID", checkAuth, deleteProperty);
 listingRouter.put("/cancel/:propertyID", checkAuth, cancelProperty);
 listingRouter.put(

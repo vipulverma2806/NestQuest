@@ -21,7 +21,7 @@ const cancelProperty = async (req, res) => {
       // console.log("if incoming" ,property._id);
       // console.log(typeof propertyID, propertyID instanceof mongoose.Types.ObjectId);
 
-      const updated = await User.findByIdAndUpdate(
+      await User.findByIdAndUpdate(
         userId,
         {
           $pull: { booking: property._id },
@@ -33,6 +33,13 @@ const cancelProperty = async (req, res) => {
     }
 
     await Booking.findOneAndDelete({ listing: propertyID });
+    await Listing.findByIdAndUpdate(
+      property._id,
+      {
+        $set: { guest: null },
+      },
+      { new: true }
+    );
 
     return res.status(200).json("canceled succesfully");
   } catch (err) {
