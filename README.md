@@ -59,12 +59,32 @@ Users can see all previous and active bookings.
 ##  Screenshots
 
 ### User registration
-![Form](./Frontend/public/screenshots/Register.png)
+![register](./Frontend/public/screenshots/register.png)
 ### User Login
-![Login](./Frontend/public/screenshots/Login.png)
-### User personal dashboard
-![Admin Dashboard](./Frontend/public/screenshots/PDash.png)
-### Common dashboard
-![Admin Dashboard](./Frontend/public/screenshots/feed.png)
+![login](./Frontend/public/screenshots/login.png)
+### Home page
+![home](./Frontend/public/screenshots/home.png)
+### Search Bar 
+![searchBar](./Frontend/public/screenshots/search.png)
+### Add Listing Page-1 
+![addListing1](./Frontend/public/screenshots/addListing1.png)
+### Add Listing Page-2
+![addListing2](./Frontend/public/screenshots/addListing2.png)
+### Add Listing Page-3
+![addListing3](./Frontend/public/screenshots/addListing3.png)
+### Booked Property by User
+![booked](./Frontend/public/screenshots/mybookings.png)
+### Listed property by User
+![Listed](./Frontend/public/screenshots/mylistings.png)
+### Confirm Booking by adding date
+![confirm booking](./Frontend/public/screenshots/bookingconfirm.png)
+### Cancel Booking
+![cancel](./Frontend/public/screenshots/cancelconfirm.png)
+### Update
+
+![Update](./Frontend/public/screenshots/update.png)
+### Update page
+
+![UpdatePage](./Frontend/public/screenshots/updatePage.png)
 
 
