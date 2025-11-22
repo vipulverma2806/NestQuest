@@ -9,8 +9,7 @@ import { IoBedOutline } from "react-icons/io5";
 import { FaTreeCity } from "react-icons/fa6";
 import { BiBuildingHouse } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-import { listingDataContext } from "../Context/ListingContext";
-import { useContext } from "react";
+
 import { categorySelect } from "../Redux/ListingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import AddListing from "./AddListing";
@@ -32,7 +31,7 @@ const AddListing2 = () => {
   ];
 
   const dispatch = useDispatch();
-  // let { category, setCategory } = useContext(listingDataContext);
+
   const [category, setCategory] = useState("");
   const title = useSelector((state) => state.listing.title);
   const navigate = useNavigate();

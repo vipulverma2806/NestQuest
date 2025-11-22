@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { CiSearch } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -13,7 +13,7 @@ import { IoBedOutline } from "react-icons/io5";
 import { FaTreeCity } from "react-icons/fa6";
 import { BiBuildingHouse } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-// import { authDataContext } from "../Context/authContext";
+
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Redux/AuthSlice";
 import axios from "axios";
@@ -44,7 +44,7 @@ const NavBar = () => {
   const [loadingIcon, setLoadingIcon] = useState(false);
   const [input, setInput] = useState("");
   const [searchArr, setSearchArr] = useState([]);
-  // let { name } = useContext(authDataContext);
+
 
   const userId = useSelector((state) => state.auth.userId);
 

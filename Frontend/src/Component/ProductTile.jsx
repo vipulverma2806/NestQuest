@@ -2,18 +2,18 @@ import React from "react";
 import vipul from "../assets/vipul.jpg";
 import { FaStar } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { listingDataContext } from "../Context/ListingContext";
+
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
-import { useContext } from "react";
-// import { authDataContext } from "../Context/authContext";
+
+
 import { useSelector, useDispatch } from "react-redux";
 import { productViewPage } from "../Redux/ListingSlice";
 import './index.css';
 import { toast } from "react-toastify";
 
 const ProductTile = ({ property, previous}) => {
-  // let { productViewPage } = useContext(listingDataContext);
-  // let { userId } = useContext(authDataContext);
+
+
   const userId = useSelector((state) => state.auth.userId);
   const dispatch = useDispatch();
   // console.log(property);

@@ -2,13 +2,13 @@ import React from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import ProductTile from "../Component/ProductTile";
 import axios from "axios";
-// import { authDataContext } from "../Context/authContext";
-import { useContext, useEffect } from "react";
+
+import {  useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserData } from "../Redux/AuthSlice";
 const MyListings = () => {
-  // let { listing } = useContext(authDataContext);
+  
   let listing = useSelector((state) => state.auth.listing);
   // console.log(listing);
   const navigate = useNavigate();

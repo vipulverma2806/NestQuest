@@ -1,8 +1,8 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-// import { listingDataContext } from "../Context/ListingContext";
-// import { useContext } from "react";
+
+
 export default function Map({ latitude, longitude, title }) {
-  // let { latitude, longitude } = useContext(listingDataContext);
+
   const center = [latitude, longitude];
   return (
     <MapContainer

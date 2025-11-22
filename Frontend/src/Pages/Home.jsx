@@ -2,16 +2,16 @@ import React from "react";
 import NavBar from "../Component/NavBar";
 import ProductTile from "../Component/ProductTile";
 import { useEffect } from "react";
-import { listingDataContext } from "../Context/ListingContext";
-import { useContext, useState } from "react";
+
+import {  useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { authDataContext } from "../Context/authContext";
+
 import { getAll } from "../Redux/ListingSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserData, setResetId } from "../Redux/AuthSlice";
 
 const Home = () => {
-  // let { getAll, allProperties } = useContext(listingDataContext);
+
   const dispatch = useDispatch();
   const allProperties = useSelector((state) => state.listing.allProperties);
   const loading = useSelector((state) => state.auth.loading);

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
-import { useContext } from "react";
-import { listingDataContext } from "../Context/ListingContext";
+
+
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { handleUpdate } from "../Redux/ListingSlice";
@@ -35,36 +35,7 @@ const UpdateForm = ({ setUpdatePopup }) => {
     "Shops",
     "Cabin",
   ];
-  // let {
-  //   title,
-  //   setTitle,
-  //   description,
-  //   setDescription,
-  //   bimg1,
-  //   setBImg1,
-  //   bimg2,
-  //   setBImg2, //object cover
-  //   bimg3,
-  //   setBImg3,
-  //   fimg1,
-  //   setFImg1,
-  //   fimg2,
-  //   setFImg2,
-  //   fimg3,
-  //   setFImg3,
-  //   rent,
-  //   setRent,
-  //   city,
-  //   setCity,
-  //   landmark,
-  //   setLandmark,
-  //   latitude,
-  //   setLatitude,
-  //   longitude,
-  //   setLongitude,
-
-  //   // handleUpdate,
-  // } = useContext(listingDataContext);
+  
 
   // console.log(listing.category);
   const uploaded = useSelector((state) => state.listing.navigate);

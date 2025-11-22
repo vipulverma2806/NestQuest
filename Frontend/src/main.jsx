@@ -5,9 +5,7 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 
 import "leaflet/dist/leaflet.css";
-import ListingContext from "./Context/ListingContext.jsx";
-import BookingContext from "./Context/BookingContext.jsx";
-// import AuthContext from "./Context/authContext.jsx";
+
 import store from "../src/Redux/Store.js";
 import { Provider } from "react-redux";
 import { persistor } from "../src/Redux/Store.js";
@@ -16,15 +14,9 @@ createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <StrictMode>
-        <ListingContext>
-          {/* <AuthContext> */}
-          <BrowserRouter>
-            <BookingContext>
-              <App />
-            </BookingContext>
-          </BrowserRouter>
-          {/* </AuthContext> */}
-        </ListingContext>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </StrictMode>
     </PersistGate>
   </Provider>

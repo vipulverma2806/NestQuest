@@ -5,14 +5,14 @@ import v3 from "../assets/v3.jpg";
 import Map from "../Component/Map";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { listingDataContext } from "../Context/ListingContext";
+
+
 import { useSelector, useDispatch } from "react-redux";
 import { divIcon } from "leaflet";
 import { setLoading } from "../Redux/AuthSlice";
 import { handleSubmit } from "../Redux/ListingSlice";
 const AddListing3 = () => {
-  let { bimg1, bimg2, bimg3 } = useContext(listingDataContext);
+
   const {
     title,
     description,

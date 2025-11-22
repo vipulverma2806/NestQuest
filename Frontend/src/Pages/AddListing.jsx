@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, {  useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
-import { listingDataContext } from "../Context/ListingContext";
+
 import { useSelector, useDispatch } from "react-redux";
 import { productViewPage } from "../Redux/ListingSlice";
 
@@ -13,34 +13,7 @@ const AddListing = () => {
   const dispatch = useDispatch();
   const [listing, setListing] = useState({});
   const [sendBackImg, setSendBackImg] = useState();
-  let {
-    title,
-    setTitle,
-    description,
-    setDescription,
-    bimg1,
-    setBImg1,
-    bimg2,
-    setBImg2,
-    bimg3,
-    setBImg3,
-    fimg1,
-    setFImg1,
-    fimg2,
-    setFImg2,
-    fimg3,
-    setFImg3,
-    rent,
-    setRent,
-    city,
-    setCity,
-    landmark,
-    setLandmark,
-    latitude,
-    setLatitude,
-    longitude,
-    setLongitude,
-  } = useContext(listingDataContext);
+  
 
   const handleImg = (e, setFront) => {
     const file = e.target.files[0];
