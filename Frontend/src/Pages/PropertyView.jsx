@@ -52,9 +52,11 @@ const PropertyView = () => {
     e.preventDefault();
     try{
       const result = await axios.post(`${URL}/listingMain/review`,{
-        reviewText
+        reviewText,propertyID
       })
       console.log(result)
+    }catch(err){
+      console.log(err)
     }
 
   }

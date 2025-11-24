@@ -7,6 +7,7 @@ import checkAuth from "../Middleware/checkAuth.js";
 import deleteProperty from "../Controllers/delete.controller.js";
 import cancelProperty from "../Controllers/cancel.controller.js";
 import search from "../Controllers/search.controller.js"
+import review from "../Controllers/review.controller.js"
 const listingRouter = express.Router();
 
 listingRouter.post(
@@ -21,6 +22,7 @@ listingRouter.post(
 );
 
 listingRouter.get("/getAll", getAll);
+listingRouter.get("/review",checkAuth, review);
 listingRouter.get("/search", search);
 listingRouter.delete("/delete/:propertyID", checkAuth, deleteProperty);
 listingRouter.put("/cancel/:propertyID", checkAuth, cancelProperty);
