@@ -14,8 +14,8 @@ export const getAdminData = createAsyncThunk(
       console.log("pending getAdminData");
       const adminData = await axios.get(`${URL}/adminRoute/getAdminData`);
       // console.log("fullfilled");
-      console.log("ye raha admindata",adminData)
-    //   return adminData.data;
+      console.log("ye raha admindata",adminData.data)
+      return adminData.data;
     } catch (err) {
       return rejectWithValue(err.message);
     }
@@ -137,81 +137,35 @@ export const getAdminData = createAsyncThunk(
 // );
 
 const AdminSlice = createSlice({
-  name: "listingSlice",
+  name: "AdminSlice",
   initialState: {
-    title: "",
-    description: "",
-    fimg1: null,
-    fimg2: null,
-    fimg3: null,
-    bimg1: null,
-    bimg2: null,
-    bimg3: null,
-    rent: "",
-    landmark: "",
-    latitude: "",
-    longitude: "",
-    category: "",
-    propertyID: 0,
-    allProperties: [],
-    hostId: "",
-    guestId:"",
-    navigate: null,
-    city: "",
-    loading: null,
-    previous: "",
-    selectCat: "All",
+    allBookings:{},
+    allUsers:{},
+    allListings:{},
+    allReviews:{}
   },
   reducers: {
-    productViewPage: (state, action) => {
-      state.fimg1 = action.payload.img1;
-      state.fimg2 = action.payload.img2;
-      state.fimg3 = action.payload.img3;
-      // state.bimg1 = action.payload.bimg1;
-      // state.bimg2 = action.payload.bimg2;
-      // state.bimg3 = action.payload.bimg3;
-      state.previous = action.payload.previous;
-      state.title = action.payload.title;
-      state.rent = action.payload.rent;
-
-      state.description = action.payload.description;
-      state.landmark = action.payload.landmark;
-      state.latitude = action.payload.latitude;
-      state.longitude = action.payload.longitude;
-      state.city = action.payload.city;
-      state.propertyID = action.payload._id;
-      state.hostId = action.payload.host;
-      state.guestId = action.payload.guest;
-      state.category = action.payload.category;
-    },
-    categorySelect: (state, action) => {
-      state.category = action.payload.category;
-    },
-    setNavigate: (state, action) => {
-      state.navigate = action.payload;
-    },
-    resetListing: (state) => {
-      state.title = "";
-      state.navigate = null;
-    },
-    setSelectCat: (state, action) => {
-      state.selectCat = action.payload;
-    },
+   
   },
-//   extraReducers: (builder) => {
-//     builder
-//       .addCase(getAll.fulfilled, (state, action) => {
-//         // console.log("addCase fulfill");
-//         state.allProperties = action.payload;
-//         // console.log("getAll fulfilled");
-//       })
-//       .addCase(getAll.rejected, (state, action) => {
-//         toast.error("network Error");
-//       })
-//       .addCase(handleSubmit.pending, (state, action) => {
-//         state.navigate = false;
-//         state.loading = true;
-//       })
+  extraReducers: (builder) => {
+    builder
+      .addCase(getAdminData.fulfilled, (state, action) => {
+        // console.log("addCase fulfill");
+        
+        state.allListings = action.payload.allListings;
+        state.allUsers = action.payload.allUsers;
+        state.allBookings = action.payload.allBookings;
+        state.allReviews = action.payload.allReviews;
+        console.log(state.allListings)
+        // console.log("getAll fulfilled");
+      })
+    //   .addCase(getAll.rejected, (state, action) => {
+    //     toast.error("network Error");
+    //   })
+    //   .addCase(handleSubmit.pending, (state, action) => {
+    //     state.navigate = false;
+    //     state.loading = true;
+    //   })
 //       .addCase(handleSubmit.fulfilled, (state, action) => {
 //         // console.log("uploaded");
 //         toast.success("listing uploaded");
@@ -264,7 +218,7 @@ const AdminSlice = createSlice({
 //         toast.success("canceled successfully");
 //         state.navigate = true;
 //       });
-//   },
+  },
 });
 
 export const {

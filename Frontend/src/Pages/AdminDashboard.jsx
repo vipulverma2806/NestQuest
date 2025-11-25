@@ -2,13 +2,9 @@ import React, { useEffect } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import NavBar from "../Component/NavBar";
 import { getAdminData } from "../Redux/AdminSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 const AdminDashboard = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAdminData());
-    console.log("useeffect admindashboard");
-  }, []);
+  
   return (
     <div className="p-4 flex just h-screen bg-gray-600">
       {/* Main Layout */}

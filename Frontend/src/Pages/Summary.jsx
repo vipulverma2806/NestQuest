@@ -1,7 +1,19 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getAdminData } from "../Redux/AdminSlice";
+import { useDispatch, useSelector } from "react-redux";
 const Summary = () => {
-  
+  const dispatch = useDispatch();
+  const allListings = useSelector((state)=>state.allListings)
+  const allReviews = useSelector((state)=>state.allReviews)
+  const allUsers = useSelector((state)=>state.allUsers)
+  const allBookings = useSelector((state)=>state.allBookings)
+  console.log("nhhhhhhhhhh")
+  console.log(allListings)
+  useEffect(() => {
+    dispatch(getAdminData());
+    console.log("useeffect admindashboard");
+  }, []);
   return (
     <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-6">
       <div className="bg-gray-100 shadow-lg rounded-lg p-6">
