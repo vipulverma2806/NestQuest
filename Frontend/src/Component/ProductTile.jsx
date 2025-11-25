@@ -18,7 +18,7 @@ const ProductTile = ({ property, previous}) => {
   const dispatch = useDispatch();
   // console.log(property);
   const newProperty = { ...property, previous };
-  console.log(newProperty)
+  // console.log(newProperty)
   const navigate = useNavigate();
   const handleClick = () => {
     console.log("onclick true access");

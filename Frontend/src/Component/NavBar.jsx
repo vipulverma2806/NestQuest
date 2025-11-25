@@ -126,7 +126,7 @@ const NavBar = () => {
 
   // console.log(listing);
   return (
-    <div className="relative  bg-red-400 z-10">
+    <div className="relative  z-10">
       <div className="fixed py-4 px-4 shadow-md shadow-black bg-white rounded-3xl pb-4 w-[97%]">
         <div className="border-b-2 px-4 border-gray-200 pb-4 w-full flex justify-between">
           <h1 className=" text-red-500 h-[55px] font-extrabold text-4xl">

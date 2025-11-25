@@ -4,15 +4,17 @@ import storage from "redux-persist/lib/storage";
 import authSlice from "./AuthSlice";
 import { combineReducers } from "@reduxjs/toolkit";
 import listingSlice from "../Redux/ListingSlice";
+import adminSlice from "./AdminSlice"
 const rootReducers = combineReducers({
   auth: authSlice,
   listing: listingSlice,
+  adminData: adminSlice
 });
 
 const persistConfigure = {
   key: "root",
   storage,
-  whitelist: ["auth", "listing"],
+  whitelist: ["auth", "listing","adminData"],
 };
 
 const allPersistReducer = persistReducer(persistConfigure, rootReducers);

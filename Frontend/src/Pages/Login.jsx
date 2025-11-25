@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
-
 import { getUserData } from "../Redux/AuthSlice";
+import { getAdminData } from "../Redux/AdminSlice.js";
 import { useDispatch } from "react-redux";
 const Login = () => {
   axios.defaults.withCredentials = true;
@@ -26,6 +25,12 @@ const Login = () => {
       });
       setLoading(false);
       // console.log("Login response:", res.data);
+      console.log(res.data.role);
+      if (res.data.role == "admin") {
+        dispatch(getAdminData);
+        toast.success("Welcome Admin");
+        return navigate("/adminDashboard");
+      }
       dispatch(getUserData());
       toast.success("Login Successful");
       navigate("/");

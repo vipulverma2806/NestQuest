@@ -18,7 +18,7 @@ const login = async (req, res) => {
     res.cookie("token", token);
     res
       .status(200)
-      .json({ msg: "success", email: found.email, name: found.name });
+      .json({ msg: "success", email: found.email, name: found.name,role:found.role });
   } catch (err) {
     console.log(err);
   }

@@ -12,7 +12,7 @@ const reviewSchema = mongoose.Schema(
       ref: "User",
       required: true,
     },
-    property: {
+    propertyID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Listing",
     },

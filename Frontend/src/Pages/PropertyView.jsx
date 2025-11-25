@@ -9,7 +9,7 @@ import BookingForm from "../Component/BookingForm";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
+import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DeleteConfirm from "../Component/DeleteConfirm";
@@ -19,7 +19,7 @@ const PropertyView = () => {
   const [bookingPopup, setBookingPopup] = useState(false);
   const [deletePopup, setDeletePopup] = useState(false);
   const [cancelPopup, setCancelPopup] = useState(false);
-
+  const [reviewArr, setReviewArr] = useState([]);
   let userId = useSelector((state) => state.auth.userId);
   let listing = useSelector((state) => state.listing);
   const property = useParams();
@@ -46,21 +46,39 @@ const PropertyView = () => {
     guestId,
   } = useSelector((state) => state.listing);
   // console.log(listing);
-    const [reviewText,setReviewText] = useState("")
+  const [reviewText, setReviewText] = useState("");
   // console.log("userid", userId, "hostid", hostId);
-  const handleSubmit =async(e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-      const result = await axios.post(`${URL}/listingMain/review`,{
-        reviewText,propertyID
-      })
-      console.log(result)
-    }catch(err){
-      console.log(err)
-    }
+    try {
+      const result = await axios.post(`${URL}/listingMain/review`, {
+        reviewText,
+        propertyID,
+      });
 
-  }
-  useEffect(() => {});
+      setReviewText("");
+      console.log(result);
+      getReviews();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getReviews = async () => {
+    try {
+      const response = await axios.get(
+        `${URL}/listingMain/getReviews/${propertyID}`
+      );
+      console.log("all reviews", response.data);
+      setReviewArr(response.data.reverse());
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getReviews();
+  }, []);
 
   return (
     <div className="p-4 flex just h-full      bg-gray-300">
@@ -113,7 +131,7 @@ const PropertyView = () => {
           <p className="text-3xl pl-3">{listing.title} </p>
           <p className="text-2xl pl-3">{listing.description}</p>
           <p className="text-2xl pl-3">{listing.category}</p>
-          {console.log("listing", listing.category)}
+          {/* {console.log("listing", listing.category)} */}
           <p className="text-xl pl-3">Rent : {listing.rent} rs./night</p>
           <p className="text-md pl-3"> Map View (Check Accuracy) </p>
 
@@ -150,38 +168,47 @@ const PropertyView = () => {
               </button>
             )}
           </div>
-          <div className="bg-red-300 py-5 px-10 rounded-2xl">
+          <div className="bg-red-100 py-5 px-10 rounded-2xl">
             <h2 className="font-semibold text-5xl">Reviews :</h2>
-            <div className={`rounded-2xl text-xl font-semibold bg-gray-400 px-8 py-6 mt-5 ${userId==listing.hostId ? "hidden" : "block"}`}>
-              <form onClick={handleSubmit}>
+            <div
+              className={`rounded-2xl text-xl font-semibold bg-gray-400 px-8 py-6 mt-5 ${
+                userId == listing.hostId ? "hidden" : "block"
+              }`}
+            >
+              <form onSubmit={handleSubmit}>
                 <textarea
-                  className="w-full max-h-22 min-h-22 bg-red-100 rounded-2xl px-3 py-2"
+                  className="w-full max-h-25 min-h-25 mb-0 bg-white rounded-2xl px-3 py-2"
                   maxLength={100}
-
+                  onChange={(e) => setReviewText(e.target.value)}
+                  value={reviewText}
                   type="text"
                   placeholder="Share your experience "
                 />
-                <button type="submit" className="bg-red-600 rounded-xl px-5 py-1 mt-2 text-white">Submit</button>
+                <button
+                  type="submit"
+                  className="bg-red-600 rounded-xl px-5 py-1 mt-3 text-white"
+                >
+                  Submit
+                </button>
               </form>
-              
             </div>
-            <div className="rounded-2xl text-xl font-semibold bg-gray-400 px-8 py-6 mt-5">
-              <div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
-                facere doloremque praesentium corrupti mollitia veniam,
-                inventore modi ipsam a nisi itaque vel nostrum sunt, dolorem
-                quasi non delectus excepturi totam optio fugiat consequuntur,
-                magnam repudiandae nam. Quaerat esse culpa facilis inventore
-                aut, explicabo sunt assumenda quo. Sint, assumenda. Similique,
-                quae.
-              </div>
-              <h2 className="mt-3">
-                {" "}
-                <span className="rounded-2xl px-5 py-1  bg-gray-200">
-                  by {"name"} at {"date"}
-                </span>
-              </h2>
-            </div>
+
+            {reviewArr.map((review, i) => {
+              return (
+                <div className="rounded-2xl text-xl font-semibold bg-gray-400 px-8 py-6 mt-5">
+                  <div>{review.reviewText}</div>
+                  <h2 className="mt-4">
+                    {" "}
+                    <span className="rounded-2xl px-5 py-1  bg-gray-200">
+                      by {review.reviewer.name} at{" "}
+                      {new Intl.DateTimeFormat("en-GB").format(
+                        new Date(review.updatedAt)
+                      )}
+                    </span>
+                  </h2>
+                </div>
+              );
+            })}
           </div>
         </div>
 
