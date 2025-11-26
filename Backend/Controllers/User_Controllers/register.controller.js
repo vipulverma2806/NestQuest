@@ -1,4 +1,4 @@
-import User from "../Model/user.model.js";
+import User from "../../Model/user.model.js";
 import vipul from "bcryptjs";
 const register = async (req, res) => {
   try {

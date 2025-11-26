@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import axios from "axios";
+
 const URL = import.meta.env.VITE_URL;
 axios.defaults.withCredentials = true;
 
@@ -76,6 +77,7 @@ const authSlice = createSlice({
       .addCase(logout.fulfilled, (state, action) => {
         state.loading = false;
         toast.success("Logout Successfull");
+        
         state.name = "";
         state.email = "";
         state.userId = 0;

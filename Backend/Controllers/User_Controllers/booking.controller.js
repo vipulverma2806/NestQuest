@@ -1,6 +1,6 @@
-import Listing from "../Model/listing.model.js";
-import Booking from "../Model/booking.model.js";
-import User from "../Model/user.model.js";
+import Listing from "../../Model/listing.model.js";
+import Booking from "../../Model/booking.model.js";
+import User from "../../Model/user.model.js";
 
 const bookingController = async (req, res) => {
   try {
@@ -31,10 +31,10 @@ const bookingController = async (req, res) => {
     await listing.save();
 
     // console.log(booking);
-    res.status(200).json("Booking completed")
+    res.status(200).json("Booking completed");
   } catch (err) {
     console.log(err);
-     res.status(401).json("Some error occurred")
+    res.status(401).json("Some error occurred");
   }
 };
 export default bookingController;

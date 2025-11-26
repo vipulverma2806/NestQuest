@@ -14,7 +14,7 @@ export const getAdminData = createAsyncThunk(
       console.log("pending getAdminData");
       const adminData = await axios.get(`${URL}/adminRoute/getAdminData`);
       // console.log("fullfilled");
-      console.log("ye raha admindata",adminData.data)
+      console.log("ye raha admindata", adminData.data);
       return adminData.data;
     } catch (err) {
       return rejectWithValue(err.message);
@@ -49,17 +49,13 @@ export const getAdminData = createAsyncThunk(
 //       // console.log("canceled", canceled);
 //       dispatch(getUserData());
 //       return canceled.data;
-      
+
 //     } catch (err) {
 //       console.log("canceled Error", err);
 //       return rejectWithValue(err.data);
 //     }
 //   }
 // );
-
-
-
-
 
 // export const handleUpdate = createAsyncThunk(
 //   "listingMain/update",
@@ -87,7 +83,6 @@ export const getAdminData = createAsyncThunk(
 //       formdata.append("longitude", updatedListing.longitude);
 //       formdata.append("category", updatedListing.category);
 //       formdata.append("propertyID", updatedListing.propertyID);
-      
 
 //       const result = await axios.put(`${URL}/listingMain/update`, formdata);
 //       // console.log("update result", result);
@@ -139,93 +134,43 @@ export const getAdminData = createAsyncThunk(
 const AdminSlice = createSlice({
   name: "AdminSlice",
   initialState: {
-    allBookings:{},
-    allUsers:{},
-    allListings:{},
-    allReviews:{}
+    allBookings: [],
+    allUsers: [],
+    allListings: [],
+    allReviews: [],
   },
   reducers: {
-   
+    cleanAdminData: (state, action) => {
+      state.allBookings = [];
+      state.allListings = [];
+      state.allReviews = [];
+      state.allUsers = [];
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(getAdminData.fulfilled, (state, action) => {
-        // console.log("addCase fulfill");
-        
+        console.log("addCase fulfill");
+
         state.allListings = action.payload.allListings;
         state.allUsers = action.payload.allUsers;
         state.allBookings = action.payload.allBookings;
         state.allReviews = action.payload.allReviews;
-        console.log(state.allListings)
-        // console.log("getAll fulfilled");
       })
-    //   .addCase(getAll.rejected, (state, action) => {
-    //     toast.error("network Error");
-    //   })
-    //   .addCase(handleSubmit.pending, (state, action) => {
-    //     state.navigate = false;
-    //     state.loading = true;
-    //   })
-//       .addCase(handleSubmit.fulfilled, (state, action) => {
-//         // console.log("uploaded");
-//         toast.success("listing uploaded");
-
-//         state.navigate = true;
-//         state.loading = false;
-//       })
-//       .addCase(handleSubmit.rejected, (state, action) => {
-//         // console.log("Rejected");
-//         toast.error("Some error occured rejected");
-//         state.loading = false;
-//       })
-//       .addCase(handleUpdate.fulfilled, (state, action) => {
-//         toast.success("updated Successfully");
-//         state.loading = false;
-//         state.navigate = true;
-//       })
-//       .addCase(handleUpdate.pending, (state, action) => {
-//         state.loading = true;
-//         toast.success("please wait loadind add kro");
-//       })
-//       .addCase(handleUpdate.rejected, (state, action) => {
-//         toast.error("Some error occured");
-//         state.loading = false;
-//       })
-//       .addCase(deleteProperty.rejected, (state, action) => {
-//         toast.error("Some error occured");
-//         state.loading = false;
-//       })
-//       .addCase(deleteProperty.pending, (state, action) => {
-        
-//         toast.error("please wait delete add add kro");
-//       })
-//       .addCase(deleteProperty.fulfilled, (state, action) => {
-//         state.loading = false;
-        
-//         toast.success("Deleted successfully");
-//         state.navigate = true;
-//       })
-//       .addCase(cancelProperty.rejected, (state, action) => {
-//         toast.error("Some error occured");
-//         state.loading = false;
-//       })
-//       .addCase(cancelProperty.pending, (state, action) => {
-//         state.loading = true;
-//         toast.error("please wait ");
-//       })
-//       .addCase(cancelProperty.fulfilled, (state, action) => {
-//         state.loading = false;
-//         toast.success("canceled successfully");
-//         state.navigate = true;
-//       });
+      .addCase(getAdminData.pending, (state, action) => {
+        console.log("pending")
+      })
+      .addCase(getAdminData.rejected, (state, action) => {
+        console.log("unsuccessfull")
+      });
   },
 });
 
 export const {
-//   getAdminData
-//   categorySelect,
-//   setNavigate,
-//   resetListing,
-//   setSelectCat,
+  //   getAdminData
+  //   categorySelect,
+  //   setNavigate,
+  //   resetListing,
+  cleanAdminData,
 } = AdminSlice.actions;
 export default AdminSlice.reducer;

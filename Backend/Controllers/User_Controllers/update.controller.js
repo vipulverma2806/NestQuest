@@ -1,6 +1,6 @@
-import Listing from "../Model/listing.model.js";
-import User from "../Model/user.model.js";
-import uploadOnCloudinary from "../Config/cloudinary.js";
+import Listing from "../../Model/listing.model.js";
+import User from "../../Model/user.model.js";
+import uploadOnCloudinary from "../../Config/cloudinary.js";
 const update = async (req, res) => {
   req.body.host = req.id;
   const propertyID = req.body.propertyID;

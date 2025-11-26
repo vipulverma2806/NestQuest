@@ -1,6 +1,6 @@
-import Listing from "../Model/listing.model.js";
-import User from "../Model/user.model.js";
-import Booking from "../Model/booking.model.js";
+import Listing from "../../Model/listing.model.js";
+import Booking from "../../Model/booking.model.js";
+import User from "../../Model/user.model.js";
 import mongoose from "mongoose";
 const cancelProperty = async (req, res) => {
   try {

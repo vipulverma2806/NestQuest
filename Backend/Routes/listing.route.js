@@ -1,14 +1,14 @@
 import express from "express";
 import upload from "../Middleware/multer.js";
-import listingController from "../Controllers/listing.controller.js";
-import getAll from "../Controllers/getAll.controller.js";
-import update from "../Controllers/update.controller.js";
+import listingController from "../Controllers/User_Controllers/listing.controller.js";
+import getAll from "../Controllers/User_Controllers/getAll.controller.js";
+import update from "../Controllers/User_Controllers/update.controller.js";
 import checkAuth from "../Middleware/checkAuth.js";
-import deleteProperty from "../Controllers/delete.controller.js";
-import cancelProperty from "../Controllers/cancel.controller.js";
-import search from "../Controllers/search.controller.js"
-import review from "../Controllers/review.controller.js"
-import {getReviews} from "../Controllers/review.controller.js"
+import deleteProperty from "../Controllers/User_Controllers/delete.controller.js";
+import cancelProperty from "../Controllers/User_Controllers/cancel.controller.js";
+import search from "../Controllers/User_Controllers/search.controller.js";
+import review from "../Controllers/User_Controllers/review.controller.js";
+import { getReviews } from "../Controllers/User_Controllers/review.controller.js";
 const listingRouter = express.Router();
 
 listingRouter.post(
@@ -23,7 +23,7 @@ listingRouter.post(
 );
 
 listingRouter.get("/getAll", getAll);
-listingRouter.post("/review",checkAuth, review);
+listingRouter.post("/review", checkAuth, review);
 listingRouter.get("/getReviews/:propertyID", getReviews);
 listingRouter.get("/search", search);
 listingRouter.delete("/delete/:propertyID", checkAuth, deleteProperty);

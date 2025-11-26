@@ -1,9 +1,9 @@
 import express from "express";
-import register from "../Controllers/register.controller.js";
-import login from "../Controllers/login.controller.js";
-import logout from "../Controllers/logout.controller.js";
-import checkOnlyAuth from "../Controllers/checkOnlyAuth.controller.js";
-import getUserData from "../Controllers/getUserData.controller.js";
+import register from "../Controllers/User_Controllers/register.controller.js";
+import login from "../Controllers/User_Controllers/login.controller.js";
+import logout from "../Controllers/User_Controllers/logout.controller.js";
+import checkOnlyAuth from "../Controllers/User_Controllers/checkOnlyAuth.controller.js";
+import getUserData from "../Controllers/User_Controllers/getUserData.controller.js";
 import checkAuth from "../Middleware/checkAuth.js";
 const authRouter = express.Router();
 

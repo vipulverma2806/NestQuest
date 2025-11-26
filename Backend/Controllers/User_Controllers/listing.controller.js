@@ -1,6 +1,6 @@
-import Listing from "../Model/listing.model.js";
-import User from "../Model/user.model.js";
-import uploadOnCloudinary from "../Config/cloudinary.js";
+import Listing from "../../Model/listing.model.js";
+import User from "../../Model/user.model.js";
+import uploadOnCloudinary from "../../Config/cloudinary.js";
 const listingController = async (req, res) => {
   req.body.host = req.id;
   try {
@@ -14,7 +14,6 @@ const listingController = async (req, res) => {
     req.body.img1_id = img1.public_id;
     req.body.img2_id = img2.public_id;
     req.body.img3_id = img3.public_id;
-
 
     try {
       const result = await Listing.create(req.body);

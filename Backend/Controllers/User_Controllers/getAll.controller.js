@@ -1,4 +1,4 @@
-import Listing from "../Model/listing.model.js";
+import Listing from "../../Model/listing.model.js";
 
 const getAll = async (req, res) => {
   try {

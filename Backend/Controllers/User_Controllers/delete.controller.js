@@ -1,6 +1,7 @@
-import Listing from "../Model/listing.model.js";
-import User from "../Model/user.model.js";
-import { deleteOnCloudinary } from "../Config/cloudinary.js";
+import Listing from "../../Model/listing.model.js";
+
+import User from "../../Model/user.model.js";
+import { deleteOnCloudinary } from "../../Config/cloudinary.js";
 const deleteProperty = async (req, res) => {
   try {
     console.log("userid", req.id);

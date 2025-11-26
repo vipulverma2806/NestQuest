@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Listing from "../Model/listing.model.js";
+import Listing from "../../Model/listing.model.js";
 
 const search = async (req, res) => {
   console.log(req.query);
