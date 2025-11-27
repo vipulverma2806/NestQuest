@@ -13,13 +13,17 @@ const Summary = () => {
   console.log(allUsers);
   console.log(allReviews);
   console.log(allBookings);
+
+  let cities = allListings.map((listing) => listing.city);
+  cities = [...new Set(cities)];
+
   useEffect(() => {
     dispatch(getAdminData());
     console.log("useeffect admindashboard");
   }, []);
   const divStyle = "bg-gray-100 shadow-lg border rounded-lg py-4 px-6 ";
   const hStyle = "text-lg font-bold";
-  const p = "text-3xl font-semibold mt-1"
+  const p = "text-3xl font-semibold mt-1";
   return (
     <div>
       <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-3">
@@ -37,12 +41,12 @@ const Summary = () => {
           <h3 className={hStyle}>Total Booked</h3>
           <p className={p}>{allBookings.length}</p>
         </div>
-         <div className={divStyle}>
-          <h3 className={hStyle}> Pendings for Approval:</h3>
-          <p className={p}>{allBookings.length}</p>
+        <div className={divStyle}>
+          <h3 className={hStyle}> Cities covered:</h3>
+          <p className={p}>{cities.length}</p>
         </div>
       </div>
-      
+
       <AdminMap allListings={allListings}></AdminMap>
     </div>
   );

@@ -138,6 +138,7 @@ const AdminSlice = createSlice({
     allUsers: [],
     allListings: [],
     allReviews: [],
+    adminInfo:{}
   },
   reducers: {
     cleanAdminData: (state, action) => {
@@ -145,6 +146,7 @@ const AdminSlice = createSlice({
       state.allListings = [];
       state.allReviews = [];
       state.allUsers = [];
+      state.adminInfo={}
     },
   },
   extraReducers: (builder) => {
@@ -156,6 +158,9 @@ const AdminSlice = createSlice({
         state.allUsers = action.payload.allUsers;
         state.allBookings = action.payload.allBookings;
         state.allReviews = action.payload.allReviews;
+        state.adminInfo = action.payload.adminInfo;
+     
+        
       })
       .addCase(getAdminData.pending, (state, action) => {
         console.log("pending")

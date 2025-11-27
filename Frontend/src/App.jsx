@@ -15,7 +15,7 @@ import ProtectedLayout from "./Component/ProtectedLayout";
 import AdminDashboard from "./Pages/AdminDashboard";
 import Summary from "./Pages/Summary"
 import Statistics from "./Pages/Statistics"
-import ExportToCSV from "./Pages/ExportToCSV"
+
 import AllUsers from "./Pages/AllUsers"
 import AllListings from "./Pages/AllListings";
 const App = () => {
@@ -47,7 +47,7 @@ const App = () => {
           {/* adminDashboard---------------------------------- */}
           <Route path="/adminDashboard" element={<AdminDashboard />}>
             <Route index element={<Summary />}></Route>
-            <Route path="exportToCSv" element={<ExportToCSV />}></Route>
+            
             <Route path="statistics" element={<Statistics />}></Route>
             <Route path="allListings" element={<AllListings />}></Route>
             <Route path="allUsers" element={<AllUsers />}></Route>

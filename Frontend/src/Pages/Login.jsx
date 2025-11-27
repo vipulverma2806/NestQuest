@@ -28,9 +28,9 @@ const Login = () => {
       console.log(res.data.role);
       if (res.data.role == "admin") {
         console.log("admin yha hai");
-        dispatch(getAdminData()).then(() => navigate("/adminDashboard"));
+       return dispatch(getAdminData()).then(() => navigate("/adminDashboard")).then(()=>toast.success("Welcome Admin"));
 
-        return toast.success("Welcome Admin");
+        
       }
       dispatch(getUserData());
       toast.success("Login Successful");
