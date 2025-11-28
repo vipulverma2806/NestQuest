@@ -43,28 +43,28 @@ Displays all property coordinates from all cities on one map.
 
     1. Monthly Booking Trends – Area chart
 
--- User Growth Over Time – Area chart
+    2. User Growth Over Time – Area chart
 
--- Listings by City – Pie chart
+    3. Listings by City – Pie chart
 
--- Top Host & Top Guest – Combined area chart
+    4. Top Host & Top Guest – Combined area chart
 
-- Admin Listings Management
-
-
--- Admin can view every listing in the system in a list/table view.
+### Admin Listings Management
 
 
--- Details component to see any listing with full details.
+- Admin can view every listing in the system in a list/table view.
 
 
--- Admin has full control to allow or remove listings from the platform.
+- Details component to see any listing with full details.
 
-- Admin User Management
 
--- View all registered users in the system and their details.
+- Admin has full control to allow or remove listings from the platform.
 
--- Admin can delete users from the platform.
+### Admin User Management
+
+- View all registered users in the system and their details.
+
+- Admin can delete users from the platform.
 
 
 
