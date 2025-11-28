@@ -41,7 +41,7 @@ Displays all property coordinates from all cities on one map.
 
 - Charts & Insights
 
--- Monthly Booking Trends – Area chart
+    1. Monthly Booking Trends – Area chart
 
 -- User Growth Over Time – Area chart
 
