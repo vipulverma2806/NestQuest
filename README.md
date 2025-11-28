@@ -96,10 +96,10 @@ Users can see all previous and active bookings.
 
 ![stats](./Frontend/public/screenshots/stats.png)
 ### All Property Listings
-
+![alllisting2](./Frontend/public/screenshots/alllisting2.png)
 ![alllistings](./Frontend/public/screenshots/alllistings.png)
 
-![alllisting2](./Frontend/public/screenshots/alllisting2.png)
+
 
 ### All Users
 
