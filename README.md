@@ -1,10 +1,10 @@
 # Nestquest
 
-**NestQuest** is a full-stack MERN (MongoDB, Express.js, React, Node.js) application that allows users to explore, list, and book rental properties. It includes full authentication, booking management, property categorization, and map-based location features. Users can add their own listings, manage bookings, and browse properties with an intuitive and modern UI.
+**NestQuest** is a full-stack MERN (MongoDB, Express.js, React, Node.js) application that allows users to explore, list, and book rental properties. It includes full authentication, booking management, property categorization, map-based location display, and a feature-rich Admin Panel for platform management. Users can add listings, manage bookings, and browse properties with a fast, intuitive UI — while admins can monitor activity, analyze trends, and manage users/listings efficiently.
 
 ---
 
-##  Features
+## User Features
 - User Authentication & Authorization
 Register, log in, and access secure routes with JWT + httpOnly cookies.
 - Add, Update & Delete Listings
@@ -24,36 +24,98 @@ Owners can see and manage all the listings they have created.
 - View Own Bookings
 Users can see all previous and active bookings.
 - Fast & Responsive UI (Tailwind + Vite)
+Built using Vite + TailwindCSS for optimal performance.
+
+
+## Admin Panel Features
+
+The Admin Dashboard provides complete control and analytics for platform management:
+
+### Dashboard Analytics
+
+- Summary Cards
+Quick stats for total users, total listings, total bookings, etc.
+
+- Single Map View
+Displays all property coordinates from all cities on one map.
+
+- Charts & Insights
+
+Monthly Booking Trends – Area chart
+
+User Growth Over Time – Area chart
+
+Listings by City – Pie chart
+
+Top Host & Top Guest – Combined area chart
+
+- Admin Listings Management
+
+All Listings Page
+Admin can view every listing in the system in a list/table view.
+
+View Listing Details
+Details component to see any listing with full details.
+
+Reject Listings
+Admin has full control to allow or remove listings from the platform.
+
+- Admin User Management
+
+All Users Page
+View all registered users in the system and their details.
+
+Remove User
+Admin can delete users from the platform.
+
+
+
 
 ##  Tech Stack
 
 ### Frontend
-
-- **React** 
-- **React Router DOM** 
-- **Tailwind CSS**
-- **Vite** 
-- **Axios** 
-- **react-icons** 
-- **react-toastify**
-- **leaflet** (Map Integration)
-- **React-Redux**
-- **Redux-persist**
+- React (Vite)
+- TailwindCSS
+- Redux Toolkit
+- React Router DOM
+- react-chartjs-2
+- Leaflet / (Map Integration)
   
 
-###  Backend
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication 
 
-- **Node.js**
-- **Express** 
-- **MongoDB** + **Mongoose** 
-- **dotenv** 
-- **cors** 
-- **nodemon**
-- **bcryptjs**
-- **cookie-parser**
-- **jsonwebtoken**
-- **Multer**
-- **Cloudinary**
+## 📦 Packages / Dependencies
+
+### Frontend
+- react
+- react-dom
+- react-icons
+- react-spinners
+- react-toastify
+- @reduxjs/toolkit
+- react-redux
+- react-router-dom
+- axios
+- tailwindcss
+- react-chartjs-2
+- leaflet
+
+### Backend
+- express
+- mongoose
+- jsonwebtoken
+- bcryptjs
+- multer
+- cookie-parser
+- cors
+- dotenv
+- cloudinary
+
 
 ---
 #  Screenshots
