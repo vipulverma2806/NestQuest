@@ -102,7 +102,7 @@ export const handleUpdate = createAsyncThunk(
 
 export const handleSubmit = createAsyncThunk(
   "listingMain/post",
-  async ({ bimg1, bimg2, bimg3 }, { getState, rejectWithValue, dispatch }) => {
+  async (_, { getState, rejectWithValue, dispatch }) => {
     try {
       const state = getState();
       const listing = state.listing;
@@ -111,9 +111,9 @@ export const handleSubmit = createAsyncThunk(
       formdata.append("title", listing.title);
       formdata.append("description", listing.description);
       // console.log(bimg1, bimg2, bimg3);
-      formdata.append("bimg1", bimg1);
-      formdata.append("bimg2", bimg2);
-      formdata.append("bimg3", bimg3);
+      formdata.append("bimg1", listing.bimg1);
+      formdata.append("bimg2", listing.bimg2);
+      formdata.append("bimg3", listing.bimg3);
       formdata.append("rent", listing.rent);
       formdata.append("city", listing.city);
       formdata.append("landmark", listing.landmark);
@@ -166,9 +166,9 @@ const ListingSlice = createSlice({
       state.fimg1 = action.payload.img1;
       state.fimg2 = action.payload.img2;
       state.fimg3 = action.payload.img3;
-      // state.bimg1 = action.payload.bimg1;
-      // state.bimg2 = action.payload.bimg2;
-      // state.bimg3 = action.payload.bimg3;
+      state.bimg1 = action.payload.bimg1;
+      state.bimg2 = action.payload.bimg2;
+      state.bimg3 = action.payload.bimg3;
       state.previous = action.payload.previous;
       state.title = action.payload.title;
       state.rent = action.payload.rent;

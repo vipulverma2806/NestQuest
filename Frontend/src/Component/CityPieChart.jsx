@@ -26,6 +26,7 @@ const CityPieChart = () => {
         {
           label: "Listings Count",
           data: values,
+
           backgroundColor: [
             "rgba(255, 99, 132, 0.6)",
             "rgba(54, 162, 235, 0.6)",
@@ -45,7 +46,10 @@ const CityPieChart = () => {
 
   return (
     <div className="w-full h-75 px-5 relative py-3 bg-white rounded shadow-xl border">
-      <div className="text-xl absolute  font-bold mb-1 top-10 left-7 text-left"> Listings by City</div>
+      <div className="text-xl absolute  font-bold mb-1 top-4 left-7 text-left">
+        {" "}
+        Listings by City
+      </div>
 
       {chartData ? (
         <Pie

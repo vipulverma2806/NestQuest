@@ -15,10 +15,10 @@ const AddListing = () => {
   const [sendBackImg, setSendBackImg] = useState();
   
 
-  const handleImg = (e, setFront) => {
+  const handleImg = (e, setFront,setBack) => {
     const file = e.target.files[0];
     const fImgURL = URL.createObjectURL(e.target.files[0]);
-    setListing((prev) => ({ ...prev, [setFront]: fImgURL }));
+    setListing((prev) => ({ ...prev, [setFront]: fImgURL, [setBack]: file }));
   };
 
   const handleSubmit = (e) => {
@@ -98,7 +98,7 @@ const AddListing = () => {
               required
               className={fileCSS}
               onChange={(e) => {
-                handleImg(e, "img1");
+                handleImg(e, "img1","bimg1");
                 setBImg1(e.target.files[0]);
               }}
               // value={img1}
@@ -109,13 +109,13 @@ const AddListing = () => {
             <label className="text-xl font-semibold" htmlFor="">
               Image 2:
             </label>
-            <img src={fimg2} className={fimg2 && "h-50 w-min"} alt="" />
+            {/* <img src={fimg2} className={fimg2 && "h-50 w-min"} alt="" /> */}
             <input
               required
               className={fileCSS}
               type="file"
               onChange={(e) => {
-                handleImg(e, "img2");
+                handleImg(e, "img2","bimg2");
                 setBImg2(e.target.files[0]);
               }}
               // value={img2}
@@ -125,13 +125,13 @@ const AddListing = () => {
             <label className="text-xl font-semibold" htmlFor="">
               Image 3:
             </label>
-            <img src={fimg3} className={fimg3 && "h-50 w-min"} alt="" />
+            {/* <img src={fimg3} className={fimg3 && "h-50 w-min"} alt="" /> */}
             <input
               required
               className={fileCSS}
               type="file"
               onChange={(e) => {
-                handleImg(e, "img3");
+                handleImg(e, "img3","bimg3");
                 setBImg3(e.target.files[0]);
               }}
               // value={img3}

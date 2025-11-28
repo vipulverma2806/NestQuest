@@ -5,7 +5,8 @@ import { getAdminData } from "../Redux/AdminSlice";
 const URL = import.meta.env.VITE_URL;
 const AllListings = () => {
   axios.defaults.withCredentials = true;
-  const allListings = useSelector((state) => state.adminData.allListings);
+  let allListings = useSelector((state) => state.adminData.allListings);
+   allListings = [...allListings].reverse()
   const allUsers = useSelector((state) => state.adminData.allUsers);
   console.log(allListings[0]);
   const [details, setDetails] = useState(null);
@@ -27,11 +28,16 @@ const AllListings = () => {
 
   return (
     <div className="flex flex-col gap-y-5">
-      <h2 className="text-2xl font-bold ml-2 text-gray-800 mb-6">
-        {" "}
+      <h2 className="text-2xl font-bold ml-2 text-gray-800 mb-1">
+        
         AllListings
       </h2>
-
+      <div className="h-13 border font-semibold grid grid-cols-4 grid-rows-1  rounded-md shadow-2xs pl-5 ">
+        <span className="text-left bg-amber-40 py-3 truncate grid ">Name</span>
+        <span className="bg-red- truncate py-3">Category</span>
+        <span className="bg-blue-40 truncate py-3">Title</span>
+        <span className="bg-blue-40 text-center truncate py-3">Actions</span>
+      </div>
       {allListings.map((listing, i) => {
         return (
           <div key={i}>

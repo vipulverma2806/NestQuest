@@ -104,7 +104,7 @@ const AddListing3 = () => {
 
           {/* Button */}
           <button
-            onClick={() => dispatch(handleSubmit({ bimg1, bimg2, bimg3 }))}
+            onClick={() => dispatch(handleSubmit())}
             className={`rounded-xl mt-8 text-lg md:text-xl font-semibold text-white px-6 py-4 w-full md:w-1/3 mx-auto transition ${
               loading ? "bg-green-500" : "bg-red-600 hover:bg-red-700"
             }`}

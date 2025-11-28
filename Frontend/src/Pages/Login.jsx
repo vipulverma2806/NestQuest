@@ -37,7 +37,8 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       // console.error(error);
-      if (error.response.data === "NA")
+      if (error.response === "NA")
+        console.log(error)
         return toast.error("Invalid Crediantials");
     }
   };

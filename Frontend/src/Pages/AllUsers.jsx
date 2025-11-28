@@ -28,18 +28,18 @@ const AllUsers = () => {
 
   return (
     <div className="flex flex-col gap-y-5">
-      <h2 className="text-2xl font-bold ml-2 text-gray-800 mb-6">AllUsers</h2>
-      <div className="h-13  border-2 w-120 grid grid-cols-4 grid-rows-1  rounded-md  pl-5 ">
-        <span className="text-left bg-amber-40 py-3 truncate grid">Name</span>
+      <h2 className="text-2xl font-bold ml-2 text-gray-800 mb-1">AllUsers</h2>
+      <div className="h-13 w-190 border-2 font-semibold grid grid-cols-4 grid-rows-1  rounded-md  pl-5 ">
+        <span className="text-left   py-3 truncate grid">Name</span>
         <span className="text-left truncate py-3">Email</span>
         <span className="bg-blue-40 text-center truncate py-3">Listings</span>
-        <span className=" flex justify-center px-2 items-center">Action</span>
+        <span className=" flex justify-center px-2 items-center py-3">Action</span>
       </div>
       {allUsers.map((user, i) => {
         return (
           <div key={i}>
-            <div className={`${user._id == adminInfo._id ? "hidden" :"block" } h-13 border w-120    grid grid-cols-4 grid-rows-1  rounded-md shadow-2xs pl-5 `}>
-              <span className="text-left bg-amber-40 py-3 truncate grid ">
+            <div className={`${user._id == adminInfo._id ? "hidden" :"block" } h-14 border w-190    grid grid-cols-4 grid-rows-1  rounded-md shadow-2xs pl-5 `}>
+              <span className="text-left  py-3 truncate grid ">
                 {user.name}
               </span>
        

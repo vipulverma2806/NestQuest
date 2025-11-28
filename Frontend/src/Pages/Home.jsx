@@ -40,7 +40,7 @@ const Home = () => {
     };
   }, []);
 
-  const navigate = useNavigate();
+  
   useEffect(() => {
     dispatch(getAll());
     checkAuth();
@@ -49,12 +49,12 @@ const Home = () => {
 
   useEffect(() => {
     if (selectCat == "All") {
-      setSorted(allProperties);
+      setSorted([...allProperties].reverse());
     } else {
       const sorted = allProperties.filter(
         (property) => property.category == selectCat
       );
-      setSorted(sorted);
+      setSorted([...sorted].reverse());
     }
   }, [selectCat, allProperties]);
   // console.log(allProperties[0]);

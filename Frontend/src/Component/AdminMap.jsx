@@ -1,11 +1,11 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 export default function AdminMap({ allListings }) {
-  // Center map around the first location
+  
   const center = [
-    allListings[0].latitude,
-    allListings[0].longitude
-  ];
+    23.6345,
+    80.6640
+  ];//india ka center
 
   return (
     <MapContainer

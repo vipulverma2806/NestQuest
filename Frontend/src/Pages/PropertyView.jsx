@@ -109,6 +109,7 @@ const PropertyView = () => {
         <div className="flex flex-col w-[90%] max-w-5xl gap-y-5 shadow-md shadow-black rounded-3xl bg-white  p-6 md:p-8 ">
           <h1 className="text-4xl pl-3">{`${listing.landmark} , ${listing.city}`}</h1>
           <div className="lg:h-84  md:flex-row gap-4 flex-col w-full flex lg:flex-row justify-center  ">
+            {console.log("listing fimg1 ",listing.fimg1)}
             <img
               src={listing.fimg1}
               alt=""

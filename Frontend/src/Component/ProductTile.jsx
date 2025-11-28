@@ -44,7 +44,7 @@ const ProductTile = ({ property, previous}) => {
   return (
     <div
       className="hover:cursor-pointer border shadow-2xl shadow-black  rounded-2xl relative z-0"
-      onClick={userId ? handleClick :()=> console.log()}
+      onClick={userId ? handleClick :()=>toast.error("Please login")}
 
       // onClick={property.guest == userId || property.host == userId ? handleClick :undefined}
     >

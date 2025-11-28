@@ -66,10 +66,12 @@ const UserGrowthChart = () => {
 
     const formatted = {
       labels: sorted.map((i) => i.label),
+
       datasets: [
         {
           label: "Users Joined",
           data: sorted.map((i) => i.count),
+
           borderColor: "rgba(99, 102, 241, 1)",
           backgroundColor: "rgba(99, 102, 241, 0.3)",
           fill: true,
@@ -83,7 +85,9 @@ const UserGrowthChart = () => {
 
   return (
     <div className="w-full h-75 px-5 py-3 bg-white rounded shadow-xl border">
-      <h2 className="text-xl font-bold mb-1 text-center">User Growth (Area Chart)</h2>
+      <h2 className="text-xl font-bold mb-1 text-center">
+        User Growth (Area Chart)
+      </h2>
 
       {chartData ? (
         <Line
