@@ -56,7 +56,8 @@ Users can see all previous and active bookings.
 - **Cloudinary**
 
 ---
-##  Screenshots
+#  Screenshots
+## User Side
 
 ### User registration
 ![register](./Frontend/public/screenshots/register.png)
@@ -83,8 +84,25 @@ Users can see all previous and active bookings.
 ### Update
 
 ![Update](./Frontend/public/screenshots/update.png)
+
 ### Update page
 
 ![UpdatePage](./Frontend/public/screenshots/updatePage.png)
+
+## Admin Panel
+### Summary Page
+![Summary](./Frontend/public/screenshots/summary.png)
+### Statistics
+
+![stats](./Frontend/public/screenshots/stats.png)
+### All Property Listings
+
+![alllistings](./Frontend/public/screenshots/alllistings.png)
+
+![alllisting2](./Frontend/public/screenshots/alllisting2.png)
+
+### All Users
+
+![allusers](./Frontend/public/screenshots/allusers.png)
 
 
